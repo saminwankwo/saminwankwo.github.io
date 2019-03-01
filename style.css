@@ -60,11 +60,10 @@ body{
   }
 
   hr{
-      padding-top:50;
-      color: red;
-       border: none;
-       height: 1px;
-       background-color:red; 
+      padding-top:50vh;
+        border: none;
+        height: 1px;
+    
   }
 
   .footer{
