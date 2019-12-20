@@ -1,0 +1,10 @@
+.container{
+  border: 3px solid red;
+  height: auto;
+  display: grid;
+  grid-auto-columns: 1fr max-content;
+}
+
+.aside{
+  border: 5px solid blue;
+}
