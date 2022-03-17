@@ -9,11 +9,11 @@ $(document).ready(function() {
 		if (typeof Cookies.get('mode') !== "undefined" ) {
 			$('body').addClass("dark-mode");
 			$('#darkmode').attr('checked', true); // toggle change
-			console.log('Cookie: dark mode' );
+			// console.log('Cookie: dark mode' );
 		} else {
 			$('body').removeClass("dark-mode");
 			$('#darkmode').attr('checked', false); // toggle change
-			console.log('Cookie: light mode' );
+			// console.log('Cookie: light mode' );
 		}
 	}
 	
