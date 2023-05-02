@@ -1,1 +1,0 @@
-convert project to nodejs, make git status and pages dynamic and add build.
