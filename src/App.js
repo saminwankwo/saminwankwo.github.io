@@ -1,9 +1,11 @@
 import './App.css';
-// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import Header from './components/Header'
 
 function App() {
   return (
-    <h2>dskcmkdmc</h2>
+    <Header/>
+	
   );
 }
 
