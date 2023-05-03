@@ -12,6 +12,7 @@ const Header = () => {
         </div>
     </header>
     // <!-- header Ends -->
+
   )
 }
 
