@@ -19,11 +19,11 @@ const navbar = () => {
   
 					{/* <!-- social media icons --> */}
 					<ul className="social-list list-inline py-2 mx-auto">
-						<li className="list-inline-item"><a href="https://www.twitter.com/saminwankwo"><i className="fab fa-twitter fa-fw"></i></a></li>
-						<li className="list-inline-item"><a href="https://www.linkedin.com/in/samuel-nwankwo-a87030174/"><i className="fab fa-linkedin-in fa-fw"></i></a></li>
-						<li className="list-inline-item"><a href="https://www.github.com/saminwankwo"><i className="fab fa-github-alt fa-fw"></i></a></li>
-						<li className="list-inline-item"><a href="https://t.me/saminwankwo"><i className="fab fa-telegram fa-fw"></i></a></li>
-						<li className="list-inline-item"><a href="https://www.facebook.com/nwankwo.samuel"><i className="fab fa-facebook fa-fw"></i></a></li>
+						<li className="list-inline-item"><a href="https://www.twitter.com/saminwankwo" target ="_blank" rel ="noreferrer"><i className="fab fa-twitter fa-fw"></i></a></li>
+						<li className="list-inline-item"><a href="https://www.linkedin.com/in/saminwankwo" target ="_blank" rel ="noreferrer"><i className="fab fa-linkedin-in fa-fw"></i></a></li>
+						<li className="list-inline-item"><a href="https://www.github.com/saminwankwo" target ="_blank" rel ="noreferrer"><i className="fab fa-github-alt fa-fw"></i></a></li>
+						<li className="list-inline-item"><a href="https://t.me/saminwankwo" target ="_blank" rel ="noreferrer"><i className="fab fa-telegram fa-fw"></i></a></li>
+						<li className="list-inline-item"><a href="https://www.facebook.com/nwankwo.samuel" target ="_blank" rel ="noreferrer"><i className="fab fa-facebook fa-fw"></i></a></li>
 					</ul>
 					{/* <!-- End of social media icons --> */}
 					<hr/>
@@ -32,11 +32,11 @@ const navbar = () => {
 
 				{/* <!-- Menu Options --> */}
 				<ul className="navbar-nav flex-column text-left">
-					<li className="nav-item active"><a className="nav-link" href="index.html"><i className="fas fa-user fa-fw mr-2"></i>About Me<span className="sr-only">(current)</span></a></li>
-					<li className="nav-item"><a className="nav-link" href="portfolio.html"><i className="fas fa-laptop-code fa-fw mr-2"></i>My Portfolio</a></li>
-					<li className="nav-item"><a className="nav-link" href="resume.html"><i className="fas fa-file-alt fa-fw mr-2"></i>Resume</a></li>
-					<li className="nav-item"><a className="nav-link" href="contact.html"><i className="fas fa-envelope-open-text fa-fw mr-2"></i>Contact</a></li>
-					<li className="nav-item"><a className="nav-link" href="blog-home.html"><i className="fas fa-blog fa-fw mr-2"></i>Blog</a></li>
+					<li className="nav-item active"><a className="nav-link" href="/"><i className="fas fa-user fa-fw mr-2"></i>About Me<span className="sr-only">(current)</span></a></li>
+					<li className="nav-item"><a className="nav-link" href="/portfolio"><i className="fas fa-laptop-code fa-fw mr-2"></i>My Portfolio</a></li>
+					<li className="nav-item"><a className="nav-link" href="/resume"><i className="fas fa-file-alt fa-fw mr-2"></i>Resume</a></li>
+					<li className="nav-item"><a className="nav-link" href="/contact"><i className="fas fa-envelope-open-text fa-fw mr-2"></i>Contact</a></li>
+					<li className="nav-item"><a className="nav-link" href="/blog"><i className="fas fa-blog fa-fw mr-2"></i>Blog</a></li>
 				</ul>
 				{/* <!-- End of menu options --> */}
 	

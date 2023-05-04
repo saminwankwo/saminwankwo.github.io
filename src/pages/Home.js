@@ -5,8 +5,6 @@ import img from '../profile.png'
 import { useState, useEffect } from "react"
 import Placeholder from "../img-placeholder.webp"
 
-
-
 const Home = () => {
     const [items, setItems] = useState([])
 
@@ -16,8 +14,7 @@ const Home = () => {
   useEffect(() => {
     const fetchRepos = async () => {
       const res = await fetch(
-        `https://api.github.com/users/${user}/repos?per_page=6&sort=updated`
-        // https://api.github.com/user/pinned/repos
+        `https://api.github.com/users/${user}/repos?per_page=8&sort=updated`
 
       )
       const data = await res.json()
@@ -128,7 +125,6 @@ const Home = () => {
                                <h5 className="card-title"><a href="project.html" className="theme-link">{item.name}</a></h5>
                                <p className="card-text">{item.description}</p>
                                <a href={item.html_url} rel='noreferrer' target='_blank'><i className="fab fa-github-alt fa-fw"></i></a>
-                                
                            </div>
                        </div>
                    </div>
