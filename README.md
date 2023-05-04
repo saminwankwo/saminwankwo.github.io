@@ -76,7 +76,9 @@ To run the portfolio on your local machine, follow these steps:
 
 ## Demo
 
-To see a live demo of this portfolio, visit [https://saminwankwo-github-io.vercel.app](https://saminwankwo-github-io.vercel.app).
+To see a live demo of this portfolio, visit 
+ - [https://saminwankwo-github-io.vercel.app](https://saminwankwo-github-io.vercel.app)
+ - [https://saminwankwo.netlify.app](https://saminwankwo.netlify.app)
 
 ## Contributing
 
