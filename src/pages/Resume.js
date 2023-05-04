@@ -292,6 +292,7 @@ const Resume = () => {
 						</aside>
 						{/* <!--//resume-aside--> */}
 					</div>
+					
 					{/* <!--//row--> */}
                 </div>
                 {/* <!--//resume-body--> */}
