@@ -27,31 +27,31 @@ const Portfolio = () => {
     <>
     <Header/>
     {/* <!-- intro plus button --> */}
-        <section class="cta-section theme-bg-light py-5">
-            <div class="container text-center single-col-max-width">
-                <h2 class="heading">Portfolio</h2>
-                <div class="intro">
+        <section className="cta-section theme-bg-light py-5">
+            <div className="container text-center single-col-max-width">
+                <h2 className="heading">Portfolio</h2>
+                <div className="intro">
                     <p>Welcome to my Portfolio. I'm taking on freelance work at the moment. Want some help building your software?</p>
                 </div>
-                <a class="btn btn-primary" href="contact.html" target="_blank"><i class="fas fa-paper-plane mr-2"></i>Hire Me</a>
+                <a className="btn btn-primary" href="/contact" target="_blank"><i className="fas fa-paper-plane mr-2"></i>Hire Me</a>
             </div>
         </section>
-        <section class="projects-list px-3 py-5 p-md-5">
+        <section className="projects-list px-3 py-5 p-md-5">
             
             {/* <!-- Filter --> */}
-            <div class="container">
-                <div class="text-center">
-                    <ul id="filters" class="filters mb-5 mx-auto pl-0">
-                        <li class="type active mb-3 mb-lg-0" data-filter="*">All</li>
-                        <li class="type  mb-3 mb-lg-0" data-filter=".webapp">We App</li> -->
-                        <li class="type  mb-3 mb-lg-0" data-filter=".frontend">Frontend</li>
-                        <li class="type  mb-3 mb-lg-0" data-filter=".backend">Backend</li>
-                        <li class="type  mb-3 mb-lg-0" data-filter=".mobileapp">Mobile App</li>
+            <div className="container">
+                <div className="text-center">
+                    <ul id="filters" className="filters mb-5 mx-auto pl-0">
+                        <li className="type active mb-3 mb-lg-0" data-filter="*">All</li>
+                        <li className="type  mb-3 mb-lg-0" data-filter=".webapp">We App</li> --
+                        <li className="type  mb-3 mb-lg-0" data-filter=".frontend">Frontend</li>
+                        <li className="type  mb-3 mb-lg-0" data-filter=".backend">Backend</li>
+                        <li className="type  mb-3 mb-lg-0" data-filter=".mobileapp">Mobile App</li>
                     </ul>
                 </div>
 
-                <div class="project-cards row isotope">
-                    <div class="isotope-item col-md-6 mb-5 mobileapp frontend">
+                <div className="project-cards row isotope">
+                    <div className="isotope-item col-md-6 mb-5 mobileapp frontend">
                         <div class="card project-card">
                             <div class="row no-gutters">
                                 <div class="col-lg-4 card-img-holder">
