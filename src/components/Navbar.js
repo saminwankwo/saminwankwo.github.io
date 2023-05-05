@@ -41,7 +41,7 @@ const navbar = () => {
 				{/* <!-- End of menu options --> */}
 	
 				{/* <!-- Hire me Buton --> */}
-				<div className="my-2"><a className="btn btn-primary" href="contact.html" target="_blank"><i className="fas fa-paper-plane mr-2"></i>Hire Me</a></div>
+				<div className="my-2"><a className="btn btn-primary" href="/contact" target="_blank"><i className="fas fa-paper-plane mr-2"></i>Hire Me</a></div>
 	
 				{/* <!-- Toggle buton --> */}
 				<div className="dark-mode-toggle text-center w-100">
