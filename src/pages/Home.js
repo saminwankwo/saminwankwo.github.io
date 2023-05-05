@@ -19,7 +19,6 @@ const Home = () => {
       )
       const data = await res.json()
       setItems(data)
-      console.log(data)
     }
 
     fetchRepos()
@@ -38,7 +37,7 @@ const Home = () => {
                         <div className="bio mb-4">I'm a software developer with expertise in building complicated, scalable online and mobile applications from the front end to the back end. Would you like to know if I can assist you with your project? Check out my project <a className="link-on-bg" href="portfolio.html">portfolio</a> and <a className="link-on-bg" href="resume.html">online resume</a>.</div>
                         <div className="mb-4">
                             <a className="btn btn-primary mr-2 mb-3" href="portfolio.html"><i className="fas fa-arrow-alt-circle-right mr-2"></i><span className="d-none d-md-inline">View</span> Portfolio</a>
-                            <a className="btn btn-secondary mb-3" href="resume.html"><i className="fas fa-file-alt mr-2"></i><span className="d-none d-md-inline">View</span> Resume</a>
+                            <a className="btn btn-secondary mb-3" href="/resume"><i className="fas fa-file-alt mr-2"></i><span className="d-none d-md-inline">View</span> Resume</a>
                         </div>
                     </div>
                     <img className="profile-image mb-3 mb-lg-0 ml-lg-5 mr-md-0" src={img} alt=" Nwankwo samuel's profile picture for nwankwo samuel's personal website"/>
@@ -98,7 +97,7 @@ const Home = () => {
                     </div>
                     
                 </div>
-                <div className="text-center py-3"><a href="contact.html" className="btn btn-primary"><i className="fas fa-paper-plane mr-2"></i>Hire Me</a></div>
+                <div className="text-center py-3"><a href="/contact" className="btn btn-primary"><i className="fas fa-paper-plane mr-2"></i>Hire Me</a></div>
                     
             </div></div>
         </section>
@@ -122,7 +121,7 @@ const Home = () => {
                        </div>
                        <div className="col-lg-8">
                            <div className="card-body">
-                               <h5 className="card-title"><a href="project.html" className="theme-link">{item.name}</a></h5>
+                               <h5 className="card-title"><a href="#" className="theme-link">{item.name}</a></h5>
                                <p className="card-text">{item.description}</p>
                                <a href={item.html_url} rel='noreferrer' target='_blank'><i className="fab fa-github-alt fa-fw"></i></a>
                            </div>
@@ -141,7 +140,7 @@ const Home = () => {
       
                     
                 </div>
-                <div className="text-center py-3"><a href="portfolio.html" className="btn btn-primary"><i className="fas fa-arrow-alt-circle-right mr-2"></i>View Portfolio</a></div>
+                <div className="text-center py-3"><a href="/portfolio" className="btn btn-primary"><i className="fas fa-arrow-alt-circle-right mr-2"></i>View Portfolio</a></div>
                     
             </div>
         </section>

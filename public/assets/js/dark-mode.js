@@ -32,6 +32,6 @@ $(document).ready(function() {
 
 	});
 	
-	
+	console.log("confirmed")
 	
 });	
