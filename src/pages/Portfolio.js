@@ -13,7 +13,7 @@ const Portfolio = () => {
   useEffect(() => {
     const fetchRepos = async () => {
       const res = await fetch(
-        `https://api.github.com/users/${user}/repos?&sort=updated`
+        `https://api.github.com/users/${user}/repos?&sort=updated&direction=desc`
 
       )
       const data = await res.json()
@@ -80,7 +80,7 @@ const Portfolio = () => {
                     {items.map((item) => (
                         <>
                         <div class="isotope-item col-md-6 mb-5 mobileapp frontend">
-                            <div class="card project-card">
+                            <div class="card project-card" key={item.id}>
                                 <div class="row no-gutters">
                                     <div class="col-lg-4 card-img-holder">
                                         {/* <img src="assets/Imgs/project/ProfilePage.png" class="card-img" alt="image"> */}
@@ -104,29 +104,7 @@ const Portfolio = () => {
                             </div>
                         </div>
 
-                        <div class="isotope-item col-md-6 mb-5 mobileapp frontend">
-                            <div class="card project-card">
-                                <div class="row no-gutters">
-                                    <div class="col-lg-4 card-img-holder">
-                                        {/* <img src="assets/Imgs/project/ProfilePage.png" class="card-img" alt="image"> */}
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title"><a href={item.html_url} class="theme-link" target="_blank">{item.name}</a></h5>
-                                            <p class="card-text">{item.description}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                 <div class="link-mask">
-                                    {/* <a class="link-mask-link" href="https://saminwankwo.github.io"></a> */}
-                                    <div class="link-mask-text">
-                                        <a class="btn btn-secondary" href={item.html_url}>
-                                            <i class="fas fa-eye mr-2"></i>Open in github
-                                        </a>
-                                    </div>
-                                </div> 
-                            </div>
-                        </div>
+                        
                         </>
                     ))}
                     </div>

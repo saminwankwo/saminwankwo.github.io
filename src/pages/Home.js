@@ -114,7 +114,7 @@ const Home = () => {
           {items.map((item) => (
 
                <div className="col-md-6 mb-5">
-               <div className="card project-card">
+               <div className="card project-card" key ={item.id}>
                    <div className="row no-gutters">
                        <div className="col-lg-4 card-img-holder">
                            <img src={Placeholder} className="card-img" alt={item.description}/>
