@@ -19,7 +19,7 @@ const Contact = () => {
             	<article className="resume-wrapper mx-auto theme-bg-light p-4 mb-4 my-4 shadow-lg">
 					<div className=" theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
 						<div className="text-center" style={{textAlign:"center",display:"flex",flexDirection:"column"}}>
-							<a href="#"><i className="fas fa-coffee fa-5x"></i></a>
+							<a href="/contact"><i className="fas fa-coffee fa-5x"></i></a>
 							<h5>Collaboration</h5>
 							You have a project and you think I can help
 							<span> <a href="mailto:nwankwosami@gmail.com"> <i className="far fa-envelope fa-lg"></i> nwankwosami@gmail.com</a></span>
@@ -28,7 +28,7 @@ const Contact = () => {
 
                 <div className="theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
                     <div className="text-center" style={{textAlign:"center",display:"flex",flexDirection:"column"}}>
-                        <a href="#"><i className="fas fa-paper-plane mr-2 fa-5x"></i></a>
+                        <a href="/contact"><i className="fas fa-paper-plane mr-2 fa-5x"></i></a>
                             <h5>Hire Me</h5>
                             Interested in hiring me for your project
                         <span><a href="mailto:nwankwosami@gmail.com"><i className="far fa-envelope fa-lg"></i> nwankwosami@gmail.com</a></span>
@@ -38,7 +38,7 @@ const Contact = () => {
 
                 <div className="theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
                     <div className="text-center" style={{textAlign:"center",display:"flex",flexDirection:"column"}}>
-                        <a href="#"><i className="fas fa-chalkboard-teacher  fa-5x"></i></a>
+                        <a href="/contact"><i className="fas fa-chalkboard-teacher  fa-5x"></i></a>
                         <h5>Mentorship</h5>
                             You can contact me if you need help learning web development or android app development
                         <span><a href="mailto:nwankwosami@gmail.com"><i className="far fa-envelope fa-lg"></i> nwankwosami@gmail.com</a></span>
@@ -48,7 +48,7 @@ const Contact = () => {
 
                 <div className="theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
                     <div className="text-center" style={{textAlign:"center",display:"flex",flexDirection:"column"}}>
-                        <a href="#"><i className="fas fa-address-card fa-5x"></i></a>
+                        <a href="/contact"><i className="fas fa-address-card fa-5x"></i></a>
                         <h5>Just Want to Connect</h5>
                         <p>Or Maybe You just want to be my friend, connect with me on the social media networks.</p>
                         <ul className="list-inline mb-0">

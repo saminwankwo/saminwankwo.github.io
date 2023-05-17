@@ -32,7 +32,7 @@ const Resume = () => {
                             <ul className="list-unstyled mb-0">
                                 <li className="mb-2"><i className="fas fa-phone-square fa-fw fa-lg mr-2 "></i><a className="resume-link" href="tel:+2348058643829">+234 805 864 3829</a></li>
                                 <li className="mb-2"><i className="fas fa-envelope-square fa-fw fa-lg mr-2"></i><a className="resume-link" href="mailto:nwankwosami@gmail.com">nwankwosami@gmail.com</a></li>
-                                <li className="mb-2"><i className="fas fa-globe fa-fw fa-lg mr-2"></i><a className="resume-link" href="https://saminwankwo.netlify.com" target="_blank">www.saminwankwo.netlify.com</a></li>
+                                <li className="mb-2"><i className="fas fa-globe fa-fw fa-lg mr-2"></i><a className="resume-link" href="https://saminwankwo.netlify.com" target="_blank" rel="noreferrer">www.saminwankwo.netlify.com</a></li>
                                 <li className="mb-0"><i className="fas fa-map-marker-alt fa-fw fa-lg mr-2"></i>Nigeria</li>
                             </ul>
                         </div>

@@ -40,7 +40,7 @@ const Home = () => {
                             <a className="btn btn-secondary mb-3" href="/resume"><i className="fas fa-file-alt mr-2"></i><span className="d-none d-md-inline">View</span> Resume</a>
                         </div>
                     </div>
-                    <img className="profile-image mb-3 mb-lg-0 ml-lg-5 mr-md-0" src={img} alt=" Nwankwo samuel's profile picture for nwankwo samuel's personal website"/>
+                    <img className="profile-image mb-3 mb-lg-0 ml-lg-5 mr-md-0" src={img} alt=" Nwankwo samuel's profile, nwankwo samuel's personal website"/>
                 </div>
             </div>
         </section>
@@ -121,7 +121,7 @@ const Home = () => {
                        </div>
                        <div className="col-lg-8">
                            <div className="card-body">
-                               <h5 className="card-title"><a href="#" className="theme-link">{item.name}</a></h5>
+                               <h5 className="card-title"><a href={item.html_url} className="theme-link">{item.name}</a></h5>
                                <p className="card-text">{item.description}</p>
                                <a href={item.html_url} rel='noreferrer' target='_blank'><i className="fab fa-github-alt fa-fw"></i></a>
                            </div>

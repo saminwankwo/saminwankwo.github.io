@@ -18,7 +18,6 @@ const Portfolio = () => {
       )
       const data = await res.json()
       setItems(data)
-      console.log(data)
     }
 
     fetchRepos()
@@ -87,7 +86,7 @@ const Portfolio = () => {
                                     </div>
                                     <div class="col-lg-8">
                                         <div class="card-body">
-                                            <h5 class="card-title"><a href="#" class="theme-link" target="_blank">{item.name}</a></h5>
+                                            <h5 class="card-title"><a href={item.html_url} class="theme-link" target="_blank" rel='noreferrer'>{item.name}</a></h5>
                                             <p class="card-text">{item.description}</p>
                                         </div>
 

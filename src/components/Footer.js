@@ -6,7 +6,7 @@ const Footer = () => {
     <div className="container"><hr/></div>
         
         <footer className="footer text-center py-4">
-            <small className="copyright">Designed with  <a href="/"><i className="fas fa-heart fa-fw"></i></a> by <a href="http:\\www.twitter.com/saminwankwo" target="_blank">Nwankwo Samuel</a></small>
+            <small className="copyright">Designed with  <a href="/"><i className="fas fa-heart fa-fw"></i></a> by <a href="http:\\www.twitter.com/saminwankwo" target="_blank" rel="noreferrer">Nwankwo Samuel</a></small>
             <ul className="social-list list-inline py-2 mx-auto">
                     <li className="list-inline-item"><a href="https://www.twitter.com/saminwankwo" target = "_blank" rel ="noreferrer"><i className="fab fa-twitter fa-fw"></i></a></li>
                     <li className="list-inline-item"><a href="https://www.linkedin.com/in/saminwankwo" target = "_blank" rel ="noreferrer"><i className="fab fa-linkedin-in fa-fw"></i></a></li>
