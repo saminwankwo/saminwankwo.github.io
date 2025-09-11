@@ -1,0 +1,106 @@
+.featured-section { padding: 2rem 0; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+.project-card { background:#fff; border:1px solid #eee; border-radius:12px; padding:1rem; box-shadow: 0 6px 20px rgba(0,0,0,.04); }
+.project-card .tagline { color:#555; margin-top:-.25rem; }
+.project-card .desc { margin:.5rem 0 1rem; }
+.project-card .tech { display:flex; flex-wrap:wrap; gap:.5rem; padding:0; list-style:none; }
+.project-card .tech li { background:#f2f3f7; padding:.25rem .5rem; border-radius:999px; font-size:.85rem; }
+.project-card .links a { margin-right:.75rem; font-weight:600; }
+.repo-list { list-style:none; padding:0; }
+.repo-list li { display:flex; justify-content:space-between; padding:.5rem 0; border-bottom:1px dashed #eee; }
+.muted { color:#666; font-size:.85rem; }
+
+.skills-section {
+  padding: 2rem 0;
+}
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+.skill-category {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+}
+.skill-category h3 {
+  margin-bottom: 0.75rem;
+}
+.skill-category ul {
+  list-style: none;
+  padding: 0;
+}
+.skill-category li {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.skill-category .icon {
+  font-size: 1.2rem;
+}
+/* Dark mode body */
+body.dark-mode {
+  background-color: #121212 !important;
+  color: #eaeaea !important;
+}
+
+/* Section overrides */
+body.dark-mode #home {
+  background-color: #121212 !important;
+  color: #eaeaea !important;
+}
+
+/* Buttons */
+body.dark-mode .btn-outline-primary {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+body.dark-mode .btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+
+/* Card dark mode */
+body.dark-mode .card {
+  background-color: #1e1e1e !important;
+  color: #ddd !important;
+  border: 1px solid #333 !important;
+}
+
+body.dark-mode .card .card-subtitle {
+  color: #aaa !important;
+}
+
+body.dark-mode .btn-outline-secondary {
+  border-color: #aaa !important;
+  color: #aaa !important;
+}
+
+body.dark-mode .btn-outline-secondary:hover {
+  background-color: #aaa !important;
+  color: #121212 !important;
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .badge.bg-secondary {
+  background-color: #6c757d !important; /* keep contrast visible */
+  color: #fff !important;
+}
+
+[data-theme="dark"] .list-group-item {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+  border-color: #333 !important;
+}
+
+[data-theme="dark"] .list-group-item a {
+  color: #4da3ff !important;
+}
+
+[data-theme="dark"] .list-group-item a:hover {
+  color: #82c0ff !important;
+}

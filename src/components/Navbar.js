@@ -37,11 +37,21 @@ const navbar = () => {
 					<li className="nav-item"><a className="nav-link" href="/resume"><i className="fas fa-file-alt fa-fw mr-2"></i>Resume</a></li>
 					<li className="nav-item"><a className="nav-link" href="/contact"><i className="fas fa-envelope-open-text fa-fw mr-2"></i>Contact</a></li>
 					<li className="nav-item"><a className="nav-link" href="/blog"><i className="fas fa-blog fa-fw mr-2"></i>Blog</a></li>
+					
 				</ul>
 				{/* <!-- End of menu options --> */}
 	
 				{/* <!-- Hire me Buton --> */}
-				<div className="my-2"><a className="btn btn-primary" href="/contact" target="_blank"><i className="fas fa-paper-plane mr-2"></i>Hire Me</a></div>
+				<div className="my-2">
+
+					{/* <li className="nav-item"> */}
+  <a className="btn btn-primary" href="/Samuel_Nwankwo_CV.pdf" target="_blank" rel="noreferrer">
+    Download CV
+  </a>
+{/* </li> */}
+
+					{/* <a className="btn btn-primary" href="/contact" target="_blank"><i className="fas fa-paper-plane mr-2"></i>Hire Me</a> */}
+					</div>
 	
 				{/* <!-- Toggle buton --> */}
 				<div className="dark-mode-toggle text-center w-100">
