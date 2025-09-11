@@ -33,7 +33,45 @@ const Home = () => {
     {/* <!-- About me, Bio section begins --> */}
         {/* <section className="about-me-section p-3 p-lg-5 theme-bg-light"> */}
         <div className='container'>
-          <HomePost />
+
+          <section className="bg-light p-5 mb-5">
+  <div className="container">
+    <div className="row align-items-center">
+      {/* Profile Image */}
+      <div className="col-md-4 text-center mb-4 mb-md-0">
+        <img 
+          src={img} 
+          alt="Nwankwo Samuel profile" 
+          className="img-fluid rounded-circle shadow-sm"
+          style={{ maxWidth: "200px" }}
+        />
+      </div>
+
+      {/* Intro Text */}
+      <div className="col-md-8">
+        <h1 className="fw-bold">Nwankwo Samuel</h1>
+        <h4 className="text-muted mb-3">Backend Engineer | Full-Stack Developer</h4>
+        <p className="lead">
+          I specialize in building scalable APIs, cloud-native applications, and backend systems. 
+          With 7+ years of experience in PHP/Laravel and 5+ years in Node.js, I’ve delivered 
+          fintech, e-commerce, and healthtech solutions serving thousands of users.
+        </p>
+        <div className="d-flex flex-wrap gap-2">
+          <a href="/portfolio" className="btn btn-primary">
+            <i className="fas fa-arrow-alt-circle-right me-2"></i> View Portfolio
+          </a>
+          <a href="/resume" className="btn btn-outline-secondary">
+            <i className="fas fa-file-alt me-2"></i> View Resume
+          </a>
+          <a href="mailto:nwankwosami@gmail.com" className="btn btn-outline-dark">
+            <i className="fas fa-envelope me-2"></i> Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+          {/* <HomePost /> */}
 
         </div>
             {/* <div className="container">
