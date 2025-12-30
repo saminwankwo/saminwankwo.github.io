@@ -9,6 +9,7 @@ export default function ProjectCard({ project }) {
           src={project.image}
           className="card-img-top"
           alt={project.title}
+          loading="lazy"
         />
       )}
 

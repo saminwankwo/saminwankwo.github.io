@@ -237,6 +237,28 @@ body.dark-mode .btn-outline-secondary:hover {
   color: #82c0ff !important;
 }
 
+/* 5. General Transitions */
+body,
+body *,
+.theme-bg-light,
+.bg-white,
+.card,
+.project-card,
+.skill-category,
+section,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+li {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 /* =========================================
    Dark Mode Improvements & Polish
    ========================================= */
