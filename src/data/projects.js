@@ -6,6 +6,7 @@ const projects = [
     description:
       "Published an open-source SDK standardizing token validation, refresh flows, and role checks. Includes TypeScript typings, unit tests, and CI/CD pipeline. Gained 200+ installs on npm.",
     tech: ["Node.js", "Express", "TypeScript", "Jest", "GitHub Actions", "npm"],
+    image: "/assets/projects/auth-sdk.png",
     links: {
       demo: "https://www.npmjs.com/package/@saminwankwo/auth-sdk",
       repo: "https://github.com/saminwankwo/auth-sdk",
@@ -19,6 +20,7 @@ const projects = [
     description:
       "Built an AI-powered intrusion detection pipeline with PHP collectors for logs, feature extraction, and TensorFlow classification. Improved security response times by 40%.",
     tech: ["PHP", "Python", "TensorFlow"],
+    image: "/assets/projects/ai-intrusion.png",
     links: { demo: null, repo: null, readme: null },
   },
 
@@ -29,6 +31,7 @@ const projects = [
     description:
       "Built a computer based test software.",
     tech: ["PHP"],
+    image: "/assets/projects/cbt-exam.png",
     links: { demo: null, repo: null, readme: null },
   },
   {
@@ -41,7 +44,7 @@ const projects = [
     links: { demo: null, repo: null, readme: null },
   },
 
-   {
+  {
     id: "sweeftly-ecommerce-api",
     title: "Sweeftly E-commerce API",
     tagline: "Multi-version API for ordering, payments & delivery",

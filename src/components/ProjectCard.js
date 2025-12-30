@@ -2,7 +2,7 @@ import React from "react";
 
 export default function ProjectCard({ project }) {
   return (
-    <div className="card h-100 shadow-sm border-0">
+    <div className="card project-card h-100 shadow-sm">
       {/* Thumbnail / Image */}
       {project.image && (
         <img

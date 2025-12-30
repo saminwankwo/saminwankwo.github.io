@@ -1,23 +1,148 @@
-.featured-section { padding: 2rem 0; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-.project-card { background:#fff; border:1px solid #eee; border-radius:12px; padding:1rem; box-shadow: 0 6px 20px rgba(0,0,0,.04); }
-.project-card .tagline { color:#555; margin-top:-.25rem; }
-.project-card .desc { margin:.5rem 0 1rem; }
-.project-card .tech { display:flex; flex-wrap:wrap; gap:.5rem; padding:0; list-style:none; }
-.project-card .tech li { background:#f2f3f7; padding:.25rem .5rem; border-radius:999px; font-size:.85rem; }
-.project-card .links a { margin-right:.75rem; font-weight:600; }
-.repo-list { list-style:none; padding:0; }
-.repo-list li { display:flex; justify-content:space-between; padding:.5rem 0; border-bottom:1px dashed #eee; }
-.muted { color:#666; font-size:.85rem; }
+:root {
+  --font-primary: 'Inter', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --primary-color: #5fb579;
+  /* Kept existing green or updated? Let's stick to a nice one or use what was there */
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* Glassmorphism Navigation */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+body.dark-mode .glass-nav {
+  background: rgba(18, 18, 18, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation-name: fadeInUp;
+  animation-duration: 0.8s;
+  animation-fill-mode: both;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+.delay-200 {
+  animation-delay: 0.2s;
+}
+
+.delay-300 {
+  animation-delay: 0.3s;
+}
+
+.featured-section {
+  padding: 2rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.project-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .04);
+}
+
+.project-card .tagline {
+  color: #555;
+  margin-top: -.25rem;
+}
+
+.project-card .desc {
+  margin: .5rem 0 1rem;
+}
+
+.project-card .tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.project-card .tech li {
+  background: #f2f3f7;
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  font-size: .85rem;
+}
+
+.project-card .links a {
+  margin-right: .75rem;
+  font-weight: 600;
+}
+
+.repo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.repo-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.muted {
+  color: #666;
+  font-size: .85rem;
+}
 
 .skills-section {
   padding: 2rem 0;
 }
+
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
 }
+
 .skill-category {
   background: #fff;
   border: 1px solid #eee;
@@ -25,22 +150,27 @@
   padding: 1rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
 }
+
 .skill-category h3 {
   margin-bottom: 0.75rem;
 }
+
 .skill-category ul {
   list-style: none;
   padding: 0;
 }
+
 .skill-category li {
   margin-bottom: 0.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
+
 .skill-category .icon {
   font-size: 1.2rem;
 }
+
 /* Dark mode body */
 body.dark-mode {
   background-color: #121212 !important;
@@ -58,6 +188,7 @@ body.dark-mode .btn-outline-primary {
   border-color: #0d6efd;
   color: #0d6efd;
 }
+
 body.dark-mode .btn-outline-primary:hover {
   background-color: #0d6efd;
   color: #fff;
@@ -87,7 +218,8 @@ body.dark-mode .btn-outline-secondary:hover {
 
 /* Dark mode adjustments */
 [data-theme="dark"] .badge.bg-secondary {
-  background-color: #6c757d !important; /* keep contrast visible */
+  background-color: #6c757d !important;
+  /* keep contrast visible */
   color: #fff !important;
 }
 
@@ -103,4 +235,86 @@ body.dark-mode .btn-outline-secondary:hover {
 
 [data-theme="dark"] .list-group-item a:hover {
   color: #82c0ff !important;
+}
+
+/* =========================================
+   Dark Mode Improvements & Polish
+   ========================================= */
+
+body.dark-mode .theme-bg-light {
+  background-color: #121212 !important;
+}
+
+body.dark-mode .bg-white {
+  background-color: #1e1e1e !important;
+  color: #e0e0e0 !important;
+}
+
+body.dark-mode .text-muted {
+  color: #b0b0b0 !important;
+}
+
+/* Fix CTA Section in Dark Mode */
+body.dark-mode .cta-section {
+  background-color: #121212 !important;
+  color: #ffffff;
+}
+
+body.dark-mode .cta-section .heading {
+  color: #ffffff;
+}
+
+/* Fix Skills Component in Dark Mode */
+body.dark-mode .skill-category {
+  background-color: #1e1e1e;
+  border-color: #333;
+  color: #e0e0e0;
+}
+
+body.dark-mode .skill-category h3 {
+  color: #ffffff;
+}
+
+/* Fix Project Card internals in Dark Mode */
+body.dark-mode .project-card .tagline {
+  color: #aaa;
+  /* Lighter than #555 */
+}
+
+body.dark-mode .project-card .tech li {
+  background-color: #333;
+  color: #ddd;
+}
+
+body.dark-mode .repo-list li {
+  border-bottom-color: #333;
+}
+
+body.dark-mode .muted {
+  color: #999;
+}
+
+/* Fix Resume Wrapper in Dark Mode */
+body.dark-mode .resume-wrapper {
+  background-color: #1e1e1e !important;
+  border: 1px solid #333;
+}
+
+
+/* Card Hover Effects for Polish */
+.project-card,
+.skill-category,
+.resume-wrapper .theme-bg-light {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover,
+.skill-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .project-card:hover,
+body.dark-mode .skill-category:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }

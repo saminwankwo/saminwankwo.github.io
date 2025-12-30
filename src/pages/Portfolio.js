@@ -28,12 +28,16 @@ export default function Portfolio() {
   return (
     <div>
       <Header title="Projects Portfolio" />
-      		<section className="cta-section theme-bg-light py-5">
-				<div className="container text-center single-col-max-width">
-					<h2 className="heading">My Portfolio</h2>
-                       
-					</div>
-			</section>
+      <section className="hero-section py-5 d-flex align-items-center" style={{ minHeight: "40vh", background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)", color: "white" }}>
+        <div className="container text-center single-col-max-width">
+          <div className="hero-content">
+            <h2 className="heading display-4 fw-bold mb-3">My Portfolio</h2>
+            <div className="intro">
+              <p className="lead mb-4 fs-4">A collection of my work, open source projects, and experiments.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <main className="container-md my-5">
         <FeaturedProjects />
