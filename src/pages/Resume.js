@@ -254,9 +254,9 @@ const Resume = () => {
 								<h3 className="text-uppercase resume-section-heading mb-4">Education</h3>
 									<ul className="list-unstyled resume-education-list">
 										<li className="mb-3">
-									        	<div className="resume-degree font-weight-bold">B.SC in Computer Science</div>
+									        	<div className="resume-degree font-weight-bold">B.SCi in Computer Science</div>
 												<div className="resume-degree-org text-muted">Michael Okpara University</div>
-												<div className="resume-degree-time text-muted">2015 - 2019</div>
+												<div className="resume-degree-time text-muted">2019</div>
 										</li>
 										<li>
 											<div className="resume-degree font-weight-bold">Diploma in IT</div>
