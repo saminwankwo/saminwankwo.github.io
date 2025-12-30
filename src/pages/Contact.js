@@ -6,71 +6,86 @@ const Contact = () => {
     return (
         <>
             <Header />
-            {/* <!-- Main Wrapper Content Begins  --> */}
 
-            <section className="hero-section py-5 d-flex align-items-center" style={{ minHeight: "40vh", background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)", color: "white" }}>
-                <div className="container text-center single-col-max-width">
-                    <div className="hero-content">
-                        <h2 className="heading display-4 fw-bold mb-3">Contact Me</h2>
-                        <div className="intro">
-                            <p className="lead mb-4 fs-4">Interested in hiring me for your project or just want to say hi?</p>
+            {/* Hero Section */}
+            <section className="hero-modern" style={{ minHeight: "50vh" }}>
+                <div className="hero-content-modern">
+                    <h1>Get In Touch</h1>
+                    <p className="lead">
+                        Let's build something amazing together.
+                    </p>
+                </div>
+            </section>
+
+            {/* Contact Cards */}
+            <section style={{ padding: "3rem 2rem 5rem" }}>
+                <div className="container" style={{ maxWidth: "1000px", margin: "0 auto" }}>
+                    <div className="grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))" }}>
+
+                        {/* Collaboration */}
+                        <div className="glass-card" style={{ textAlign: "center" }}>
+                            <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>☕</div>
+                            <h3 style={{ fontSize: "1.5rem", marginBottom: "1rem", color: "var(--accent-cyan)" }}>Collaboration</h3>
+                            <p className="text-secondary" style={{ marginBottom: "1.5rem" }}>
+                                Have a project and think I can help?
+                            </p>
+                            <a href="mailto:nwankwosami@gmail.com" className="btn-neon">
+                                Email Me
+                            </a>
+                        </div>
+
+                        {/* Hire */}
+                        <div className="glass-card" style={{ textAlign: "center" }}>
+                            <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🚀</div>
+                            <h3 style={{ fontSize: "1.5rem", marginBottom: "1rem", color: "var(--accent-purple)" }}>Hire Me</h3>
+                            <p className="text-secondary" style={{ marginBottom: "1.5rem" }}>
+                                Interested in hiring me for your project?
+                            </p>
+                            <a href="/resume" className="btn-neon btn-neon-purple">
+                                View Resume
+                            </a>
+                        </div>
+
+                        {/* Mentorship */}
+                        <div className="glass-card" style={{ textAlign: "center" }}>
+                            <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🎓</div>
+                            <h3 style={{ fontSize: "1.5rem", marginBottom: "1rem", color: "var(--accent-pink)" }}>Mentorship</h3>
+                            <p className="text-secondary" style={{ marginBottom: "1.5rem" }}>
+                                Need help learning web development?
+                            </p>
+                            <a href="https://www.twitter.com/saminwankwo" target="_blank" rel="noreferrer" className="btn-neon btn-neon-pink">
+                                DM on Twitter
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Social Links */}
+                    <div className="glass-card" style={{ marginTop: "3rem", textAlign: "center", padding: "3rem 2rem" }}>
+                        <h3 style={{ fontSize: "1.5rem", marginBottom: "2rem" }}>Connect With Me</h3>
+                        <div style={{ display: "flex", gap: "1.5rem", justifyContent: "center", flexWrap: "wrap", fontSize: "2rem" }}>
+                            <a href="https://www.twitter.com/saminwankwo" target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)", transition: "all 0.3s ease" }}>
+                                <i className="fab fa-twitter"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/saminwankwo" target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)", transition: "all 0.3s ease" }}>
+                                <i className="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/saminwankwo" target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)", transition: "all 0.3s ease" }}>
+                                <i className="fab fa-github-alt"></i>
+                            </a>
+                            <a href="https://t.me/saminwankwo" target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)", transition: "all 0.3s ease" }}>
+                                <i className="fab fa-telegram"></i>
+                            </a>
+                            <a href="https://web.facebook.com/nwankwo.samuel" target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)", transition: "all 0.3s ease" }}>
+                                <i className="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://hashnode.com/@saminwankwo" target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)", transition: "all 0.3s ease" }}>
+                                <i className="fab fa-hashnode"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* <!-- Contact Form begins --> */}
-            <div className="container px-3 px-lg-5">
-                <article className="resume-wrapper mx-auto theme-bg-light p-4 mb-4 my-4 shadow-lg">
-                    <div className=" theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
-                        <div className="text-center" style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
-                            <a href="/contact"><i className="fas fa-coffee fa-5x"></i></a>
-                            <h5>Collaboration</h5>
-                            You have a project and you think I can help
-                            <span> <a href="mailto:nwankwosami@gmail.com"> <i className="far fa-envelope fa-lg"></i> nwankwosami@gmail.com</a></span>
-                        </div>
-                    </div>
-
-                    <div className="theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
-                        <div className="text-center" style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
-                            <a href="/contact"><i className="fas fa-paper-plane mr-2 fa-5x"></i></a>
-                            <h5>Hire Me</h5>
-                            Interested in hiring me for your project
-                            <span><a href="mailto:nwankwosami@gmail.com"><i className="far fa-envelope fa-lg"></i> nwankwosami@gmail.com</a></span>
-                            <span> <span>You can also checkout my <a href="/resume">Resume</a></span></span>
-                        </div>
-                    </div>
-
-                    <div className="theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
-                        <div className="text-center" style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
-                            <a href="/contact"><i className="fas fa-chalkboard-teacher  fa-5x"></i></a>
-                            <h5>Mentorship</h5>
-                            You can contact me if you need help learning web development or android app development
-                            <span><a href="mailto:nwankwosami@gmail.com"><i className="far fa-envelope fa-lg"></i> nwankwosami@gmail.com</a></span>
-                            <span><a className="twitter" href="https://www.twitter.com/saminwankwo"><i className="fab fa-twitter fa-fw fa-lg"></i>@saminwankwo</a> </span>
-                        </div>
-                    </div>
-
-                    <div className="theme-bg-light shadow-sm p-5 mb-4 bg-white p-5 m-5">
-                        <div className="text-center" style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
-                            <a href="/contact"><i className="fas fa-address-card fa-5x"></i></a>
-                            <h5>Just Want to Connect</h5>
-                            <p>Or Maybe You just want to be my friend, connect with me on the social media networks.</p>
-                            <ul className="list-inline mb-0">
-                                <li className="list-inline-item mb-3"><a className="twitter" href="https://www.twitter.com/saminwankwo"><i className="fab fa-twitter fa-fw fa-lg"></i></a></li>
-                                <li className="list-inline-item mb-3"><a className="linkedin" href="https://www.linkedin.com/in/saminwankwo/"><i className="fab fa-linkedin-in fa-fw fa-lg"></i></a> </li>
-                                <li className="list-inline-item mb-3"><a className="github" href="https://github.com/saminwankwo"><i className="fab fa-github-alt fa-fw fa-lg"></i></a></li>
-                                <li className="list-inline-item"><a className="instagram" href="https://www.instagram.com/saminwankwo/"><i className="fab fa-instagram fa-fw fa-lg"></i></a></li>
-                                <li className="list-inline-item"><a href="https://t.me/saminwankwo"><i className="fab fa-telegram fa-fw fa-lg"></i></a></li>
-                                <li className="list-inline-item mb-3"><a className="medium" href="https://medium.com/@nwankwosami"><i className="fab fa-medium-m fa-fw fa-lg"></i></a></li>
-                                <li className="list-inline-item mb-3"><a className="medium" href="https://hashnode.com/@saminwankwo"><i className="fab fa-hashnode fa-fw fa-lg"></i></a></li>
-                                <li className="list-inline-item mb-3"><a className="codepen" href="https://codepen.io/saminwankwo"><i className="fab fa-codepen fa-fw fa-lg"></i></a></li>
-                                <li className="list-inline-item mb-3"><a className="facebook" href="https://web.facebook.com/nwankwo.samuel"><i className="fab fa-facebook-f fa-fw fa-lg"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </article>
-            </div>
             <Footer />
         </>
     )

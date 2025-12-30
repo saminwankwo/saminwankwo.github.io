@@ -2,10 +2,10 @@ import React from 'react'
 import { useState, useEffect } from "react";
 
 
-
 function BlogPosts() {
   const [posts, setPosts] = useState([]);
-
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function fetchPosts() {
@@ -35,51 +35,53 @@ function BlogPosts() {
         if (data.data?.user?.publication?.posts) {
           setPosts(data.data.user.publication.posts);
         } else {
-          console.error("Invalid data structure from Hashnode", data);
+          setError("Could not load posts");
         }
       } catch (e) {
-        console.error("Error fetching posts:", e);
+        setError("Failed to fetch posts");
+      } finally {
+        setLoading(false);
       }
     }
     fetchPosts();
   }, []);
 
   return (
-    <>
-      {/* <!-- Main Wrapper Content Begins  --> */}
+    <section style={{ padding: "3rem 2rem 5rem" }}>
+      <div className="container" style={{ maxWidth: "1200px", margin: "0 auto" }}>
+        {loading && <p className="text-center text-secondary">Loading posts...</p>}
+        {error && <p className="text-center" style={{ color: "var(--accent-pink)" }}>{error}</p>}
 
-      <section className="cta-section theme-bg-light py-5">
-        <div className="container text-center single-col-max-width">
-          <h2 className="heading">Blog Post</h2>
-          <div className="intro">
-            <p>I write on hashnode too when I am not writing on VSCode</p>
-            <a className="btn btn-primary" href="https://saminwankwo.hashnode.dev" target="_blank" rel='noreferrer'><i className="fas fa-blog fa-fw mr-2"></i> Visit Blog</a>
-          </div>
-        </div>
-      </section>
+        {!loading && !error && posts.length === 0 && (
+          <p className="text-center text-secondary">No posts found.</p>
+        )}
 
-      <section className="projects-list px-3 py-5 p-md-5">
-        <div className="project-cards row isotope">
-          {posts.map((post) => (
-            <div className="isotope-item col-md-6 mb-5">
-              <div className="card project-card" key={post.slug}>
-                <div className='card-body'>
-                  <div className='card-title' style={{ textAlign: "center" }}><h3>{post.title}</h3></div>
-                  {post.brief}
-                  <div className='card-footer'><a href={`https://saminwankwo.hashnode.dev/${post.slug}`}>Read more</a></div>
-                </div>
-
+        {!loading && !error && posts.length > 0 && (
+          <div className="grid">
+            {posts.map((post) => (
+              <div key={post.slug} className="glass-card">
+                <h3 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>
+                  <a href={`https://saminwankwo.hashnode.dev/${post.slug}`} target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)" }}>
+                    {post.title}
+                  </a>
+                </h3>
+                <p className="text-secondary" style={{ marginBottom: "1rem" }}>{post.brief}</p>
+                <a href={`https://saminwankwo.hashnode.dev/${post.slug}`} target="_blank" rel="noreferrer" className="btn-neon" style={{ padding: "0.5rem 1.5rem", fontSize: "0.875rem" }}>
+                  Read More
+                </a>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        )}
+
+        <div style={{ textAlign: "center", marginTop: "3rem" }}>
+          <a href="https://saminwankwo.hashnode.dev" target="_blank" rel="noreferrer" className="btn-neon btn-neon-purple">
+            Visit Full Blog
+          </a>
         </div>
-        {/* </div>             */}
-
-      </section>
-
-    </>
-    
+      </div>
+    </section>
   );
 }
 
-export default BlogPosts;
+export default BlogPosts

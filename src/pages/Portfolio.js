@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
-import FeaturedProjects from '../components/FeaturedProjects';
 import ProjectCard from '../components/ProjectCard';
 import projects from '../data/projects';
 
@@ -26,51 +25,55 @@ export default function Portfolio() {
   }, []);
 
   return (
-    <div>
-      <Header title="Projects Portfolio" />
-      <section className="hero-section py-5 d-flex align-items-center" style={{ minHeight: "40vh", background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)", color: "white" }}>
-        <div className="container text-center single-col-max-width">
-          <div className="hero-content">
-            <h2 className="heading display-4 fw-bold mb-3">My Portfolio</h2>
-            <div className="intro">
-              <p className="lead mb-4 fs-4">A collection of my work, open source projects, and experiments.</p>
-            </div>
+    <>
+      <Header />
+
+      {/* Hero Section */}
+      <section className="hero-modern" style={{ minHeight: "50vh" }}>
+        <div className="hero-content-modern">
+          <h1>My Portfolio</h1>
+          <p className="lead">
+            A collection of projects, experiments, and open source contributions.
+          </p>
+        </div>
+      </section>
+
+      {/* Featured Projects */}
+      <section style={{ padding: "5rem 2rem" }}>
+        <div className="container" style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 className="text-center" style={{ marginBottom: "3rem" }}>Featured Work</h2>
+          <div className="grid">
+            {projects.map(p => <ProjectCard key={p.id} project={p} />)}
           </div>
         </div>
       </section>
 
-      <main className="container-md my-5">
-        <FeaturedProjects />
-
-        <section className="all-projects mt-5">
-          <h2 className='section-title font-weight-bold mb-5'>All Featured Work</h2>
-          <div className="grid">
-            {projects.map(p => <ProjectCard key={p.id} project={p} />)}
-          </div>
-        </section>
-
-       <section className="github-projects mt-5">
-  <h2 className='section-title font-weight-bold mb-5'>Open Source Repos</h2>
-  {loading ? <p>Loading GitHub repos…</p> : (
-    <ul className="list-group">
-      {repos.slice(0, 12).map(r => (
-        <li key={r.id} className="list-group-item d-flex justify-content-between align-items-center">
-          <div>
-            <a href={r.html_url} target="_blank" rel="noreferrer" className="fw-bold text-decoration-none">
-              {r.name}
-            </a>
-            {r.description && <p className="mb-0 small text-muted">{r.description}</p>}
-          </div>
-          <span className="badge bg-secondary">
-            {r.language || "Unknown"} • ★ {r.stargazers_count}
-          </span>
-        </li>
-      ))}
-    </ul>
-  )}
-</section>
-
-      </main>
-    </div>
+      {/* GitHub Repos */}
+      <section style={{ padding: "3rem 2rem 5rem" }}>
+        <div className="container" style={{ maxWidth: "1200px", margin: "0 auto" }}>
+          <h2 className="text-center" style={{ marginBottom: "3rem" }}>Open Source Contributions</h2>
+          {loading ? (
+            <p className="text-center text-secondary">Loading repositories...</p>
+          ) : (
+            <div className="grid">
+              {repos.slice(0, 12).map(r => (
+                <div key={r.id} className="glass-card" style={{ padding: "1.5rem" }}>
+                  <h3 style={{ fontSize: "1.25rem", marginBottom: "0.5rem" }}>
+                    <a href={r.html_url} target="_blank" rel="noreferrer" style={{ color: "var(--accent-cyan)" }}>
+                      {r.name}
+                    </a>
+                  </h3>
+                  {r.description && <p className="text-secondary" style={{ fontSize: "0.875rem", marginBottom: "1rem" }}>{r.description}</p>}
+                  <div style={{ display: "flex", gap: "1rem", fontSize: "0.875rem", color: "var(--text-muted)" }}>
+                    <span>{r.language || "Unknown"}</span>
+                    <span>★ {r.stargazers_count}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    </>
   );
 }

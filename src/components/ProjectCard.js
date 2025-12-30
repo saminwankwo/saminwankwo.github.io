@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ProjectCard({ project }) {
   return (
-    <div className="card project-card h-100 shadow-sm">
-      {/* Thumbnail / Image */}
+    <div className="project-card">
       {project.image && (
         <img
           src={project.image}
@@ -13,56 +13,28 @@ export default function ProjectCard({ project }) {
         />
       )}
 
-      {/* Card Body */}
-      <div className="card-body d-flex flex-column">
-        <h5 className="card-title">{project.title}</h5>
+      <div className="card-body">
+        <h3 className="card-title">{project.title}</h3>
+        {project.tagline && <p className="tagline">{project.tagline}</p>}
+        <p className="desc">{project.description}</p>
 
-        {/* Tech stack badges */}
         {project.tech && project.tech.length > 0 && (
-          <div className="mb-2">
-            {project.tech.map((t, idx) => (
-              <span
-                key={idx}
-                className="badge bg-secondary me-1"
-              >
-                {t}
-              </span>
+          <ul className="tech">
+            {project.tech.slice(0, 5).map((t, i) => (
+              <li key={i}>{t}</li>
             ))}
-          </div>
+          </ul>
         )}
 
-        <p className="card-text flex-grow-1">{project.description}</p>
-
-        {/* Footer buttons */}
-        <div className="mt-auto">
+        <div className="links" style={{ display: "flex", gap: "1rem", marginTop: "1rem" }}>
           {project.links?.demo && (
-            <a
-              href={project.links.demo}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-sm btn-primary me-2"
-            >
-              Live Demo
+            <a href={project.links.demo} target="_blank" rel="noreferrer" className="btn-neon" style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}>
+              Demo
             </a>
           )}
           {project.links?.repo && (
-            <a
-              href={project.links.repo}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-sm btn-outline-secondary me-2"
-            >
-              Source Code
-            </a>
-          )}
-          {project.links?.readme && (
-            <a
-              href={project.links.readme}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-sm btn-outline-dark"
-            >
-              Read More
+            <a href={project.links.repo} target="_blank" rel="noreferrer" className="btn-neon btn-neon-purple" style={{ padding: "0.5rem 1rem", fontSize: "0.875rem" }}>
+              GitHub
             </a>
           )}
         </div>
