@@ -1,5 +1,5 @@
 import React from "react";
-import { FaNodeJs, FaReact, FaPhp, FaDocker, FaAws, FaDatabase, FaLaravel } from "react-icons/fa";
+import { FaNodeJs, FaReact, FaPhp, FaDocker, FaAws, FaLaravel } from "react-icons/fa";
 import { SiNestjs, SiMongodb, SiMysql, SiPostgresql, SiGraphql, SiTypescript } from "react-icons/si";
 
 export default function Skills() {

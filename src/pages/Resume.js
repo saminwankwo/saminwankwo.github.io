@@ -7,13 +7,11 @@ const Resume = () => {
     return (
         <>
             <Header />
-            {/* <!-- button for offline download --> */}
-            <section className="hero-section py-5 d-flex align-items-center" style={{ minHeight: "30vh", background: "linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)", color: "white" }}>
-                <div className="container text-center single-col-max-width">
-                    <div className="hero-content">
-                        <h2 className="heading display-4 fw-bold mb-3">Online Resume</h2>
-                        <a className="btn btn-light fw-bold" href="/assets/Resume.pdf" target="_blank" download="001NwankwoSamuelResume.pdf"><i className="fas fa-file-pdf mr-2"></i>Download PDF Version</a>
-                    </div>
+            <section className="hero-modern">
+                <div className="hero-content-modern">
+                    <h1>Online Resume</h1>
+                    <p className="lead">A concise overview of experience, skills, and impact.</p>
+                    <a className="btn-primary" href="/assets/Resume.pdf" target="_blank" rel="noreferrer" download="001NwankwoSamuelResume.pdf">Download PDF</a>
                 </div>
             </section>
 

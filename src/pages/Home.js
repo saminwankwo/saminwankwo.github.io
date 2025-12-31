@@ -11,8 +11,8 @@ const Home = () => {
     <>
       <Header />
 
-      {/* Hero Section - refined, not too tall */}
-      <section className="hero-modern" style={{ background: `linear-gradient(135deg, ${getComputedStyle(document.documentElement).getPropertyValue('--bg-primary')} 0%, ${getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary')} 100%)` }}>
+      {/* Hero Section */}
+      <section className="hero-modern">
         <div className="hero-content-modern">
           <h1>Nwankwo Samuel</h1>
           <p className="lead">

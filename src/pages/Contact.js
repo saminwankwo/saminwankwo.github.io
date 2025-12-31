@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 
@@ -41,9 +42,9 @@ const Contact = () => {
                             <p className="text-secondary" style={{ marginBottom: "1.5rem" }}>
                                 Interested in hiring me for your project?
                             </p>
-                            <a href="/resume" className="btn-neon btn-neon-purple">
+                            <Link to="/resume" className="btn-neon btn-neon-purple">
                                 View Resume
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Mentorship */}

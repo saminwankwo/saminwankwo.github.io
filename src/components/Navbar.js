@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { ThemeContext } from '../App'
 import Profile from '../profile.png'
 
 function Navbar() {
+    const { theme, setTheme } = useContext(ThemeContext)
+    const isDark = theme === 'dark'
     return (
         <nav className="navbar navbar-expand-lg navbar-dark" >
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 	
@@ -57,7 +60,13 @@ function Navbar() {
 				<div className="dark-mode-toggle text-center w-100">
 					<hr className="mb-4"/>
                     <h4 className="toggle-name mb-3 "><i className="fas fa-adjust mr-1"></i>Dark Mode</h4>
-                    <input className="toggle" id="darkmode" type="checkbox"/><label className="toggle-btn mx-auto mb-0" htmlFor="darkmode"></label>
+                    <input
+                        className="toggle"
+                        id="darkmode"
+                        type="checkbox"
+                        checked={isDark}
+                        onChange={() => setTheme(isDark ? 'light' : 'dark')}
+                    /><label className="toggle-btn mx-auto mb-0" htmlFor="darkmode"></label>
                 </div>
             </div>
         </nav>
