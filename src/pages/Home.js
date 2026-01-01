@@ -28,52 +28,14 @@ const Home = () => {
             <Link to="/contact" className="btn-secondary">
               Get In Touch
             </Link>
+             <Link to="/resume" className="btn-outline-secondary">
+                    View Resume
+                  </Link>
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="section-spacing">
-        <div className="container">
-          <div className="card">
-            <div className="row align-items-center" style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
-              <div style={{ flex: "0 0 auto", textAlign: "center" }}>
-                <img
-                  src={img}
-                  alt="Nwankwo Samuel"
-                  className="img-fluid rounded-circle"
-                  style={{
-                    maxWidth: "220px",
-                    width: "100%",
-                    border: `3px solid var(--border-strong)`,
-                    boxShadow: "var(--shadow-md)"
-                  }}
-                  loading="lazy"
-                />
-              </div>
-              <div style={{ flex: "1", minWidth: "300px" }}>
-                <h2 style={{ fontSize: "2rem", marginBottom: "1.25rem" }}>About Me</h2>
-                <p style={{ fontSize: "1.05rem", lineHeight: "1.7", marginBottom: "1.75rem", color: "var(--text-secondary)" }}>
-                  I specialize in building scalable APIs, cloud-native applications, and backend systems.
-                  With 7+ years of experience in PHP/Laravel and 5+ years in Node.js, I've delivered
-                  fintech, e-commerce, and healthtech solutions serving thousands of users.
-                </p>
-                <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem" }}>
-                  <Link to="/portfolio" className="btn-primary">
-                    View Portfolio
-                  </Link>
-                  <Link to="/resume" className="btn-outline-secondary">
-                    View Resume
-                  </Link>
-                  <a href="mailto:nwankwosami@gmail.com" className="btn-outline-dark">
-                    Contact Me
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* Skills Section */}
       <section style={{ padding: "4rem 0" }}>
