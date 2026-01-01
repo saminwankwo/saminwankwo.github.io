@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Header from '../components/Header';
 import ProjectCard from '../components/ProjectCard';
 import projects from '../data/projects';
@@ -8,6 +8,7 @@ const GITHUB_USER = "saminwankwo";
 export default function Portfolio() {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTag, setSelectedTag] = useState('All');
 
   useEffect(() => {
     const fetchRepos = async () => {
@@ -23,6 +24,17 @@ export default function Portfolio() {
     };
     fetchRepos();
   }, []);
+
+  const tags = useMemo(() => {
+    const set = new Set();
+    projects.forEach(p => (p.tech || []).forEach(t => set.add(t)));
+    return ['All', ...Array.from(set).sort()];
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (!selectedTag || selectedTag === 'All') return projects;
+    return projects.filter(p => (p.tech || []).includes(selectedTag));
+  }, [selectedTag]);
 
   return (
     <>
@@ -41,9 +53,21 @@ export default function Portfolio() {
       {/* Featured Projects */}
       <section style={{ padding: "5rem 2rem" }}>
         <div className="container" style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <h2 className="text-center" style={{ marginBottom: "3rem" }}>Featured Work</h2>
+          <h2 className="text-center" style={{ marginBottom: "2rem" }}>Featured Work</h2>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center', marginBottom: '2rem' }}>
+            {tags.map(tag => (
+              <button
+                key={tag}
+                className={selectedTag === tag ? 'btn-primary' : 'btn-outline-secondary'}
+                onClick={() => setSelectedTag(tag)}
+                style={{ padding: '0.5rem 1rem' }}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
           <div className="grid">
-            {projects.map(p => <ProjectCard key={p.id} project={p} />)}
+            {filtered.map(p => <ProjectCard key={p.id} project={p} />)}
           </div>
         </div>
       </section>

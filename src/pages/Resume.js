@@ -18,8 +18,9 @@ const Resume = () => {
             {/* <!-- end of button download --> */}
 
             {/* <!-- Resume starts --> */}
-            <div className="container px-3 px-lg-5" style={{ textAlign: "justify" }}>
-                <article className="resume-wrapper mx-auto theme-bg-light p-5 mb-5 my-5 shadow-lg">
+            <div className="section-spacing">
+                <div className="container">
+                <article className="resume-wrapper card mx-auto mb-5">
 
                     {/* <!-- resume header --> */}
                     <div className="resume-header">
@@ -59,14 +60,14 @@ const Resume = () => {
                     {/* <!-- Resume body --> */}
                     <div className="resume-body">
                         <div className="row">
-                            <div className="resume-main col-12 col-lg-8 col-xl-9 pr-0 pr-lg-5" >
+                            <div className="resume-main col-12 col-lg-8 col-xl-9 pr-0 pr-lg-5">
 
                                 {/* <!-- Work experience section --> */}
                                 <section className="work-section py-3">
                                     <h3 className="text-uppercase resume-section-heading mb-4">Work Experiences</h3>
 
                                     {/* <!-- Role number one --> */}
-                                    <div className="item mb-3">
+                                    <div className="item mb-3 card">
                                         <div className="item-heading row align-items-center mb-2">
                                             <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Backend Developer</h4>
                                             <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">Credib.io | August 2022 - Present</div>
@@ -84,7 +85,7 @@ const Resume = () => {
                                         </div>
                                     </div>
 
-                                    <div className="item mb-3">
+                                    <div className="item mb-3 card">
                                         <div className="item-heading row align-items-center mb-2">
                                             <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Software Developer</h4>
                                             <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">Emblic Technologies | March 2020 - July 2022</div>
@@ -104,7 +105,7 @@ const Resume = () => {
                                         </div>
                                     </div>
 
-                                    <div className="item mb-3">
+                                    <div className="item mb-3 card">
                                         <div className="item-heading row align-items-center mb-2">
                                             <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Frontend Developer</h4>
                                             <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">Softicu | May 2019 - December 2019</div>
@@ -119,7 +120,7 @@ const Resume = () => {
                                     </div>
 
                                     {/* <!-- Role number two --> */}
-                                    <div className="item mb-3">
+                                    <div className="item mb-3 card">
                                         <div className="item-heading row align-items-center mb-2">
                                             <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Intern/Instructor</h4>
                                             <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">Aspire Labs | APRIL - OCT 2018</div>
@@ -149,7 +150,7 @@ const Resume = () => {
                                     </div>
 
                                     {/* <!-- Role Number Four --> */}
-                                    <div className="item">
+                                    <div className="item card">
                                         <div className="item-heading row align-items-center mb-2">
                                             <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Backend Developer</h4>
                                             <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">Textbookng | 2016 - 2018</div>
@@ -165,7 +166,7 @@ const Resume = () => {
                                     </div>
 
                                     {/* <!-- Role Number Five --> */}
-                                    <div className="item">
+                                    <div className="item card">
                                         <div className="item-heading row align-items-center mb-2">
                                             <h4 className="item-title col-12 col-md-6 col-lg-8 mb-2 mb-md-0">Computer Operator</h4>
                                             <div className="item-meta col-12 col-md-6 col-lg-4 text-muted text-left text-md-right">Gilmor | 2011 - 2012</div>
@@ -270,12 +271,12 @@ const Resume = () => {
 
                                 <section className="skills-section py-3">
                                     <h3 className="text-uppercase resume-section-heading mb-4">Languages</h3>
-                                    <ul className="list-unstyled resume-lang-list">
+                                    {/* <ul className="list-unstyled resume-lang-list">
                                         <li className="mb-2">Igbo <span className="text-muted">(Native)</span></li>
                                         <li className="mb-2">Hausa <span className="text-muted">(Fluent)</span></li>
                                         <li className="mb-2">English <span className="text-muted">(Fluent)</span></li>
                                         <li>Spanish <span className="text-muted">(Working Knowledge)</span></li>
-                                    </ul>
+                                    </ul> */}
                                 </section>
                                 {/* <!--//certificates-section--> */}
                                 <section className="skills-section py-3">
@@ -309,7 +310,7 @@ const Resume = () => {
                     {/* <!--//resume-footer--> */}
                 </article>
             </div>
-
+            </div>
             <Footer />
         </>
     )

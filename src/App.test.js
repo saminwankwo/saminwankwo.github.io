@@ -1,10 +1,13 @@
-import { render, screen, waitForElementToBeRemoved } from '@testing-library/react';
-import App from './App';
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import Home from './pages/Home';
 
 test('renders name', async () => {
-  render(<App />);
-  const loader = screen.getByText(/Loading…/i);
-  await waitForElementToBeRemoved(loader);
-  const matches = screen.getAllByText(/Nwankwo Samuel/i);
-  expect(matches[0]).toBeInTheDocument();
+  render(
+    <MemoryRouter>
+      <Home />
+    </MemoryRouter>
+  );
+  const title = await screen.findByRole('heading', { name: /Nwankwo Samuel/i });
+  expect(title).toBeInTheDocument();
 });

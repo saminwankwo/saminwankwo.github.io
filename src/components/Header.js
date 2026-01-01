@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import { ThemeContext } from '../App'
 
 const Header = () => {
   const location = useLocation();
+  const { theme, setTheme } = useContext(ThemeContext);
+  const isDark = theme === 'dark';
 
   const isActive = (path) => location.pathname === path;
 
@@ -38,6 +41,16 @@ const Header = () => {
             <Link to="/contact" className={isActive('/contact') ? 'active' : ''}>
               Contact
             </Link>
+          </li>
+          <li>
+            <button
+              className="btn-secondary"
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              aria-label="Toggle theme"
+              style={{ marginLeft: '1rem' }}
+            >
+              {isDark ? 'Light' : 'Dark'}
+            </button>
           </li>
         </ul>
       </div>

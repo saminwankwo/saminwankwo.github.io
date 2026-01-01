@@ -34,7 +34,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<div className="text-center py-5">Loading…</div>}>
           <Routes>
-            <Route index element={<Home />}/>
+            <Route path="/" element={<Home />}/>
             <Route path="/portfolio" element={<Portfolio />}/>
             <Route path="/blog" element={<Blog />}/>
             <Route path="/contact" element={<Contact />}/>

@@ -1,32 +1,26 @@
 :root {
-  /* Typography */
   --font-primary: 'Inter', sans-serif;
   --font-heading: 'Outfit', sans-serif;
 
-  /* Sophisticated Dark Palette */
-  --bg-primary: #0f0f0f;
-  --bg-secondary: #1a1a1a;
-  --bg-tertiary: #242424;
+  --bg-primary: #0b1e3f;
+  --bg-secondary: #0f274f;
+  --bg-tertiary: #132d5e;
 
-  /* Professional Accents */
   --accent-primary: #3b82f6;
-  --accent-secondary: #8b5cf6;
+  --accent-secondary: #60a5fa;
   --accent-success: #10b981;
 
-  /* Text - High Contrast */
   --text-primary: #ffffff;
-  --text-secondary: #a3a3a3;
-  --text-muted: #737373;
+  --text-secondary: #c7d2fe;
+  --text-muted: #93a4c6;
 
-  /* Borders */
-  --border-subtle: #2a2a2a;
-  --border-default: #404040;
-  --border-strong: #525252;
+  --border-subtle: #1d335f;
+  --border-default: #274272;
+  --border-strong: #30508a;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 1px 3px rgba(12, 31, 70, 0.35);
+  --shadow-md: 0 4px 12px rgba(12, 31, 70, 0.45);
+  --shadow-lg: 0 10px 30px rgba(12, 31, 70, 0.6);
 }
 
 * {
@@ -215,6 +209,7 @@ a:hover {
   justify-content: center;
   padding: 8rem 2rem 4rem;
   position: relative;
+  background: linear-gradient(135deg, #0b1e3f 0%, #1e3a8a 55%, #0c4a6e 100%);
 }
 
 .hero-content-modern {
