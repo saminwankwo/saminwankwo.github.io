@@ -28,7 +28,7 @@ const Home = () => {
             <Link to="/contact" className="btn-secondary">
               Get In Touch
             </Link>
-             <Link to="/resume" className="btn-outline-secondary">
+             <Link to="/resume" className="btn-secondary">
                     View Resume
                   </Link>
           </div>

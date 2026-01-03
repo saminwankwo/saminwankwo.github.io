@@ -43,6 +43,7 @@ const Header = () => {
             </Link>
           </li>
           <li>
+            {/* //TODO: change this button to moon icon */}
             <button
               className="btn-secondary"
               onClick={() => setTheme(isDark ? 'light' : 'dark')}
