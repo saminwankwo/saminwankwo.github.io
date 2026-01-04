@@ -1,6 +1,24 @@
-const projects = [
+export type ProjectLink = {
+  demo?: string | null
+  repo?: string | null
+  readme?: string | null
+}
+
+export type Project = {
+  id: string
+  slug?: string
+  title: string
+  tagline?: string
+  description: string
+  tech: string[]
+  image?: string
+  links: ProjectLink
+}
+
+export const projects: Project[] = [
   {
     id: "auth-sdk-express",
+    slug: "auth-sdk-express",
     title: "Auth SDK for Express.js",
     tagline: "Authentication middleware for Express (JS/TS)",
     description:
@@ -15,6 +33,7 @@ const projects = [
   },
   {
     id: "ai-intrusion-detection",
+    slug: "ai-intrusion-detection",
     title: "AI Intrusion Detection System",
     tagline: "Hybrid ML pipeline (PHP ingestion + TensorFlow inference)",
     description:
@@ -23,19 +42,19 @@ const projects = [
     image: "/assets/projects/ai-intrusion.png",
     links: { demo: null, repo: null, readme: null },
   },
-
   {
     id: "cbt-exam",
+    slug: "cbt-exam",
     title: "Computer Based Test (CBT) Software",
     tagline: "Hybrid ML pipeline (PHP, MYSQL)",
-    description:
-      "Built a computer based test software.",
+    description: "Built a computer based test software.",
     tech: ["PHP"],
     image: "/assets/projects/cbt-exam.png",
     links: { demo: null, repo: null, readme: null },
   },
   {
     id: "parrot-backend",
+    slug: "parrot-backend",
     title: "Parrot — Mobile Backend",
     tagline: "Realtime backend for social and payment app",
     description:
@@ -43,9 +62,9 @@ const projects = [
     tech: ["Node.js", "Express.js", "MongoDB", "AWS S3", "Paystack"],
     links: { demo: null, repo: null, readme: null },
   },
-
   {
     id: "sweeftly-ecommerce-api",
+    slug: "sweeftly-ecommerce-api",
     title: "Sweeftly E-commerce API",
     tagline: "Multi-version API for ordering, payments & delivery",
     description:
@@ -53,10 +72,9 @@ const projects = [
     tech: ["NestJS", "Express.js", "AWS", "Docker", "Stripe", "MongoDB"],
     links: { demo: null, repo: null, readme: null },
   },
-
-  // --- Major freelance/consulting products ---
   {
     id: "schetia-lms",
+    slug: "schetia-lms",
     title: "Schetia LMS",
     tagline: "Cohort-based learning platform",
     description:
@@ -66,6 +84,7 @@ const projects = [
   },
   {
     id: "movment-rideshare",
+    slug: "movment-rideshare",
     title: "Movment — Ride Sharing API",
     tagline: "Dispatch and trip lifecycle management",
     description:
@@ -75,6 +94,7 @@ const projects = [
   },
   {
     id: "sparkxyfix",
+    slug: "sparkxyfix",
     title: "SparkxyFix",
     tagline: "Maintenance services booking app",
     description:
@@ -84,6 +104,7 @@ const projects = [
   },
   {
     id: "godgrace-healthcare",
+    slug: "godgrace-healthcare",
     title: "GodgraceLab Healthcare Portal",
     tagline: "Admin & reporting platform for clinics",
     description:
@@ -93,6 +114,7 @@ const projects = [
   },
   {
     id: "kid-learning-platform",
+    slug: "kid-learning-platform",
     title: "KID Learning Platform",
     tagline: "Interactive coding lessons for kids",
     description:
@@ -100,10 +122,9 @@ const projects = [
     tech: ["React.js", "Node.js", "Express.js"],
     links: { demo: null, repo: null, readme: null },
   },
-
-  // --- Open source / tools ---
   {
     id: "remote-access-terminal",
+    slug: "remote-access-terminal",
     title: "Remote Access Terminal (RAT)",
     tagline: "Secure remote shell over WebSockets",
     description:
@@ -111,10 +132,9 @@ const projects = [
     tech: ["Node.js", "WebSockets", "Docker"],
     links: { demo: null, repo: null, readme: null },
   },
-
-  // --- Early projects / training ---
   {
     id: "officepro",
+    slug: "officepro",
     title: "OfficePro",
     tagline: "All-in-one office management system",
     description:
@@ -124,6 +144,7 @@ const projects = [
   },
   {
     id: "hospital-management",
+    slug: "hospital-management",
     title: "Hospital Management System",
     tagline: "Complete hospital workflow platform",
     description:
@@ -133,6 +154,7 @@ const projects = [
   },
   {
     id: "myreminda",
+    slug: "myreminda",
     title: "MyReminda",
     tagline: "Automated reminders for businesses",
     description:
@@ -142,6 +164,7 @@ const projects = [
   },
   {
     id: "pay-record-pro",
+    slug: "pay-record-pro",
     title: "Pay Record Pro",
     tagline: "Payroll management system",
     description:
@@ -151,6 +174,7 @@ const projects = [
   },
   {
     id: "textbooksng",
+    slug: "textbooksng",
     title: "Textbooks.ng",
     tagline: "E-commerce platform for books",
     description:
@@ -158,12 +182,8 @@ const projects = [
     tech: ["PHP", "MySQL", "Bootstrap"],
     links: { demo: null, repo: null, readme: null },
   },
-];
+]
 
-export default projects;
-
-
-
-
-// export default projects;
-
+export function getProjectBySlug(slug: string) {
+  return projects.find(p => (p.slug || p.id) === slug)
+}

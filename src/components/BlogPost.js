@@ -17,24 +17,26 @@ function BlogPosts() {
           },
           body: JSON.stringify({
             query: `
-                query {
-                    user(username: "saminwankwo") {
-                    publication {
-                        posts(page: 0) {
+              query Publication {
+                publication(host: "saminwankwo.hashnode.dev") {
+                  posts(first: 8) {
+                    edges {
+                      node {
                         title
                         slug
                         brief
-                        }
+                      }
                     }
-                    }
+                  }
                 }
-                `,
+              }
+            `,
           }),
         });
         const data = await response.json();
-        console.log(data);
-        if (data.data?.user?.publication?.posts) {
-          setPosts(data.data.user.publication.posts);
+        if (data.data?.publication?.posts?.edges) {
+          const edges = data.data.publication.posts.edges || [];
+          setPosts(edges.map(e => e.node));
         } else {
           setError("Could not load posts");
         }

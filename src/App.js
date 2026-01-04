@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import React, { Suspense, lazy, createContext, useEffect, useMemo, useState } from 'react'
-import 'bootstrap/dist/css/bootstrap.css';
 const Home = lazy(() => import('./pages/Home'))
 const Portfolio = lazy(() => import('./pages/Portfolio'))
 const Blog = lazy(() => import('./pages/Blog'))
