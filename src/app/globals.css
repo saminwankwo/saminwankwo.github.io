@@ -16,14 +16,53 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #ffffff;
-    --foreground: #171717;
-  }
+[data-theme="dark"] {
+  --background: #0b1e3f;
+  --foreground: #ffffff;
+  --bg-secondary: #0f274f;
+  --bg-tertiary: #132d5e;
+  --accent-primary: #3b82f6;
+  --accent-secondary: #22d3ee;
+}
+
+[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #171717;
+  --bg-secondary: #f5f7fb;
+  --bg-tertiary: #eef2ff;
+  --accent-primary: #1d4ed8;
+  --accent-secondary: #0ea5e9;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+.card {
+  border: 1px solid rgba(255,255,255,0.1);
+  background-color: rgba(2,6,23,0.6);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
 }

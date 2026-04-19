@@ -39,8 +39,8 @@ export async function getHashnodePosts(host: string, first = 12, after?: string)
     next: { revalidate: 3600 },
   })
   const json = await res.json()
-  const edges = json?.data?.publication?.posts?.edges || []
+  const edges: Array<{ node: HashnodePost }> = json?.data?.publication?.posts?.edges || []
   const pageInfo: PageInfo = json?.data?.publication?.posts?.pageInfo || { hasNextPage: false }
-  const posts: HashnodePost[] = edges.map((e: any) => e.node)
+  const posts: HashnodePost[] = edges.map(e => e.node)
   return { posts, pageInfo }
 }

@@ -2,8 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { projects } from '@/data/projects'
 
-export default function PortfolioPage({ searchParams }: { searchParams?: { tag?: string } }) {
-  const tag = searchParams?.tag
+export default async function PortfolioPage({ searchParams }: { searchParams?: Promise<{ tag?: string }> }) {
+  const params = await searchParams
+  const tag = params?.tag
   const filtered = tag ? projects.filter(p => p.tech.includes(tag)) : projects
 
   const tags = Array.from(new Set(projects.flatMap(p => p.tech))).sort()
@@ -40,6 +41,7 @@ export default function PortfolioPage({ searchParams }: { searchParams?: { tag?:
               <div className="flex gap-2">
                 {p.links.demo && <Link href={p.links.demo} target="_blank" className="px-3 py-1.5 rounded-md bg-blue-500 text-white">Demo</Link>}
                 {p.links.repo && <Link href={p.links.repo} target="_blank" className="px-3 py-1.5 rounded-md border border-white/10 text-slate-200">Repo</Link>}
+                {p.links.readme && <Link href={p.links.readme} target="_blank" className="px-3 py-1.5 rounded-md border border-white/10 text-slate-200">Readme</Link>}
               </div>
             </div>
           </article>
