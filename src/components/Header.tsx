@@ -1,41 +1,150 @@
-"use client"
+'use client'
+
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+
+const navLinks = [
+  { href: '/experience', label: 'Experience' },
+  { href: '/portfolio',  label: 'Projects'   },
+  { href: '/freelance',  label: 'Freelance'  },
+  { href: '/blog',       label: 'Blog'       },
+  { href: '/contact',    label: 'Contact'    },
+]
 
 export default function Header() {
-  const [theme, setTheme] = useState<'dark'|'light'>(() => {
-    if (typeof window === 'undefined') return 'dark'
-    const saved = localStorage.getItem('theme')
-    if (saved === 'light' || saved === 'dark') return saved
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    return prefersDark ? 'dark' : 'light'
-  })
+  const pathname = usePathname()
+  const [open, setOpen] = useState(false)
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-    document.documentElement.classList.toggle('dark', theme === 'dark')
-    localStorage.setItem('theme', theme)
-  }, [theme])
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-50 backdrop-blur-md border-b border-white/10">
-      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <Link href="/" className="font-semibold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-          Samuel Nwankwo
+    <>
+      <nav
+        style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0,
+          height: '56px',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '0 2rem',
+          background: 'rgba(10,12,15,0.92)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          borderBottom: '1px solid var(--border)',
+        }}
+        aria-label="Main navigation"
+      >
+        {/* Logo */}
+        <Link
+          href="/"
+          style={{
+            fontFamily: 'var(--font-syne), sans-serif',
+            fontWeight: 800,
+            fontSize: '18px',
+            color: '#fff',
+            textDecoration: 'none',
+            letterSpacing: '-0.5px',
+          }}
+        >
+          Samuel<span style={{ color: 'var(--text-muted)' }}>.dev</span>
         </Link>
-        <div className="flex items-center gap-4">
-          <Link href="/portfolio" className="text-slate-300 hover:text-white">Portfolio</Link>
-          <Link href="/blog" className="text-slate-300 hover:text-white">Blog</Link>
-          <Link href="/resume" className="text-slate-300 hover:text-white">Resume</Link>
-          <Link href="/contact" className="text-slate-300 hover:text-white">Contact</Link>
-          <button
-            aria-label="Toggle theme"
-            aria-pressed={theme === 'dark'}
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            className="px-3 py-1.5 rounded-md border border-white/10 text-slate-200 hover:bg-slate-800"
-          >{theme === 'dark' ? 'Light' : 'Dark'}</button>
+
+        {/* Desktop nav links */}
+        <ul
+          className="hidden md:flex"
+          style={{ listStyle: 'none', display: 'flex', alignItems: 'center', gap: '2rem' }}
+        >
+          {navLinks.map(({ href, label }) => (
+            <li key={href}>
+              <Link
+                href={href}
+                style={{
+                  textDecoration: 'none',
+                  color: isActive(href) ? 'var(--accent-green)' : 'var(--text-muted)',
+                  fontSize: '11px',
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                  fontFamily: 'var(--font-jetbrains), monospace',
+                  transition: 'color .2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--accent-green)')}
+                onMouseLeave={e => (e.currentTarget.style.color = isActive(href) ? 'var(--accent-green)' : 'var(--text-muted)')}
+              >
+                {label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Desktop CTA */}
+        <div className="hidden md:flex" style={{ alignItems: 'center', gap: '1rem' }}>
+          <Link href="/contact" className="btn-hire">Hire Me</Link>
         </div>
-      </div>
-    </nav>
+
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden"
+          onClick={() => setOpen(o => !o)}
+          aria-label="Toggle menu"
+          aria-expanded={open}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'var(--text-muted)',
+            fontSize: '22px',
+            cursor: 'pointer',
+            padding: '4px',
+          }}
+        >
+          {open ? '✕' : '☰'}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      {open && (
+        <div
+          style={{
+            position: 'fixed',
+            top: '56px',
+            left: 0, right: 0,
+            zIndex: 999,
+            background: 'rgba(10,12,15,0.98)',
+            backdropFilter: 'blur(16px)',
+            borderBottom: '1px solid var(--border)',
+            padding: '1.5rem 2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+          }}
+        >
+          {navLinks.map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setOpen(false)}
+              style={{
+                textDecoration: 'none',
+                color: isActive(href) ? 'var(--accent-green)' : 'var(--text-muted)',
+                fontSize: '13px',
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                fontFamily: 'var(--font-jetbrains), monospace',
+                padding: '0.5rem 0',
+                borderBottom: '1px solid var(--border)',
+              }}
+            >
+              {label}
+            </Link>
+          ))}
+          <Link href="/contact" className="btn-hire" style={{ alignSelf: 'flex-start', marginTop: '0.5rem' }} onClick={() => setOpen(false)}>
+            Hire Me
+          </Link>
+        </div>
+      )}
+    </>
   )
 }

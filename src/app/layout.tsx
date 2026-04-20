@@ -1,56 +1,54 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Script from "next/script";
+import type { Metadata } from 'next'
+import { JetBrains_Mono, Syne } from 'next/font/google'
+import './globals.css'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains',
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  display: 'swap',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const syne = Syne({
+  variable: '--font-syne',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
   title: {
-    default: "Nwankwo Samuel — Backend Engineer",
-    template: "%s · Nwankwo Samuel",
+    default: 'Samuel Nwankwo — Backend Engineer',
+    template: '%s · Samuel Nwankwo',
   },
-  description: "Building scalable APIs, cloud-native applications, and robust backend systems.",
+  description:
+    'Backend Engineer specializing in Node.js, PHP, Laravel, NestJS, and cloud infrastructure. Building scalable APIs and distributed systems.',
+  keywords: ['Samuel Nwankwo', 'Backend Engineer', 'Node.js', 'PHP', 'Laravel', 'NestJS', 'AWS'],
   openGraph: {
-    title: "Nwankwo Samuel — Backend Engineer",
-    description: "Building scalable APIs, cloud-native applications, and robust backend systems.",
-    url: "https://saminwankwo-github-io.vercel.app/",
-    siteName: "Nwankwo Samuel",
-    locale: "en_US",
-    type: "website",
+    title: 'Samuel Nwankwo — Backend Engineer',
+    description: 'Backend Engineer specializing in Node.js, PHP, Laravel, and Cloud infrastructure.',
+    url: 'https://saminwankwo.github.io',
+    siteName: 'Samuel Nwankwo',
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Nwankwo Samuel — Backend Engineer",
-    description: "Building scalable APIs, cloud-native applications, and robust backend systems.",
+    card: 'summary_large_image',
+    title: 'Samuel Nwankwo — Backend Engineer',
+    description: 'Backend Engineer specializing in Node.js, PHP, Laravel, and Cloud infrastructure.',
   },
-};
+}
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" data-theme="dark" className="dark">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Script id="theme-init" strategy="beforeInteractive">
-          {`(function(){try{var s=localStorage.getItem('theme');var t=(s==='light')?'light':(s==='dark')?'dark':(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');var d=document.documentElement;d.setAttribute('data-theme',t);if(t==='dark'){d.classList.add('dark')}else{d.classList.remove('dark')}}catch(e){}})();`}
-        </Script>
+    <html lang="en" className={`${jetbrainsMono.variable} ${syne.variable}`}>
+      <body>
         <Header />
-        <main className="pt-20">{children}</main>
+        <main className="pt-14">{children}</main>
         <Footer />
       </body>
     </html>
-  );
+  )
 }

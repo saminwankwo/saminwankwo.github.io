@@ -1,133 +1,241 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
-import Image from 'next/image'
-import { projects } from '@/data/projects'
-import { getHashnodePosts } from '@/lib/hashnode'
+import TerminalWindow from '@/components/TerminalWindow'
+import RevealWrapper from '@/components/RevealWrapper'
+import { skills } from '@/data/skills'
 
-export default async function Home() {
-  const host = 'saminwankwo.hashnode.dev'
-  const { posts } = await getHashnodePosts(host, 6)
-  const featured = projects.slice(0, 6)
+export const metadata: Metadata = {
+  title: 'Samuel Nwankwo — Backend Engineer',
+  description:
+    'Backend Engineer specializing in Node.js, PHP, Laravel, NestJS, and cloud infrastructure. 7+ years building scalable APIs and distributed systems.',
+}
 
+const stats = [
+  { num: '7+',   label: 'Years PHP / Laravel'    },
+  { num: '5+',   label: 'Years Node.js'           },
+  { num: '$1M+', label: 'Payments Processed'      },
+  { num: '200+', label: 'Auth SDK Installs'        },
+]
+
+export default function HomePage() {
   return (
     <>
-    <section className="min-h-[70vh] bg-gradient-to-br from-[#0b1e3f] via-[#1e3a8a] to-[#0c4a6e] text-white flex items-center">
-      <div className="max-w-6xl mx-auto px-4 py-24 text-center">
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-          Samuel Nwankwo
-        </h1>
-        <p className="text-lg md:text-xl text-blue-100">Backend Engineer • Full‑Stack Developer</p>
-        <p className="max-w-2xl mx-auto text-slate-200 mt-4">
-          Building scalable APIs, cloud‑native applications, and robust backend systems.
-        </p>
-        <p className="max-w-2xl mx-auto text-slate-300 mt-2">
-          7+ years in PHP/Laravel • 5+ years in Node.js
-        </p>
-        <div className="flex flex-wrap gap-3 justify-center mt-8">
-          <Link href="/portfolio" className="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">View Portfolio</Link>
-          <Link href="/resume" className="px-4 py-2 rounded-md border border-white/10 text-white hover:bg-white/10">View Resume</Link>
-          <Link href="/contact" className="px-4 py-2 rounded-md border border-white/10 text-white hover:bg-white/10">Contact Me</Link>
-        </div>
-        <div className="flex flex-wrap gap-2 justify-center mt-8">
-          <span className="px-3 py-1 text-xs rounded-md border border-white/10 text-slate-200">Scalable APIs</span>
-          <span className="px-3 py-1 text-xs rounded-md border border-white/10 text-slate-200">Cloud‑native</span>
-          <span className="px-3 py-1 text-xs rounded-md border border-white/10 text-slate-200">CI/CD</span>
-          <span className="px-3 py-1 text-xs rounded-md border border-white/10 text-slate-200">Auth</span>
-          <span className="px-3 py-1 text-xs rounded-md border border-white/10 text-slate-200">Payments</span>
-        </div>
-      </div>
-    </section>
-    <section className="py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl font-semibold mb-6">Skills & Tools</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          <div className="rounded-xl border border-white/10 bg-slate-900/50 p-6">
-            <h3 className="text-lg font-semibold mb-3">Backend</h3>
-            <ul className="text-slate-300 space-y-2"><li>Node.js</li><li>NestJS</li><li>Express.js</li><li>PHP/Laravel</li></ul>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-slate-900/50 p-6">
-            <h3 className="text-lg font-semibold mb-3">Databases</h3>
-            <ul className="text-slate-300 space-y-2"><li>MongoDB</li><li>MySQL</li><li>PostgreSQL</li></ul>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-slate-900/50 p-6">
-            <h3 className="text-lg font-semibold mb-3">Frontend</h3>
-            <ul className="text-slate-300 space-y-2"><li>React</li><li>HTML/CSS/JS</li><li>Bootstrap</li></ul>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-slate-900/50 p-6">
-            <h3 className="text-lg font-semibold mb-3">DevOps & Cloud</h3>
-            <ul className="text-slate-300 space-y-2"><li>AWS</li><li>Docker</li><li>CI/CD</li></ul>
-          </div>
-          <div className="rounded-xl border border-white/10 bg-slate-900/50 p-6">
-            <h3 className="text-lg font-semibold mb-3">Other</h3>
-            <ul className="text-slate-300 space-y-2"><li>GraphQL</li><li>TypeScript</li></ul>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section className="py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl font-semibold mb-6">Featured Projects</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featured.map(p => (
-            <article key={p.id} className="rounded-xl border border-white/10 bg-slate-900/50 overflow-hidden transition transform hover:-translate-y-1 hover:shadow-lg">
-              {p.image && (
-                <div className="relative w-full h-40">
-                  <Image src={p.image} alt={p.title} fill className="object-cover" />
-                </div>
-              )}
-              <div className="p-4">
-                <h3 className="text-xl font-semibold mb-1">
-                  <Link href={`/portfolio/${p.slug || p.id}`} className="text-blue-400 hover:text-blue-300">{p.title}</Link>
-                </h3>
-                {p.tagline && <p className="text-slate-300 text-sm mb-2">{p.tagline}</p>}
-                <div className="flex flex-wrap gap-2 mb-3">
-                  {p.tech.slice(0,4).map(t => (
-                    <span key={t} className="px-2 py-1 text-xs rounded-md border border-white/10 text-slate-300">{t}</span>
-                  ))}
-                </div>
-                <div className="flex gap-2">
-                  {p.links.demo && <Link href={p.links.demo} target="_blank" className="px-3 py-1.5 rounded-md bg-blue-500 text-white hover:bg-blue-600">Demo</Link>}
-                  {p.links.repo && <Link href={p.links.repo} target="_blank" className="px-3 py-1.5 rounded-md border border-white/10 text-slate-200 hover:bg-white/10">Repo</Link>}
-                </div>
+      {/* ── HERO ── */}
+      <section
+        className="bg-grid"
+        style={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '6rem 2rem 4rem',
+        }}
+      >
+        <div
+          className="section-inner"
+          style={{
+            display: 'flex',
+            gap: '4rem',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          {/* Left */}
+          <div style={{ maxWidth: '560px', flex: 1 }}>
+            <RevealWrapper>
+              <p
+                style={{
+                  fontSize: '13px',
+                  color: 'var(--text-muted)',
+                  marginBottom: '1rem',
+                  fontFamily: 'var(--font-jetbrains), monospace',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                }}
+              >
+                <span style={{ color: 'var(--accent-green)' }}>$</span> whoami
+              </p>
+            </RevealWrapper>
+
+            <RevealWrapper delay={80}>
+              <h1
+                className="font-display"
+                style={{
+                  fontWeight: 800,
+                  fontSize: 'clamp(48px, 8vw, 88px)',
+                  lineHeight: 1,
+                  letterSpacing: '-3px',
+                  marginBottom: '1.25rem',
+                }}
+              >
+                <span style={{ color: '#fff', display: 'block' }}>Samuel</span>
+                <span style={{ color: 'var(--accent-green)', display: 'block' }}>Nwankwo</span>
+              </h1>
+            </RevealWrapper>
+
+            <RevealWrapper delay={160}>
+              <p
+                className="font-display"
+                style={{
+                  fontSize: '16px',
+                  color: 'var(--text-muted)',
+                  marginBottom: '1.75rem',
+                  fontWeight: 500,
+                }}
+              >
+                Backend Engineer —{' '}
+                <span style={{ color: 'var(--accent-blue)' }}>Node.js · PHP · Cloud</span>
+              </p>
+            </RevealWrapper>
+
+            <RevealWrapper delay={240}>
+              <p
+                style={{
+                  fontSize: '13px',
+                  color: 'var(--text-muted)',
+                  lineHeight: 1.8,
+                  borderLeft: '2px solid var(--accent-green)',
+                  paddingLeft: '1.25rem',
+                  marginBottom: '2.5rem',
+                  fontFamily: 'var(--font-jetbrains), monospace',
+                }}
+              >
+                I design and build scalable backend systems — from RESTful APIs and
+                event-driven microservices to multi-tenant SaaS platforms and
+                payment-integrated commerce infrastructure. 7+ years shipping
+                production software across fintech, logistics, health, and education.
+              </p>
+            </RevealWrapper>
+
+            {/* Stats */}
+            <RevealWrapper delay={320}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: '2.5rem',
+                  flexWrap: 'wrap',
+                  marginBottom: '2.5rem',
+                }}
+              >
+                {stats.map(({ num, label }) => (
+                  <div key={label} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <span
+                      className="font-display"
+                      style={{ fontSize: '22px', fontWeight: 800, color: 'var(--accent-green)', lineHeight: 1 }}
+                    >
+                      {num}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '9px',
+                        color: 'var(--text-muted)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '1.5px',
+                        fontFamily: 'var(--font-jetbrains), monospace',
+                      }}
+                    >
+                      {label}
+                    </span>
+                  </div>
+                ))}
               </div>
-            </article>
-          ))}
+            </RevealWrapper>
+
+            {/* CTAs */}
+            <RevealWrapper delay={400}>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                <Link href="/experience" className="btn-primary">View Experience →</Link>
+                <Link href="/contact"    className="btn-ghost">Get In Touch</Link>
+              </div>
+            </RevealWrapper>
+          </div>
+
+          {/* Right – Terminal (hidden below 1100px via inline media isn't possible, use class) */}
+          <RevealWrapper
+            delay={480}
+            className="hero-terminal"
+            style={{ flex: 1, maxWidth: '480px' } as React.CSSProperties}
+          >
+            <TerminalWindow />
+          </RevealWrapper>
         </div>
-      </div>
-    </section>
-    <section className="py-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-2xl font-semibold mb-6">Recent Posts</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map(post => (
-            <article key={post.slug} className="rounded-xl border border-white/10 bg-slate-900/50 p-4">
-              {post.coverImage?.url && (
-                <div className="relative w-full h-40 mb-3 overflow-hidden rounded-md">
-                  <Image src={post.coverImage.url} alt={post.title} fill className="object-cover" />
+      </section>
+
+      {/* ── SKILLS ── */}
+      <section style={{ background: 'var(--bg-secondary)' }} className="section-pad">
+        <div className="section-inner">
+          <RevealWrapper>
+            <p className="section-tag">// Expertise</p>
+          </RevealWrapper>
+          <RevealWrapper delay={80}>
+            <h2 className="section-title">
+              Technical <span style={{ color: 'var(--accent-green)' }}>Skills</span>
+            </h2>
+          </RevealWrapper>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '1.25rem',
+            }}
+          >
+            {skills.map((skill, i) => (
+              <RevealWrapper key={skill.category} delay={i * 60}>
+                <div className="card-base" style={{ padding: '1.5rem', cursor: 'default' }}>
+                  <span style={{ fontSize: '22px', marginBottom: '0.75rem', display: 'block' }}>
+                    {skill.icon}
+                  </span>
+                  <h3
+                    className="font-display"
+                    style={{ fontSize: '14px', fontWeight: 700, color: '#fff', marginBottom: '1rem' }}
+                  >
+                    {skill.category}
+                  </h3>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                    {skill.primary.map(t => <span key={t} className="tag tag-primary">{t}</span>)}
+                    {skill.normal.map(t => <span key={t}  className="tag tag-normal">{t}</span>)}
+                  </div>
                 </div>
-              )}
-              <h3 className="text-xl font-semibold mb-2">
-                <Link href={`https://${host}/${post.slug}`} className="text-blue-400 hover:text-blue-300">
-                  {post.title}
-                </Link>
-              </h3>
-              <p className="text-slate-300 text-sm mb-3">{post.brief}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-    <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4 text-center">
-        <div className="rounded-2xl border border-white/10 bg-slate-900/50 p-10">
-          <h2 className="text-2xl font-semibold mb-3">Ready to collaborate?</h2>
-          <p className="text-slate-300 mb-6">Let’s build reliable systems with measurable impact.</p>
-          <div className="flex flex-wrap gap-3 justify-center">
-            <Link href="/contact" className="px-4 py-2 rounded-md bg-blue-500 text-white hover:bg-blue-600">Get In Touch</Link>
-            <Link href="/portfolio" className="px-4 py-2 rounded-md border border-white/10 text-white hover:bg-white/10">View Portfolio</Link>
+              </RevealWrapper>
+            ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* ── CTA strip ── */}
+      <section style={{ background: 'var(--bg-primary)' }} className="section-pad">
+        <div className="section-inner">
+          <RevealWrapper>
+            <div
+              style={{
+                border: '1px solid var(--border)',
+                borderRadius: '8px',
+                padding: '3rem',
+                textAlign: 'center',
+                background: 'var(--bg-card)',
+              }}
+            >
+              <h2
+                className="font-display"
+                style={{ fontSize: 'clamp(24px, 4vw, 36px)', fontWeight: 800, color: '#fff', marginBottom: '0.75rem' }}
+              >
+                Explore the full picture
+              </h2>
+              <p style={{ fontSize: '13px', color: 'var(--text-muted)', marginBottom: '2rem', maxWidth: '480px', margin: '0 auto 2rem' }}>
+                6 years of experience across fintech, logistics, health and education.
+                15+ shipped projects. 8 freelance clients across 3 continents.
+              </p>
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <Link href="/experience" className="btn-primary">Work Experience</Link>
+                <Link href="/portfolio"  className="btn-ghost">Projects</Link>
+                <Link href="/freelance"  className="btn-ghost">Freelance</Link>
+                <Link href="/contact"    className="btn-ghost">Contact</Link>
+              </div>
+            </div>
+          </RevealWrapper>
+        </div>
+      </section>
     </>
   )
 }
