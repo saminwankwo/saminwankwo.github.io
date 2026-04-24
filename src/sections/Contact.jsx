@@ -4,6 +4,14 @@ import FadeIn from '../components/FadeIn'
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false)
+  const [copied, setCopied] = useState(false)
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault()
+    navigator.clipboard.writeText('nwankwosami@gmail.com')
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -37,7 +45,7 @@ export default function Contact() {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 {[
-                  { icon: '✉', label: 'nwankwosami@gmail.com', href: 'mailto:nwankwosami@gmail.com' },
+                  { icon: '✉', label: 'nwankwosami@gmail.com', href: 'mailto:nwankwosami@gmail.com', copyable: true },
                   { icon: '', label: 'github.com/saminwankwo', href: 'https://github.com/saminwankwo' },
                   { icon: '💼', label: 'linkedin.com/in/saminwankwo', href: 'https://linkedin.com/in/saminwankwo' },
                   { icon: '𝕏', label: '@saminwankwo', href: 'https://twitter.com/saminwankwo' }
@@ -47,6 +55,7 @@ export default function Contact() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={link.copyable ? handleCopyEmail : undefined}
                     className="contact-link"
                     style={{
                       display: 'flex',
@@ -58,11 +67,21 @@ export default function Contact() {
                       color: 'var(--text2)',
                       fontSize: '13px',
                       fontFamily: 'var(--mono)',
-                      transition: '0.2s'
+                      transition: '0.2s',
+                      position: 'relative'
                     }}
                   >
                     <span style={{ fontSize: '14px', width: '20px', textAlign: 'center' }}>{link.icon}</span>
                     <span>{link.label}</span>
+                    {link.copyable && copied && (
+                      <span style={{
+                        position: 'absolute',
+                        right: '1rem',
+                        fontSize: '10px',
+                        color: 'var(--green)',
+                        fontFamily: 'var(--mono)'
+                      }}>Copied!</span>
+                    )}
                   </a>
                 ))}
               </div>

@@ -1,8 +1,23 @@
+import { useState, useEffect } from 'react'
 import SectionHeader from '../components/SectionHeader'
 import FadeIn from '../components/FadeIn'
-import articles from '../data/articles'
+import { fetchHashnodePosts } from '../services/hashnode'
 
 export default function Writing() {
+  const [liveArticles, setLiveArticles] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    async function loadPosts() {
+      const posts = await fetchHashnodePosts()
+      if (posts.length > 0) {
+        setLiveArticles(posts.slice(0, 4))
+      }
+      setLoading(false)
+    }
+    loadPosts()
+  }, [])
+
   return (
     <section id="writing" style={{
       background: 'var(--bg)',
@@ -13,49 +28,59 @@ export default function Writing() {
         
         <FadeIn>
           <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid var(--border)' }}>
-            {articles.map((art, i) => (
-              <a 
-                href={art.href}
-                key={i}
-                className="article-row"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  gap: '1.5rem',
-                  padding: '1.1rem 1.4rem',
-                  background: 'var(--bg2)',
-                  borderBottom: i < articles.length - 1 ? '1px solid var(--border)' : 'none',
-                  transition: '0.2s'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-                  <span style={{
-                    fontSize: '9px',
-                    fontFamily: 'var(--mono)',
-                    color: 'var(--green)',
-                    border: '1px solid rgba(0,255,157,0.4)',
-                    background: 'rgba(0,255,157,0.05)',
-                    padding: '2px 8px',
-                    borderRadius: '2px'
-                  }}>
-                    {art.tag}
-                  </span>
-                  <span style={{ fontFamily: 'var(--sans)', fontWeight: 600, fontSize: '14px', color: 'var(--text)' }}>
-                    {art.title}
-                  </span>
-                </div>
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexShrink: 0 }}>
-                  <span style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)' }}>
-                    {art.readTime}
-                  </span>
-                  <span style={{ color: 'var(--text3)', fontSize: '14px' }}>↗</span>
-                </div>
-              </a>
-            ))}
+            {loading ? (
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text3)', fontFamily: 'var(--mono)', fontSize: '12px' }}>
+                Fetching articles from Hashnode...
+              </div>
+            ) : liveArticles.length > 0 ? (
+              liveArticles.map((art, i) => (
+                <a 
+                  href={art.url}
+                  key={art.id || i}
+                  className="article-row"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: '1.5rem',
+                    padding: '1.1rem 1.4rem',
+                    background: 'var(--bg2)',
+                    borderBottom: i < liveArticles.length - 1 ? '1px solid var(--border)' : 'none',
+                    transition: '0.2s'
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                    <span style={{
+                      fontSize: '9px',
+                      fontFamily: 'var(--mono)',
+                      color: 'var(--green)',
+                      border: '1px solid rgba(0,255,157,0.4)',
+                      background: 'rgba(0,255,157,0.05)',
+                      padding: '2px 8px',
+                      borderRadius: '2px'
+                    }}>
+                      {art.tag}
+                    </span>
+                    <span style={{ fontFamily: 'var(--sans)', fontWeight: 600, fontSize: '14px', color: 'var(--text)' }}>
+                      {art.title}
+                    </span>
+                  </div>
+                  
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexShrink: 0 }}>
+                    <span style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)' }}>
+                      {art.readTime}
+                    </span>
+                    <span style={{ color: 'var(--text3)', fontSize: '14px' }}>↗</span>
+                  </div>
+                </a>
+              ))
+            ) : (
+              <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text3)', fontFamily: 'var(--mono)', fontSize: '12px' }}>
+                No articles found. Check back soon!
+              </div>
+            )}
           </div>
         </FadeIn>
         

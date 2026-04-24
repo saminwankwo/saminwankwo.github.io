@@ -1,12 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import posts from '../data/posts'
+import { fetchHashnodePosts } from '../services/hashnode'
 
 export default function Blog() {
   const [filter, setFilter] = useState('All')
+  const [posts, setPosts] = useState([])
+  const [loading, setLoading] = useState(true)
   
   const tags = ['All', 'Architecture', 'Performance', 'API Design', 'DevOps']
   
+  useEffect(() => {
+    async function loadPosts() {
+      const livePosts = await fetchHashnodePosts()
+      setPosts(livePosts)
+      setLoading(false)
+    }
+    loadPosts()
+  }, [])
+
   const filteredPosts = filter === 'All' 
     ? posts 
     : posts.filter(p => p.tag === filter)
@@ -26,6 +37,7 @@ export default function Blog() {
         </h1>
         <p style={{ fontSize: '13px', fontFamily: 'var(--mono)', color: 'var(--text2)', lineHeight: 1.9, marginBottom: '2rem' }}>
           Thoughts on backend engineering, system design, and building products.
+          Live from <a href="https://hashnode.com/@saminwankwo" target="_blank" rel="noreferrer" style={{ color: 'var(--green)' }}>Hashnode</a>.
         </p>
         <div style={{ width: '40px', height: '2px', background: 'var(--green)', marginBottom: '3rem' }} />
         
@@ -54,10 +66,16 @@ export default function Blog() {
         </div>
         
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {filteredPosts.map(post => (
-            <Link 
-              to={`/blog/${post.slug}`} 
-              key={post.slug}
+          {loading ? (
+            <div style={{ color: 'var(--text3)', fontFamily: 'var(--mono)', fontSize: '12px', textAlign: 'center', padding: '4rem 0' }}>
+              Loading articles from Hashnode...
+            </div>
+          ) : filteredPosts.map(post => (
+            <a 
+              href={post.url}
+              key={post.id}
+              target="_blank"
+              rel="noopener noreferrer"
               className="blog-card"
               style={{
                 display: 'block',
@@ -88,11 +106,11 @@ export default function Blog() {
               </p>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <span style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)' }}>{post.readTime}</span>
-                <span style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--green)' }}>Read post →</span>
+                <span style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--green)' }}>Read on Hashnode ↗</span>
               </div>
-            </Link>
+            </a>
           ))}
-          {filteredPosts.length === 0 && (
+          {!loading && filteredPosts.length === 0 && (
             <div style={{ color: 'var(--text3)', fontFamily: 'var(--mono)', fontSize: '12px', textAlign: 'center', padding: '2rem 0' }}>
               No posts found for this category.
             </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Nav from './components/Nav'
 import Footer from './components/Footer'
+import CommandPalette from './components/CommandPalette'
 import Home from './pages/Home'
 import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
@@ -20,6 +21,7 @@ export default function App() {
     <>
       <ScrollRestoration />
       <Nav />
+      <CommandPalette />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
