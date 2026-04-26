@@ -1,78 +1,19 @@
-const skills = [
-  { 
-    icon: "⬡", 
-    cat: "Languages & Frameworks",
-    tags: [
-      { label: "Node.js", primary: true },
-      { label: "NestJS", primary: true },
-      { label: "PHP", primary: true },
-      { label: "Laravel", primary: true },
-      { label: "Express.js" },
-      { label: "TypeScript" },
-      { label: "JavaScript" },
-      { label: "React.js" }
-    ] 
-  },
-  { 
-    icon: "◈", 
-    cat: "Databases",
-    tags: [
-      { label: "MongoDB", primary: true },
-      { label: "MySQL", primary: true },
-      { label: "PostgreSQL" },
-      { label: "Redis" },
-      { label: "Mongoose ODM" }
-    ] 
-  },
-  { 
-    icon: "☁", 
-    cat: "Cloud & DevOps",
-    tags: [
-      { label: "AWS EC2", primary: true },
-      { label: "Docker", primary: true },
-      { label: "AWS S3" },
-      { label: "Lambda" },
-      { label: "Nginx" },
-      { label: "GitHub Actions" },
-      { label: "CI/CD" }
-    ] 
-  },
-  { 
-    icon: "⟡", 
-    cat: "API & Architecture",
-    tags: [
-      { label: "REST APIs", primary: true },
-      { label: "GraphQL", primary: true },
-      { label: "Microservices" },
-      { label: "WebSockets" },
-      { label: "RabbitMQ" },
-      { label: "Webhooks" }
-    ] 
-  },
-  { 
-    icon: "⚡", 
-    cat: "Payments & Integrations",
-    tags: [
-      { label: "Stripe", primary: true },
-      { label: "Paystack", primary: true },
-      { label: "Apple Pay" },
-      { label: "Split Payments" },
-      { label: "WhatsApp API" },
-      { label: "Mailchimp" }
-    ] 
-  },
-  { 
-    icon: "◎", 
-    cat: "Testing & Security",
-    tags: [
-      { label: "Jest", primary: true },
-      { label: "PHPUnit", primary: true },
-      { label: "OWASP" },
-      { label: "JWT/OAuth2" },
-      { label: "Rate Limiting" },
-      { label: "HTTPS/TLS" }
-    ] 
-  }
-];
-
-export default skills;
+export default [
+  { icon:"⬡", cat:"Languages & Frameworks",
+    tags:[{l:"Node.js",p:1},{l:"Express.js",p:1},{l:"PHP",p:1},{l:"Laravel",p:1},
+          {l:"NestJS",},{l:"TypeScript"},{l:"JavaScript"},{l:"React.js"}] },
+  { icon:"◈", cat:"Databases",
+    tags:[{l:"MongoDB",p:1},{l:"MySQL",p:1},{l:"PostgreSQL"},{l:"Redis"},{l:"Mongoose ODM"}] },
+  { icon:"☁", cat:"Cloud & DevOps",
+    tags:[{l:"AWS EC2",p:1},{l:"Docker",p:1},{l:"AWS S3"},{l:"Lambda"},
+          {l:"Nginx"},{l:"GitHub Actions"},{l:"CI/CD"}] },
+  { icon:"⟡", cat:"API & Architecture",
+    tags:[{l:"REST APIs",p:1},{l:"GraphQL",p:1},{l:"Microservices"},{l:"WebSockets"},
+          {l:"RabbitMQ"},{l:"Webhooks"}] },
+  { icon:"⚡", cat:"Payments & Integrations",
+    tags:[{l:"Stripe",p:1},{l:"Paystack",p:1},{l:"Apple Pay"},{l:"Split Payments"},
+          {l:"WhatsApp API"},{l:"Mailchimp"}] },
+  { icon:"◎", cat:"Testing & Security",
+    tags:[{l:"Jest",p:1},{l:"PHPUnit",p:1},{l:"OWASP"},{l:"JWT/OAuth2"},
+          {l:"Rate Limiting"},{l:"HTTPS/TLS"}] },
+]

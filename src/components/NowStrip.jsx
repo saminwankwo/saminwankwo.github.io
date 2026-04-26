@@ -1,37 +1,42 @@
+import React from 'react'
+
 export default function NowStrip() {
   return (
-    <div style={{
+    <div className="now-strip" style={{
       width: '100%',
       background: 'var(--green)',
-      height: '38px',
+      height: 'var(--strip-h)',
+      position: 'sticky',
+      top: 'var(--nav-h)',
+      zIndex: 98,
       display: 'flex',
-      alignItems: 'center',
       justifyContent: 'center',
+      alignItems: 'center',
       gap: '12px',
       fontFamily: 'var(--mono)',
       fontSize: '12px',
-      padding: '0 1rem',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis'
+      overflow: 'hidden'
     }}>
-      <div style={{
-        width: '8px',
-        height: '8px',
-        borderRadius: '50%',
-        background: '#0a0c0f',
-        animation: 'blink 1.2s steps(1) infinite',
-        flexShrink: 0
-      }} />
-      <span style={{ fontWeight: 600, color: '#0a0c0f' }}>
-        Currently available
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <span 
+          aria-hidden="true"
+          style={{
+            width: '8px',
+            height: '8px',
+            background: '#0a0c0f',
+            borderRadius: '50%',
+            animation: 'blink 1.2s steps(1) infinite'
+          }}
+        />
+        <span style={{ fontWeight: 600, color: '#0a0c0f' }}>Currently available</span>
+      </div>
+      <span className="strip-right" style={{ color: 'var(--green-dk)' }}>
+        · Open to full-time remote & contract · Node.js / PHP / Cloud
       </span>
-      <span style={{ color: 'var(--green-dk)' }} className="hide-on-mobile">
-        · Open to full-time remote roles & contract work · Node.js / PHP / Cloud
-      </span>
+
       <style>{`
-        @media (max-width: 600px) {
-          .hide-on-mobile { display: none; }
+        @media (max-width: 480px) {
+          .strip-right { display: none; }
         }
       `}</style>
     </div>

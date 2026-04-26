@@ -1,80 +1,79 @@
-import { CONFIG } from '../data/config';
+import fs from 'fs';
+import path from 'path';
 
-async function fetchPosts() {
-  const query = `
-    query Publication($host: String!) {
-      publication(host: $host) {
-        posts(first: 100) {
-          edges {
-            node {
-              url
-              publishedAt
+async function generateSitemap() {
+  try {
+    // 1. Load env vars manually
+    const envPath = path.resolve(process.cwd(), '.env');
+    let env = {};
+    if (fs.existsSync(envPath)) {
+      const envContent = fs.readFileSync(envPath, 'utf-8');
+      envContent.split('\n').forEach(line => {
+        const [key, value] = line.split('=');
+        if (key && value) env[key.trim()] = value.trim();
+      });
+    }
+
+    const username = env.VITE_HASHNODE_USERNAME || 'saminwankwo';
+    const siteUrl = env.VITE_SITE_URL || 'https://saminwankwo.dev';
+
+    // 2. Fetch posts from Hashnode
+    const query = `
+      query GetPosts($username: String!) {
+        user(username: $username) {
+          publications(first: 1) {
+            edges {
+              node {
+                posts(first: 100) {
+                  edges {
+                    node {
+                      slug
+                      publishedAt
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
-    }
-  `;
+    `;
 
-  try {
     const response = await fetch('https://gql.hashnode.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        query, 
-        variables: { host: CONFIG.hashnodeBlog } 
-      }),
+      body: JSON.stringify({ query, variables: { username } }),
     });
 
-    const { data } = await response.json();
-    return data.publication.posts.edges.map(edge => ({
-      url: edge.node.url,
-      lastmod: edge.node.publishedAt.split('T')[0]
-    }));
-  } catch (error) {
-    console.error('Error fetching posts for sitemap:', error);
-    return [];
-  }
-}
+    const result = await response.json();
+    const posts = result?.data?.user?.publications?.edges[0]?.node?.posts?.edges || [];
 
-async function generateSitemap() {
-  const posts = await fetchPosts();
-  const baseUrl = CONFIG.siteUrl;
-  const today = new Date().toISOString().split('T')[0];
+    // 3. Read base sitemap
+    const sitemapPath = path.resolve(process.cwd(), 'public/sitemap.xml');
+    let sitemap = fs.readFileSync(sitemapPath, 'utf-8');
 
-  const staticUrls = [
-    { loc: `${baseUrl}/`, lastmod: today, changefreq: 'monthly', priority: '1.0' },
-    { loc: `${baseUrl}/blog`, lastmod: today, changefreq: 'weekly', priority: '0.8' },
-  ];
-
-  const postUrls = posts.map(post => `
-  <url>
-    <loc>${post.url}</loc>
-    <lastmod>${post.lastmod}</lastmod>
-    <changefreq>monthly</changefreq>
+    // 4. Insert post entries
+    const postUrls = posts.map(({ node }) => {
+      const date = new Date(node.publishedAt).toISOString().split('T')[0];
+      return `  <url>
+    <loc>${siteUrl}/blog/${node.slug}</loc>
+    <lastmod>${date}</lastmod>
+    <changefreq>never</changefreq>
     <priority>0.6</priority>
-  </url>`).join('');
+  </url>`;
+    }).join('\n');
 
-  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${staticUrls.map(url => `
-  <url>
-    <loc>${url.loc}</loc>
-    <lastmod>${url.lastmod}</lastmod>
-    <changefreq>${url.changefreq}</changefreq>
-    <priority>${url.priority}</priority>
-  </url>`).join('')}
-${postUrls}
-</urlset>`;
+    const closingTag = '</urlset>';
+    sitemap = sitemap.replace(closingTag, postUrls + '\n' + closingTag);
 
-  const fs = await import('fs');
-  const path = await import('path');
-  
-  const publicDir = path.join(process.cwd(), 'public');
-  if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir);
-  
-  fs.writeFileSync(path.join(publicDir, 'sitemap.xml'), sitemap);
-  console.log('Sitemap generated successfully with', posts.length, 'posts.');
+    // 5. Write back
+    fs.writeFileSync(sitemapPath, sitemap);
+    console.log(`✓ Sitemap updated: added ${posts.length} blog posts.`);
+
+  } catch (error) {
+    console.warn('! Sitemap generation failed:', error.message);
+    process.exit(0);
+  }
 }
 
 generateSitemap();

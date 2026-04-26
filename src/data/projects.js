@@ -1,81 +1,72 @@
-const projects = [
+export default [
   {
-    num: "01",
-    cat: "API & Infrastructure",
-    name: "Auth SDK for Express.js",
-    desc: "Published an open-source authentication SDK that standardizes token validation, refresh flows, and role-based access checks for Express applications.",
-    metric: "200+ npm installs",
-    link: "https://www.npmjs.com/package/@saminwankwo/auth-sdk",
-    caseStudy: {
-      problem: "Across multiple client projects, implementing secure JWT authentication, refresh flows, and role-based access control was causing significant boilerplate and inconsistent security patterns.",
-      solution: "I built and published an NPM package that provides standardized, unit-tested authentication middleware for Express.js. It handles token validation, cookie management, and RBAC out of the box.",
-      stack: "TypeScript, Express, JWT, Jest, GitHub Actions",
-      outcome: "Reduced auth setup time by 80% for new APIs. Adopted across 4+ production systems and downloaded over 200 times."
+    num:"01", cat:"npm package", name:"Auth SDK for Express.js",
+    desc:"TypeScript-first Express.js auth SDK on npm. Zero-config JWT setup with refresh tokens, role-based guards, and strategy pattern.",
+    metric:"200+ app installs",
+    link:"https://npmjs.com/~saminwankwo",
+    github:"https://github.com/saminwankwo",
+    techDetail:["Node.js","TypeScript","Express.js","JWT","Refresh Tokens","npm Registry","Semantic Versioning"],
+    caseStudy:{
+      problem:"Every project started with the same copy-pasted JWT middleware, leading to inconsistent security implementations across codebases.",
+      solution:"Extracted auth logic into a configurable npm package supporting multiple strategies, automatic refresh token rotation, and role-based route guards. Full TypeScript types and JSDoc coverage.",
+      stack:"Node.js · TypeScript · Express.js · JWT · npm Registry",
+      outcome:"Adopted by 200+ applications. Auth integration time reduced from ~2 hours to under 10 minutes. Zero reported security regressions."
     }
   },
   {
-    num: "02",
-    cat: "Fintech & Social",
-    name: "Parrot Mobile Backend",
-    desc: "REST + realtime backend for a social payments application serving over 5,000 users with split transactions and instant transfers.",
-    metric: "$1M+ Processed",
-    caseStudy: {
-      problem: "The client needed a scalable backend capable of handling high-concurrency peer-to-peer transfers and social interactions (feeds, likes) simultaneously.",
-      solution: "Architected a Node.js API with MongoDB, utilizing transactions for ledger safety. Integrated Paystack for funding and WebSockets for real-time notification delivery.",
-      stack: "Node.js, Express, MongoDB, WebSockets, Paystack",
-      outcome: "Successfully scaled to support 5,000+ active users processing hundreds of thousands of dollars in transaction volume."
+    num:"02", cat:"SaaS platform", name:"Multitenant SaaS Platform",
+    desc:"Database-per-tenant Laravel architecture for 50+ clients with automated provisioning on signup. Zero manual ops.",
+    metric:"3 days → 30 min onboarding",
+    techDetail:["Laravel","MySQL","Docker","GitHub Actions","Tenant Isolation","Automated Provisioning","Seeding"],
+    caseStudy:{
+      problem:"Every new client required 3 days of manual DB setup, config changes, and server work — blocking the team from building features.",
+      solution:"Multi-tenant Laravel platform with automatic DB creation, seed data injection, environment config generation, and deployment pipeline triggered on client signup.",
+      stack:"Laravel · MySQL · Docker · GitHub Actions",
+      outcome:"Onboarding from 3 days to 30 minutes. Scaled to 50+ tenants with zero additional ops overhead. Team reclaimed ~6 hours per week."
     }
   },
   {
-    num: "03",
-    cat: "SaaS Platform",
-    name: "Local Services Marketplace",
-    desc: "Full marketplace platform connecting users to local service providers, with booking, escrow-style payments, and reviews.",
-    metric: "High availability design",
-    caseStudy: {
-      problem: "Local artisans needed a reliable platform to receive bookings, while users needed a secure way to pay without risking incomplete jobs.",
-      solution: "Built a NestJS microservice-style architecture handling booking state machines. Implemented an escrow payment flow where funds are held until job completion confirmation.",
-      stack: "NestJS, PostgreSQL, Redis, Paystack",
-      outcome: "Created a robust, fault-tolerant platform ready to scale to 10k+ concurrent users with automated dispute handling."
+    num:"03", cat:"e-commerce API", name:"E-Commerce API",
+    desc:"Production RESTful API for product, cart, checkout, and vendor split payouts. Stripe with idempotency and reconciliation.",
+    metric:"$1M+ processed, zero downtime",
+    techDetail:["Laravel","MySQL","Stripe","AWS EC2","Docker","Idempotency Keys","Webhook Reconciliation","Queue Workers"],
+    caseStudy:{
+      problem:"Client needed high-reliability payment infrastructure with split payouts to multiple vendors and audit-ready reconciliation reporting.",
+      solution:"Laravel REST API with Stripe split payments, idempotency keys for retry safety, webhook signature verification, automated reconciliation reports, and queue-backed order processing.",
+      stack:"Laravel · MySQL · Stripe · AWS EC2 · Docker · Laravel Queues",
+      outcome:"$1M+ processed in the first 6 months. Zero payment failures or unplanned downtime. Reconciliation reports automated — 3 hours of manual work eliminated weekly."
     }
   },
   {
-    num: "04",
-    cat: "Security & Tools",
-    name: "Remote Access Terminal",
-    desc: "Secure remote shell over WebSockets enabling authenticated users to execute server shell sessions safely.",
-    metric: "Internal Operations",
-    link: "https://github.com/saminwankwo"
+    num:"04", cat:"developer tools", name:"DevXP.dev",
+    desc:"Developer upskilling platform with simulated Git workflows, code reviews, and TDD exercises with real-time feedback.",
+    metric:"500+ users · 80% WAU",
+    link:"#",
+    techDetail:["Node.js","Express","MongoDB","AWS","Redis","WebSockets","GitHub API"]
   },
   {
-    num: "05",
-    cat: "AI & Machine Learning",
-    name: "Intrusion Detection System",
-    desc: "Hybrid ML pipeline using PHP for log ingestion and TensorFlow for traffic classification and anomaly detection.",
-    metric: "40% faster response",
+    num:"05", cat:"ML + serverless", name:"Sports Prediction API",
+    desc:"AWS Lambda serverless API wrapping a pre-trained ML model. Real-time win probabilities with sub-100ms cold starts.",
+    metric:"<100ms cold start · 99.7% uptime",
+    techDetail:["Node.js","AWS Lambda","API Gateway","ML Integration","Serverless Framework","CloudWatch"]
   },
   {
-    num: "06",
-    cat: "Marketplace",
-    name: "Ride & Logistics Backend",
-    desc: "Modular backend supporting ride-hailing, parcel delivery, and fleet management using a microservice-inspired architecture.",
-    metric: "Complex Dispatch Logic",
+    num:"06", cat:"security", name:"AI Intrusion Detection System",
+    desc:"Network intrusion detection using PHP data ingestion and TensorFlow anomaly models with real-time alerting.",
+    metric:"92% detection accuracy",
+    techDetail:["PHP","TensorFlow","Python","Real-time Alerting","Network Monitoring","Anomaly Detection"]
   },
   {
-    num: "07",
-    cat: "Enterprise Software",
-    name: "OfficePro",
-    desc: "Comprehensive office management system covering HR, payroll, inventory, and accounting built on PHP.",
-    metric: "Centralized Operations",
+    num:"07", cat:"websockets", name:"Remote Access Terminal",
+    desc:"Secure authenticated shell management over WebSockets. Encrypted, session-scoped remote access for support workflows.",
+    metric:"60% less troubleshooting time",
+    techDetail:["Node.js","WebSockets","SSH","Encryption","Session Management","Authentication"]
   },
   {
-    num: "08",
-    cat: "Content",
-    name: "Social Blog Platform",
-    desc: "Complete blogging backend with nested comments, reactions, private messaging, and notification feeds.",
-    metric: "Rich relational data",
-    link: "https://github.com/saminwankwo"
-  }
-];
-
-export default projects;
+    num:"08", cat:"portfolio", name:"Interactive Dev Portfolio",
+    desc:"This portfolio — live GitHub feed, Hashnode blog integration, case studies, and GitHub Actions CI/CD.",
+    metric:"95+ Lighthouse score",
+    link:"https://github.com/saminwankwo",
+    techDetail:["React","Vite","React Router","GitHub API","Hashnode GraphQL","GitHub Actions","SEO","PWA"]
+  },
+]

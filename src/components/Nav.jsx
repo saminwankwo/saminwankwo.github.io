@@ -1,103 +1,135 @@
-import { Link, NavLink, useNavigate, useLocation } from 'react-router-dom'
-import { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { CONFIG } from '../data/config'
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const navigate = useNavigate()
   const location = useLocation()
-  const menuRef = useRef(null)
+  const navigate = useNavigate()
 
-  const handleNavClick = (e, path, hash) => {
-    e.preventDefault()
-    setMenuOpen(false)
-    if (location.pathname !== path) {
-      navigate(path + hash, { state: { scrollTo: hash } })
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
     } else {
-      if (hash) {
-        const el = document.querySelector(hash)
-        if (el) el.scrollIntoView({ behavior: 'smooth' })
-      } else {
-        window.scrollTo(0, 0)
-      }
+      document.body.style.overflow = 'auto'
     }
+    
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', handleEsc)
+    return () => window.removeEventListener('keydown', handleEsc)
+  }, [menuOpen])
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location.pathname])
+
+  const handleHashClick = (e, id) => {
+    e.preventDefault()
+    if (location.pathname === '/') {
+      const el = document.getElementById(id)
+      if (el) el.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/', { state: { scrollTo: id } })
+    }
+    setMenuOpen(false)
   }
 
-  // Focus trap for mobile menu
-  useEffect(() => {
-    if (menuOpen && menuRef.current) {
-      const focusableElements = menuRef.current.querySelectorAll('a, button');
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-
-      const handleTab = (e) => {
-        if (e.key === 'Tab') {
-          if (e.shiftKey) {
-            if (document.activeElement === firstElement) {
-              e.preventDefault();
-              lastElement.focus();
-            }
-          } else {
-            if (document.activeElement === lastElement) {
-              e.preventDefault();
-              firstElement.focus();
-            }
-          }
-        }
-      };
-
-      window.addEventListener('keydown', handleTab);
-      return () => window.removeEventListener('keydown', handleTab);
-    }
-  }, [menuOpen]);
+  const navLinks = [
+    { label: 'Skills', id: 'skills' },
+    { label: 'Experience', id: 'experience' },
+    { label: 'Projects', id: 'projects' },
+    { label: 'Freelance', id: 'freelance' },
+    { label: 'GitHub', id: 'github' },
+    { label: 'Writing', id: 'writing' },
+    { label: 'Contact', id: 'contact' },
+  ]
 
   return (
-    <header>
-      <a href="#main-content" className="skip-link">Skip to main content</a>
-      <nav 
-        aria-label="Main navigation"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: 'var(--nav-h)',
-          zIndex: 100,
-          background: 'rgba(10,12,15,0.92)',
-          backdropFilter: 'blur(12px)',
-          borderBottom: '1px solid var(--border)',
-          padding: '0 2rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
-      >
-        <Link to="/" style={{ fontFamily: 'var(--sans)', fontWeight: 800, fontSize: '18px' }} onClick={() => setMenuOpen(false)}>
-          <span style={{ color: 'var(--green)' }}>Samuel</span>
-          <span style={{ color: 'var(--text3)', fontWeight: 400 }}>.dev</span>
+    <header style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
+      height: 'var(--nav-h)',
+      zIndex: 100,
+      background: 'rgba(10, 12, 15, 0.92)',
+      backdropFilter: 'blur(12px)',
+      borderBottom: '1px solid var(--border)',
+      padding: '0 2rem',
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    }}>
+      <nav aria-label="Main navigation" style={{ display: 'flex', alignItems: 'center', width: '100%', justifyContent: 'space-between' }}>
+        <Link to="/" aria-label="Samuel Nwankwo — home" style={{ display: 'flex', alignItems: 'baseline', gap: '2px' }}>
+          <span style={{ fontFamily: 'var(--sans)', fontWeight: 800, fontSize: '18px', color: 'var(--green)' }}>Samuel</span>
+          <span style={{ color: 'var(--text3)', fontWeight: 400, fontSize: '18px' }}>.dev</span>
         </Link>
 
-        {/* Desktop Nav Links */}
-        <div style={{ display: 'none' }} className="nav-desktop">
-          <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-            <a href="/#skills" onClick={(e) => handleNavClick(e, '/', '#skills')} className="nav-link">Skills</a>
-            <a href="/#experience" onClick={(e) => handleNavClick(e, '/', '#experience')} className="nav-link">Experience</a>
-            <a href="/#projects" onClick={(e) => handleNavClick(e, '/', '#projects')} className="nav-link">Projects</a>
-            <a href="/#freelance" onClick={(e) => handleNavClick(e, '/', '#freelance')} className="nav-link">Freelance</a>
-            <a href="/#github" onClick={(e) => handleNavClick(e, '/', '#github')} className="nav-link">GitHub</a>
-            <a href="/#writing" onClick={(e) => handleNavClick(e, '/', '#writing')} className="nav-link">Writing</a>
-            <NavLink to="/blog" className="nav-link" style={({isActive}) => isActive ? {color: 'var(--green)'} : {}}>Blog</NavLink>
-            <a href="/#contact" onClick={(e) => handleNavClick(e, '/', '#contact')} className="nav-link">Contact</a>
-          </div>
-          <div style={{ display: 'flex', gap: '1rem', marginLeft: '1.5rem' }}>
-            <a href={CONFIG.resumePath} download className="nav-btn-ghost">Resume ↓</a>
-            <a href={`mailto:${CONFIG.email}`} className="nav-btn-filled">Hire Me</a>
+        {/* Desktop Links */}
+        <div className="nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+          <ul style={{ listStyle: 'none', display: 'flex', gap: '1.25rem' }}>
+            {navLinks.map(link => (
+              <li key={link.id}>
+                <a 
+                  href={`/#${link.id}`}
+                  onClick={(e) => handleHashClick(e, link.id)}
+                  style={{
+                    fontSize: '11px',
+                    fontFamily: 'var(--mono)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    color: 'var(--text2)',
+                    transition: 'color 0.2s'
+                  }}
+                  onMouseEnter={(e) => e.target.style.color = 'var(--green)'}
+                  onMouseLeave={(e) => e.target.style.color = 'var(--text2)'}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <NavLink 
+                to="/blog"
+                style={({ isActive }) => ({
+                  fontSize: '11px',
+                  fontFamily: 'var(--mono)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                  color: isActive ? 'var(--green)' : 'var(--text2)',
+                  transition: 'color 0.2s'
+                })}
+              >
+                Blog
+              </NavLink>
+            </li>
+          </ul>
+
+          <div style={{ display: 'flex', gap: '8px', marginLeft: '1.5rem' }}>
+            <a 
+              href={CONFIG.resumePath} 
+              download="Samuel_Nwankwo_Resume.pdf"
+              aria-label="Download Samuel Nwankwo's resume PDF"
+              className="nav-btn-outline"
+            >
+              Resume ↓
+            </a>
+            <a 
+              href={`mailto:${CONFIG.email}`} 
+              aria-label="Send email to hire Samuel"
+              className="nav-btn-primary"
+            >
+              Hire Me
+            </a>
           </div>
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile Toggle */}
         <button 
-          className="nav-hamburger" 
+          className="nav-mobile-toggle"
           onClick={() => setMenuOpen(true)}
           aria-label="Open navigation menu"
           aria-expanded={menuOpen}
@@ -106,12 +138,11 @@ export default function Nav() {
         </button>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Overlay */}
       {menuOpen && (
         <div 
-          ref={menuRef}
-          role="dialog"
-          aria-modal="true"
+          role="dialog" 
+          aria-modal="true" 
           aria-label="Navigation menu"
           style={{
             position: 'fixed',
@@ -120,76 +151,125 @@ export default function Nav() {
             zIndex: 200,
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
             justifyContent: 'center',
-            gap: '1.5rem'
+            alignItems: 'center',
+            gap: '2rem'
           }}
         >
           <button 
-            style={{
-              position: 'absolute',
-              top: '20px',
-              right: '20px',
-              color: 'var(--text)',
-              fontSize: '24px',
-              padding: '10px'
-            }} 
             onClick={() => setMenuOpen(false)}
             aria-label="Close navigation menu"
+            style={{
+              position: 'absolute',
+              top: '1.5rem',
+              right: '1.5rem',
+              fontSize: '24px',
+              color: 'var(--text2)'
+            }}
           >
             ✕
           </button>
-          
-          <a href="/#skills" onClick={(e) => handleNavClick(e, '/', '#skills')} className="mobile-link">Skills</a>
-          <a href="/#experience" onClick={(e) => handleNavClick(e, '/', '#experience')} className="mobile-link">Experience</a>
-          <a href="/#projects" onClick={(e) => handleNavClick(e, '/', '#projects')} className="mobile-link">Projects</a>
-          <a href="/#freelance" onClick={(e) => handleNavClick(e, '/', '#freelance')} className="mobile-link">Freelance</a>
-          <a href="/#github" onClick={(e) => handleNavClick(e, '/', '#github')} className="mobile-link">GitHub</a>
-          <a href="/#writing" onClick={(e) => handleNavClick(e, '/', '#writing')} className="mobile-link">Writing</a>
-          <NavLink to="/blog" className="mobile-link" onClick={() => setMenuOpen(false)}>Blog</NavLink>
-          <a href="/#contact" onClick={(e) => handleNavClick(e, '/', '#contact')} className="mobile-link">Contact</a>
-          
+
+          <ul style={{ listStyle: 'none', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {navLinks.map(link => (
+              <li key={link.id}>
+                <a 
+                  href={`/#${link.id}`}
+                  onClick={(e) => handleHashClick(e, link.id)}
+                  style={{
+                    fontSize: '18px',
+                    fontFamily: 'var(--sans)',
+                    fontWeight: 600,
+                    color: 'var(--text2)'
+                  }}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <Link 
+                to="/blog"
+                style={{
+                  fontSize: '18px',
+                  fontFamily: 'var(--sans)',
+                  fontWeight: 600,
+                  color: 'var(--text2)'
+                }}
+              >
+                Blog
+              </Link>
+            </li>
+          </ul>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '200px' }}>
+            <a 
+              href={CONFIG.resumePath} 
+              download="Samuel_Nwankwo_Resume.pdf"
+              className="nav-btn-outline"
+              style={{ textAlign: 'center', display: 'block' }}
+            >
+              Resume ↓
+            </a>
+            <a 
+              href={`mailto:${CONFIG.email}`} 
+              className="nav-btn-primary"
+              style={{ textAlign: 'center', display: 'block' }}
+            >
+              Hire Me
+            </a>
+          </div>
+
           <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-            <a href={CONFIG.resumePath} download className="nav-btn-ghost">Resume ↓</a>
-            <a href={`mailto:${CONFIG.email}`} className="nav-btn-filled">Hire Me</a>
+            <a href={CONFIG.githubUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text3)' }}>GitHub</a>
+            <a href={CONFIG.linkedinUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text3)' }}>LinkedIn</a>
           </div>
         </div>
       )}
 
       <style>{`
-        .nav-desktop { display: flex; align-items: center; }
+        .nav-btn-outline {
+          border: 1px solid var(--green);
+          color: var(--green);
+          background: transparent;
+          padding: 6px 14px;
+          font-size: 11px;
+          font-family: var(--mono);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          transition: all 0.2s;
+        }
+        .nav-btn-outline:hover {
+          background: var(--green);
+          color: var(--bg);
+        }
+        .nav-btn-primary {
+          background: var(--green);
+          color: var(--bg);
+          border: 1px solid var(--green);
+          padding: 6px 14px;
+          font-size: 11px;
+          font-family: var(--mono);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+          transition: all 0.2s;
+        }
+        .nav-btn-primary:hover {
+          background: var(--green-dim);
+          border-color: var(--green-dim);
+        }
+        .nav-mobile-toggle {
+          display: none;
+          border: 1px solid var(--border);
+          color: var(--text);
+          padding: 6px 10px;
+          font-size: 12px;
+          font-family: var(--mono);
+        }
         @media (max-width: 768px) {
-          .nav-desktop { display: none !important; }
+          .nav-links-desktop { display: none !important; }
+          .nav-mobile-toggle { display: block; }
         }
-        @media (min-width: 769px) {
-          .nav-hamburger { display: none !important; }
-        }
-        .nav-link {
-          font-family: var(--mono); font-size: 11px; text-transform: uppercase;
-          letter-spacing: 0.08em; color: var(--text2); transition: color 0.2s;
-        }
-        .nav-link:hover, .nav-link:active { color: var(--green); }
-        .nav-btn-ghost {
-          border: 1px solid var(--green); color: var(--green); background: transparent;
-          padding: 6px 14px; font-size: 11px; text-transform: uppercase;
-          letter-spacing: 0.1em; transition: 0.2s; border-radius: 2px;
-        }
-        .nav-btn-ghost:hover { background: var(--green); color: var(--bg); }
-        .nav-btn-filled {
-          background: var(--green); color: var(--bg); border: 1px solid var(--green);
-          padding: 6px 14px; font-size: 11px; text-transform: uppercase;
-          letter-spacing: 0.1em; transition: 0.2s; border-radius: 2px;
-        }
-        .nav-btn-filled:hover { background: var(--green-dim); border-color: var(--green-dim); }
-        .nav-hamburger {
-          background: none; border: 1px solid var(--border); color: var(--text);
-          font-size: 12px; font-family: var(--mono); padding: 4px 8px; cursor: pointer;
-        }
-        .mobile-link {
-          font-family: var(--mono); font-size: 18px; text-transform: uppercase;
-          letter-spacing: 0.08em; color: var(--text); transition: color 0.2s;
-        }
-        .mobile-link:hover { color: var(--green); }
       `}</style>
     </header>
   )

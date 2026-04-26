@@ -1,31 +1,23 @@
+import React from 'react'
 import FadeIn from './FadeIn'
 
-export default function SectionHeader({ tag, title }) {
+export default function SectionHeader({ tag, title, subtitle, id }) {
   return (
-    <FadeIn>
-      <div style={{ marginBottom: '2.5rem' }}>
+    <FadeIn style={{ marginBottom: '2.5rem' }}>
+      <p className="section-tag" id={id}>{tag}</p>
+      <h2 className="section-title">{title}</h2>
+      {subtitle && (
         <p style={{
-          fontSize: '11px',
-          color: 'var(--green)',
-          fontFamily: 'var(--mono)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.1em',
-          marginBottom: '0.5rem'
-        }}>// {tag}</p>
-        <h2 style={{
-          fontFamily: 'var(--sans)',
-          fontWeight: 800,
-          fontSize: 'clamp(26px, 4vw, 38px)',
-          letterSpacing: '-1px',
-          color: 'var(--text)'
-        }}>{title}</h2>
-        <div style={{
-          width: '40px',
-          height: '2px',
-          background: 'var(--green)',
-          marginTop: '10px'
-        }} />
-      </div>
+          fontSize: 13,
+          color: 'var(--text2)',
+          marginTop: '0.75rem',
+          lineHeight: 1.8,
+          maxWidth: '600px'
+        }}>
+          {subtitle}
+        </p>
+      )}
+      <div className="section-line" />
     </FadeIn>
   )
 }

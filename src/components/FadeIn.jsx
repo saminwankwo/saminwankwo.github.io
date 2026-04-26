@@ -1,39 +1,51 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
-export default function FadeIn({ children, delay = 0, className = '' }) {
-  const [isVisible, setIsVisible] = useState(false)
+export default function FadeIn({
+  children,
+  delay = 0,
+  className = '',
+  style = {},
+  as: Component = 'div'
+}) {
   const domRef = useRef()
+  const [isVisible, setVisible] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.unobserve(entry.target)
+          setVisible(true)
+          observer.unobserve(domRef.current)
         }
-      })
-    }, { threshold: 0.08 })
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
 
-    const { current } = domRef
-    if (current) observer.observe(current)
-    
-    return () => {
-      if (current) observer.unobserve(current)
+    if (domRef.current) {
+      observer.observe(domRef.current)
     }
-  }, [])
+
+    return () => {
+      if (domRef.current) observer.unobserve(domRef.current)
+    };
+  }, []);
+
+  const baseStyle = {
+    opacity: isVisible ? 1 : 0,
+    transform: isVisible ? 'none' : 'translateY(22px)',
+    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
+    ...style
+  }
 
   return (
-    <div
+    <Component
       ref={domRef}
       className={className}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(22px)',
-        transition: 'opacity 0.6s ease, transform 0.6s ease',
-        transitionDelay: `${delay}ms`
-      }}
+      style={baseStyle}
     >
       {children}
-    </div>
+    </Component>
   )
 }

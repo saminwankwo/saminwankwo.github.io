@@ -1,19 +1,17 @@
-const testimonials = [
+export default [
   {
-    quote: "Samuel completely transformed our backend architecture. The migration from PHP to Laravel was seamless, and the new multi-tenant system he built has allowed us to onboard 10x more clients without performance degradation.",
-    name: "John Doe",
-    role: "CTO, TechCorp"
+    quote:"Samuel consistently delivers clean, well-documented APIs on time. His ability to onboard new concepts quickly and mentor others while shipping production features is rare.",
+    name:"Engineering Lead",
+    role:"Olotu Square"
   },
   {
-    quote: "Working with Samuel was a breeze. He quickly understood our complex requirements for the ride-hailing app and delivered a robust, real-time Node.js backend that handles dispatch logic effortlessly.",
-    name: "Jane Smith",
-    role: "Product Manager, Muvment"
+    quote:"The NestJS backend Samuel built for our LMS is rock solid. Role-based access, clean architecture, thorough documentation — exactly what we needed.",
+    name:"Founder",
+    role:"EduCrest LMS (UK)"
   },
   {
-    quote: "His attention to security and performance is unmatched. The Auth SDK he built for us is now standard across all our internal tools. A highly skilled and reliable backend engineer.",
-    name: "Alex Johnson",
-    role: "Lead Engineer, FinTech Solutions"
-  }
-];
-
-export default testimonials;
+    quote:"Samuel taught our cohort from zero to deploying REST APIs in 4 months. Practical, patient, and deeply knowledgeable about real-world backend patterns.",
+    name:"Backend Developer",
+    role:"Olotu Square Training Graduate"
+  },
+]

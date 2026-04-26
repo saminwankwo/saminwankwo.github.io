@@ -1,28 +1,31 @@
-import React, { Suspense, lazy, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import Nav from './components/Nav';
-import Footer from './components/Footer';
-import CommandPalette from './components/CommandPalette';
-import Home from './pages/Home';
-import NotFound from './pages/NotFound';
+import React, { Suspense, useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import Nav from './components/Nav'
+import Footer from './components/Footer'
+import Home from './pages/Home'
+import NotFound from './pages/NotFound'
 
-const Blog = lazy(() => import('./pages/Blog'));
-const BlogPost = lazy(() => import('./pages/BlogPost'));
+// Lazy load Blog and BlogPost
+const Blog = React.lazy(() => import('./pages/Blog'))
+const BlogPost = React.lazy(() => import('./pages/BlogPost'))
+
+import BackToTop from './components/BackToTop'
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+
+  const { pathname } = useLocation()
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  return null;
+    window.scrollTo(0, 0)
+  }, [pathname])
+  return null
 }
 
-export default function App() {
+function App() {
   return (
-    <BrowserRouter>
+    <>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <ScrollToTop />
       <Nav />
-      <CommandPalette />
       <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -31,7 +34,11 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
+      <BackToTop />
       <Footer />
-    </BrowserRouter>
-  );
+
+    </>
+  )
 }
+
+export default App

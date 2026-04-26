@@ -1,83 +1,66 @@
-const experience = [
+export default [
   {
-    company: "Sweeftly",
-    role: "Backend Engineer",
-    date: "May 2024 – Present",
-    loc: "Scotland, UK (Remote)",
-    current: true,
-    tech: ["NestJS", "Express.js", "MongoDB", "AWS EC2", "Docker", "Stripe"],
-    bullets: [
-      "Led e-commerce API migration from v1 to v2 architecture, improving scalability and maintainability across the platform.",
-      "Integrated delivery-partner APIs (Stuart, Shipday, Gophr) and implemented Stripe + Apple Pay split-payment flows.",
-      "Configured AWS EC2 autoscaling groups behind an Elastic Load Balancer for zero-downtime deployments under peak traffic.",
-      "Built a WhatsApp notification bot for real-time order status updates, reducing support tickets significantly."
+    company:"Sweeftly", role:"Backend Engineer — Full-Time, Remote",
+    date:"May 2024 – Aug 2025", loc:"Cumbernauld, Scotland", current:false,
+    tech:["NestJS","Express.js","MongoDB","AWS (EC2, ELB, S3)","Docker"],
+    bullets:[
+      "Architected e-commerce API (v1 Express.js → v2 NestJS) handling thousands of daily orders with chat-style ordering flow.",
+      "Integrated 3 delivery partners (Stuart, Shipday, Gophr) + Stripe/Apple Pay; webhook reconciliation reduced payment discrepancies by ~90%.",
+      "Deployed behind AWS ELB with autoscaling groups; achieved 99.9% uptime with S3 media uploads and automated backups.",
+      "Built WhatsApp notification bot for real-time order/delivery updates, cutting support ticket volume by ~35%.",
     ]
   },
   {
-    company: "Olotu Square",
-    role: "Backend Engineer",
-    date: "May 2024 – Present",
-    loc: "Port Harcourt, NG",
-    current: true,
-    tech: ["PHP", "Laravel", "Node.js", "Docker", "CI/CD"],
-    bullets: [
-      "Migrate legacy PHP systems to modern Laravel architectures and build multi-tenant SaaS platforms.",
-      "Implement CI/CD with GitHub Actions and Docker to ensure zero-downtime releases.",
-      "Lead a hands-on backend training program, mentoring developers on Node.js, Express, testing, and API design."
+    company:"Olotu Square", role:"Backend Engineer — Contract, Remote",
+    date:"May 2024 – Present", loc:"Port Harcourt, Nigeria", current:false,
+    tech:["Node.js","Express","Laravel","MongoDB","MySQL","Docker","GitHub Actions"],
+    bullets:[
+      "Migrated PHP monolith → Laravel; reduced deployment errors by ~50% through standardized architecture and automated tests.",
+      "Multi-tenant SaaS with isolated DBs; cut client onboarding from 3 days to under 2 hours.",
+      "GitHub Actions + Docker CI/CD enabling zero-downtime deployments across all client apps.",
+      "Led 4-month backend training for 12+ developers — 80% now in active backend roles.",
     ]
   },
   {
-    company: "Webxiel",
-    role: "Laravel Developer",
-    date: "Jan 2024 – Oct 2024",
-    loc: "Enugu State, NG (Remote)",
-    current: false,
-    tech: ["PHP", "Laravel", "MySQL", "REST APIs"],
-    bullets: [
-      "Delivered a Laravel microservice as part of a landlord-to-tenant mobile API architecture.",
-      "Wrote secure REST endpoints, authentication flows, and webhook integrations to support complex mobile workflows.",
-      "Optimized service endpoints to significantly improve response times for mobile consumers."
+    company:"Webxiel", role:"Laravel Developer — Contract, Remote",
+    date:"Jan 2024 – Oct 2024", loc:"Enugu State, Nigeria", current:false,
+    tech:["PHP","Laravel","MySQL"],
+    bullets:[
+      "Laravel microservice for landlord-to-tenant mobile API serving 10,000+ users.",
+      "JWT auth, secure RESTful endpoints, webhook integrations for push notifications.",
+      "Optimized N+1 queries; improved average endpoint response time by ~40%.",
     ]
   },
   {
-    company: "iGiet Ltd",
-    role: "Software Engineer",
-    date: "Nov 2023 – Sep 2024",
-    loc: "Port Harcourt, NG (Remote)",
-    current: false,
-    tech: ["Node.js", "Express.js", "GraphQL", "React.js"],
-    bullets: [
-      "Designed and implemented the Parrot mobile app backend with real-time webhooks.",
-      "Built a vehicle-registration app integrating both frontend and backend systems.",
-      "Delivered e-commerce modules and a REST+GraphQL hybrid API to improve client data fetching performance."
+    company:"iGiet Ltd", role:"Software Engineer — Contract, Remote",
+    date:"Nov 2023 – Sep 2024", loc:"Port Harcourt, Nigeria", current:false,
+    tech:["Node.js","Express.js","Laravel","React.js","GraphQL"],
+    bullets:[
+      "Parrot mobile app backend shipped from 0 to production in 6 weeks.",
+      "REST+GraphQL hybrid API cut client data payload by ~30%.",
+      "SSR + asset optimization reduced initial load time by ~50%.",
     ]
   },
   {
-    company: "Credib",
-    role: "Backend Developer",
-    date: "Aug 2022 – Feb 2024",
-    loc: "Lagos, NG (Remote)",
-    current: false,
-    tech: ["Node.js", "GraphQL", "Redis", "RabbitMQ", "Paystack"],
-    bullets: [
-      "Designed a GraphQL API and gateway to unify access across microservices for a chat-style e-commerce flow.",
-      "Built order workflows with split payments via Paystack and managed file uploads via AWS S3.",
-      "Used Redis and RabbitMQ for caching and background processing to improve latency under high loads."
+    company:"Credib", role:"Backend Developer — Full-Time, Remote",
+    date:"Aug 2022 – Feb 2024", loc:"Port Harcourt, Nigeria", current:false,
+    tech:["Node.js","GraphQL","MySQL","AWS","Docker","Redis","RabbitMQ"],
+    bullets:[
+      "GraphQL API gateway across 5+ microservices; reduced frontend integration complexity by ~60%.",
+      "Paystack split payments + S3 serving 50,000+ assets.",
+      "Redis caching cut avg DB query load by ~45%; RabbitMQ async job queues.",
+      "Maintained 99.7% uptime across all containerized AWS EC2 production services.",
     ]
   },
   {
-    company: "Emblic Technologies",
-    role: "Software Developer",
-    date: "Mar 2020 – Jul 2022",
-    loc: "Port Harcourt, NG",
-    current: false,
-    tech: ["PHP", "MySQL", "Java", "Android"],
-    bullets: [
-      "Built multiple enterprise web applications including OfficePro and a Hospital Management system.",
-      "Implemented backend APIs and developed Android applications (Java/Kotlin) to consume them.",
-      "Maintained nightly backups and AWS monitoring for production systems."
+    company:"Emblic Technologies", role:"Software Developer — On-site",
+    date:"Mar 2020 – Jul 2022", loc:"Port Harcourt, Nigeria", current:false,
+    tech:["PHP","MySQL","Java/Kotlin (Android)","HTML/CSS/Bootstrap","AWS"],
+    bullets:[
+      "OfficePro — enterprise office suite (HR, Payroll, Inventory, Invoicing, Attendance) at 5+ corporate clients.",
+      "Hospital Management System used by 3 healthcare facilities with patient mgmt, pharmacy, and billing.",
+      "MyReminda published to Google Play Store; 1,000+ downloads.",
+      "POS solution for supermarket chains; legacy payroll product with Excel/PDF reporting.",
     ]
-  }
-];
-
-export default experience;
+  },
+]

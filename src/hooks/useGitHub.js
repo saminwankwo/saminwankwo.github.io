@@ -1,23 +1,22 @@
-import { useState, useEffect } from 'react';
-import { CONFIG } from '../data/config';
+import { useState, useEffect } from 'react'
+import { CONFIG } from '../data/config'
 
 export function useGitHub() {
-  const [user, setUser] = useState(null);
-  const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [user, setUser] = useState(null)
+  const [repos, setRepos] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
-      setLoading(true);
       try {
         const [userRes, reposRes] = await Promise.all([
           fetch(`https://api.github.com/users/${CONFIG.github}`),
-          fetch(`https://api.github.com/users/${CONFIG.github}/repos?sort=updated&per_page=6`)
+          fetch(`https://api.github.com/users/${CONFIG.github}/repos?sort=updated&per_page=6&type=public`)
         ]);
 
-        if (!userRes.ok || !reposRes.ok) {
-          throw new Error('Failed to fetch GitHub data');
+        if (userRes.status === 403 || reposRes.status === 403) {
+          throw new Error('Rate limit exceeded');
         }
 
         const userData = await userRes.json();
@@ -25,9 +24,10 @@ export function useGitHub() {
 
         setUser(userData);
         setRepos(reposData);
+        setLoading(false);
       } catch (err) {
-        setError(err.message);
-      } finally {
+        console.warn('GitHub fetch error:', err.message);
+        setError(true);
         setLoading(false);
       }
     }

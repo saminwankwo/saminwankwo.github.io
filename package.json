@@ -1,12 +1,13 @@
 {
-  "name": "samuel-portfolio",
+  "name": "samuel-nwankwo-portfolio",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "node scripts/generate-sitemap.js && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate-sitemap": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
     "react": "^18.3.1",

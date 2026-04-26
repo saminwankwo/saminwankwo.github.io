@@ -1,60 +1,10 @@
-const freelance = [
-  {
-    name: "SparkxyFix",
-    country: "Nigeria",
-    flag: "🇳🇬",
-    sector: "Services",
-    stack: "Node.js · MongoDB · Paystack"
-  },
-  {
-    name: "EazzyReg",
-    country: "Canada",
-    flag: "🇨🇦",
-    sector: "GovTech / Admin",
-    stack: "NestJS · PostgreSQL"
-  },
-  {
-    name: "HealthConnect",
-    country: "UK",
-    flag: "🇬🇧",
-    sector: "HealthTech",
-    stack: "Laravel · MySQL"
-  },
-  {
-    name: "LogisFleet",
-    country: "USA",
-    flag: "🇺🇸",
-    sector: "Logistics",
-    stack: "Express.js · Redis"
-  },
-  {
-    name: "Edulink",
-    country: "Nigeria",
-    flag: "🇳🇬",
-    sector: "EdTech",
-    stack: "PHP · MySQL"
-  },
-  {
-    name: "PayFlow",
-    country: "South Africa",
-    flag: "🇿🇦",
-    sector: "Fintech",
-    stack: "Node.js · AWS Lambda"
-  },
-  {
-    name: "RetailSync",
-    country: "Ghana",
-    flag: "🇬🇭",
-    sector: "E-Commerce",
-    stack: "NestJS · GraphQL"
-  },
-  {
-    name: "EventMaster",
-    country: "UAE",
-    flag: "🇦🇪",
-    sector: "Events",
-    stack: "Laravel · Redis"
-  }
-];
-
-export default freelance;
+export default [
+  { name:"DigiBank",     country:"🇳🇬 Nigeria",  sector:"Fintech",     stack:"PHP/Laravel — loan scheduling API" },
+  { name:"VendoHub",     country:"🇺🇸 USA",       sector:"Marketplace", stack:"Node.js, MongoDB — vendor onboarding" },
+  { name:"EduCrest LMS", country:"🇬🇧 UK",        sector:"EdTech",      stack:"NestJS — role-based LMS backend" },
+  { name:"Schetia",      country:"🇳🇬 Nigeria",  sector:"EdTech",      stack:"Node.js, Express, MongoDB" },
+  { name:"Movment",      country:"🇳🇬 Nigeria",  sector:"Transport",   stack:"Node.js — ride-sharing dispatch API" },
+  { name:"GodgraceLab",  country:"🇳🇬 Nigeria",  sector:"HealthTech",  stack:"PHP, MySQL — healthcare admin portal" },
+  { name:"SparkxyFix",   country:"🇳🇬 Nigeria",  sector:"Services",    stack:"Node.js, Stripe — booking & payments" },
+  { name:"KID Platform", country:"🇳🇬 Nigeria",  sector:"EdTech",      stack:"React.js, Node.js — children's platform" },
+]

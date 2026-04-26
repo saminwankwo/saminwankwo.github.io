@@ -1,32 +1,35 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import SectionHeader from '../components/SectionHeader'
 import FadeIn from '../components/FadeIn'
 import CaseStudyModal from '../components/CaseStudyModal'
-import projects from '../data/projects'
+import projectsData from '../data/projects'
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null)
 
   return (
-    <section id="projects" style={{
+    <section id="projects" aria-labelledby="projects-heading" style={{
       background: 'var(--bg2)',
-      padding: '5rem 2rem',
+      padding: 'var(--section-py) var(--section-px)',
       borderTop: '1px solid var(--border)',
       borderBottom: '1px solid var(--border)'
     }}>
-      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
-        <SectionHeader tag="Featured Work" title="Project Highlights" />
-        
-        <div style={{
+      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+        <SectionHeader 
+          tag="Featured Work" 
+          title="Project Highlights" 
+        />
+
+        <ul style={{
+          listStyle: 'none',
+          padding: 0,
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
           gap: '1.25rem'
         }}>
-          {projects.map((proj, i) => (
-            <FadeIn key={`${proj.name}-${i}`} delay={i * 60}>
-              <div 
-                className="project-card"
-                onClick={() => proj.caseStudy && setActiveProject(proj)}
+          {projectsData.map((project, index) => (
+            <FadeIn as="li" key={project.name} delay={index * 55}>
+              <article 
                 style={{
                   background: 'var(--bg3)',
                   border: '1px solid var(--border)',
@@ -36,10 +39,14 @@ export default function Projects() {
                   display: 'flex',
                   flexDirection: 'column',
                   height: '100%',
-                  cursor: proj.caseStudy ? 'pointer' : 'default'
+                  cursor: project.caseStudy ? 'pointer' : 'default',
+                  transition: 'transform 0.3s'
                 }}
+                className="project-card"
+                onClick={() => project.caseStudy && setActiveProject(project)}
               >
-                <div className="project-card-line" style={{
+                {/* Top accent bar */}
+                <div className="project-accent" style={{
                   position: 'absolute',
                   top: 0,
                   left: 0,
@@ -48,47 +55,101 @@ export default function Projects() {
                   background: 'var(--green)',
                   transform: 'scaleX(0)',
                   transformOrigin: 'left',
-                  transition: '0.3s'
+                  transition: 'transform 0.3s'
                 }} />
-                
-                <div style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', marginBottom: '0.5rem' }}>
-                  {proj.cat}
+
+                <div style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', marginBottom: '4px' }}>
+                  {project.num} / {project.cat}
                 </div>
                 
-                <h3 style={{ fontFamily: 'var(--sans)', fontWeight: 700, fontSize: '15px', color: 'var(--text)', marginBottom: '0.5rem' }}>
-                  {proj.name}
+                <h3 style={{ 
+                  fontFamily: 'var(--sans)', 
+                  fontWeight: 700, 
+                  fontSize: '15px', 
+                  color: 'var(--text)',
+                  marginBottom: '0.75rem'
+                }}>
+                  {project.name}
                 </h3>
-                
-                <div style={{ fontSize: '12px', fontFamily: 'var(--mono)', color: 'var(--text2)', lineHeight: 1.8, flex: 1, marginBottom: '1rem' }}>
-                  {proj.desc}
-                </div>
-                
-                <div style={{ borderTop: '1px solid var(--border)', paddingTop: '0.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ color: 'var(--green)', fontSize: '11px', fontFamily: 'var(--mono)' }}>{proj.metric}</span>
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    {proj.caseStudy && <span style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)' }}>case study ↗</span>}
-                    {!proj.caseStudy && proj.link && <a href={proj.link} target="_blank" rel="noopener noreferrer" style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)' }}>live ↗</a>}
+
+                <p style={{
+                  fontSize: '12px',
+                  fontFamily: 'var(--mono)',
+                  color: 'var(--text2)',
+                  lineHeight: 1.8,
+                  flex: 1,
+                  marginBottom: '1rem'
+                }}>
+                  {project.desc}
+                </p>
+
+                <div style={{
+                  borderTop: '1px solid var(--border)',
+                  paddingTop: '0.75rem',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center'
+                }}>
+                  <div style={{ color: 'var(--green)', fontSize: '11px', fontFamily: 'var(--mono)' }}>
+                    {project.metric}
+                  </div>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    {project.caseStudy && (
+                      <button 
+                        aria-label={`View case study for ${project.name}`}
+                        style={{
+                          fontSize: '10px',
+                          fontFamily: 'var(--mono)',
+                          color: 'var(--text3)',
+                          transition: 'color 0.2s'
+                        }}
+                        className="project-link-btn"
+                      >
+                        case study ↗
+                      </button>
+                    )}
+                    {project.link && project.link !== '#' && (
+                      <a 
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${project.name} live`}
+                        style={{
+                          fontSize: '10px',
+                          fontFamily: 'var(--mono)',
+                          color: 'var(--text3)',
+                          transition: 'color 0.2s'
+                        }}
+                        className="project-link-btn"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        live ↗
+                      </a>
+                    )}
                   </div>
                 </div>
-              </div>
+              </article>
             </FadeIn>
           ))}
-        </div>
+        </ul>
+
+        {activeProject && (
+          <CaseStudyModal 
+            project={activeProject} 
+            onClose={() => setActiveProject(null)} 
+          />
+        )}
       </div>
 
-      {activeProject && (
-        <CaseStudyModal 
-          project={activeProject} 
-          onClose={() => setActiveProject(null)} 
-        />
-      )}
-
       <style>{`
-        .project-card { transition: 0.3s; }
-        .project-card:hover { transform: translateY(-2px); }
-        .project-card:hover .project-card-line { transform: scaleX(1) !important; }
-        @media (max-width: 768px) {
-          #projects { padding: 4rem 1.25rem !important; }
+        .project-card:hover {
+          transform: translateY(-2px);
+        }
+        .project-card:hover .project-accent {
+          transform: scaleX(1) !important;
+        }
+        .project-link-btn:hover {
+          color: var(--green) !important;
         }
       `}</style>
     </section>

@@ -1,17 +1,30 @@
+import React from 'react'
 import SectionHeader from '../components/SectionHeader'
 import FadeIn from '../components/FadeIn'
-import experience from '../data/experience'
+import experienceData from '../data/experience'
 
 export default function Experience() {
   return (
-    <section id="experience" style={{
+    <section id="experience" aria-labelledby="experience-heading" style={{
       background: 'var(--bg)',
-      padding: '5rem 2rem'
+      padding: 'var(--section-py) var(--section-px)'
     }}>
-      <div style={{ maxWidth: '960px', margin: '0 auto' }}>
-        <SectionHeader tag="Work History" title="Professional Experience" />
-        
-        <div style={{ position: 'relative' }} className="timeline-wrapper">
+      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
+        <SectionHeader 
+          id="experience-heading" 
+          tag="Work History" 
+          title="Professional Experience" 
+        />
+
+        <ol 
+          aria-label="Work history timeline"
+          style={{
+            listStyle: 'none',
+            position: 'relative',
+            paddingLeft: 0
+          }}
+        >
+          {/* Vertical line */}
           <div style={{
             position: 'absolute',
             left: 0,
@@ -19,98 +32,104 @@ export default function Experience() {
             bottom: 0,
             width: '1px',
             background: 'var(--border)'
-          }} />
-          
-          {experience.map((job, i) => (
-            <FadeIn key={`${job.company}-${i}`} delay={i * 60}>
+          }} aria-hidden="true" />
+
+          {experienceData.map((job, index) => (
+            <FadeIn as="li" key={`${job.company}-${index}`} delay={index * 70} style={{
+              paddingLeft: '2rem',
+              paddingBottom: '2.75rem',
+              position: 'relative'
+            }}>
+              {/* Timeline Dot */}
               <div style={{
-                paddingLeft: '2rem',
-                paddingBottom: '2.75rem',
-                position: 'relative'
-              }}>
-                {/* Dot */}
-                <div style={{
-                  position: 'absolute',
-                  left: '-5px',
-                  top: '5px',
-                  width: '11px',
-                  height: '11px',
-                  borderRadius: '50%',
-                  background: job.current ? 'var(--green)' : 'var(--bg)',
-                  border: job.current ? 'none' : '2px solid var(--green)'
-                }} />
-                
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
-                  <h3 style={{ fontFamily: 'var(--sans)', fontWeight: 700, fontSize: '17px', color: 'var(--text)' }}>
-                    {job.company}
-                  </h3>
-                  {job.current && (
-                    <span style={{
-                      fontFamily: 'var(--mono)',
-                      fontSize: '10px',
-                      textTransform: 'uppercase',
-                      background: 'rgba(0,255,157,0.1)',
+                position: 'absolute',
+                left: '-5px',
+                top: '5px',
+                width: '11px',
+                height: '11px',
+                borderRadius: '50%',
+                background: job.current ? 'var(--green)' : 'var(--bg)',
+                border: job.current ? 'none' : '2px solid var(--green)'
+              }} aria-hidden="true" />
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '4px' }}>
+                <h3 style={{ fontFamily: 'var(--sans)', fontWeight: 700, fontSize: '17px', color: 'var(--text)' }}>
+                  {job.company}
+                </h3>
+                {job.current && (
+                  <span 
+                    aria-label="Current position"
+                    style={{
+                      background: 'rgba(0, 255, 157, 0.1)',
                       color: 'var(--green)',
-                      border: '1px solid rgba(0,255,157,0.3)',
-                      padding: '2px 8px',
-                      borderRadius: '2px'
-                    }}>Current</span>
-                  )}
-                </div>
-                
-                <div style={{ color: 'var(--blue)', fontSize: '13px', fontFamily: 'var(--mono)', marginBottom: '4px' }}>
-                  {job.role}
-                </div>
-                <div style={{ color: 'var(--text3)', fontSize: '11px', fontFamily: 'var(--mono)', letterSpacing: '0.04em', marginBottom: '1rem' }}>
-                  {job.loc} · {job.date}
-                </div>
-                
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '1.25rem' }}>
-                  {job.tech.map(t => (
-                    <span key={t} style={{
-                      fontFamily: 'var(--mono)',
+                      border: '1px solid rgba(0, 255, 157, 0.3)',
                       fontSize: '10px',
-                      color: 'var(--amber)',
-                      border: '1px solid rgba(255,209,102,0.25)',
-                      background: 'rgba(255,209,102,0.05)',
+                      fontFamily: 'var(--mono)',
+                      textTransform: 'uppercase',
                       padding: '2px 8px',
                       borderRadius: '2px'
-                    }}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-                
-                <ul style={{ listStyle: 'none' }}>
-                  {job.bullets.map((b, bi) => (
-                    <li key={bi} style={{
+                    }}
+                  >
+                    Current
+                  </span>
+                )}
+              </div>
+
+              <div style={{ color: 'var(--blue)', fontSize: '13px', fontFamily: 'var(--mono)', marginBottom: '4px' }}>
+                {job.role}
+              </div>
+
+              <div style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', marginBottom: '0.75rem' }}>
+                {job.loc} · {job.date}
+              </div>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: '1rem' }}>
+                {job.tech.map(t => (
+                  <span 
+                    key={t}
+                    style={{
+                      fontSize: '10px',
+                      fontFamily: 'var(--mono)',
+                      color: 'var(--amber)',
+                      border: '1px solid rgba(255, 209, 102, 0.25)',
+                      background: 'rgba(255, 209, 102, 0.05)',
+                      padding: '2px 8px',
+                      borderRadius: '2px'
+                    }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
+              <ul aria-label={`Key achievements at ${job.company}`} style={{ listStyle: 'none', paddingLeft: 0 }}>
+                {job.bullets.map((bullet, i) => (
+                  <li 
+                    key={i}
+                    style={{
                       fontSize: '12px',
                       fontFamily: 'var(--mono)',
                       color: 'var(--text2)',
                       lineHeight: 1.9,
                       paddingLeft: '1.2rem',
                       position: 'relative',
-                      marginBottom: '8px'
-                    }}>
-                      <span style={{
-                        position: 'absolute',
-                        left: 0,
-                        color: 'var(--green)'
-                      }}>›</span>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      marginBottom: '4px'
+                    }}
+                  >
+                    <span 
+                      style={{ position: 'absolute', left: 0, color: 'var(--green)' }}
+                      aria-hidden="true"
+                    >
+                      ›
+                    </span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
             </FadeIn>
           ))}
-        </div>
+        </ol>
       </div>
-      <style>{`
-        @media (max-width: 768px) {
-          #experience { padding: 4rem 1.25rem !important; }
-        }
-      `}</style>
     </section>
   )
 }
