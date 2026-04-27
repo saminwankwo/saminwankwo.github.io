@@ -1,0 +1,19 @@
+/* Post body — rendered from Hashnode HTML */
+.post-body p         { font-size:14px; line-height:1.9; color:var(--text2); margin-bottom:1.25rem }
+.post-body h2        { font-family:var(--sans); font-weight:800; font-size:22px; color:var(--text); margin:2rem 0 0.75rem; letter-spacing:-0.5px }
+.post-body h3        { font-family:var(--sans); font-weight:700; font-size:18px; color:var(--text); margin:1.5rem 0 0.5rem }
+.post-body code      { font-family:var(--mono); font-size:13px; background:var(--bg3); color:var(--green); padding:2px 6px; border-radius:2px }
+.post-body pre       { background:var(--bg3); border:1px solid var(--border); padding:1.25rem; overflow-x:auto; margin-bottom:1.25rem; border-radius:2px }
+.post-body pre code  { background:transparent; padding:0; color:var(--text) }
+.post-body strong    { color:var(--text); font-weight:600 }
+.post-body em        { color:var(--text2) }
+.post-body ul, .post-body ol  { padding-left:1.5rem; margin-bottom:1.25rem; list-style:initial }
+.post-body li        { font-size:14px; line-height:1.9; color:var(--text2) }
+.post-body blockquote { border-left:3px solid var(--green); padding-left:1rem; margin-bottom:1.25rem; color:var(--text2); font-style:italic }
+.post-body a         { color:var(--green); text-decoration:underline }
+.post-body hr        { border:none; border-top:1px solid var(--border); margin:2rem 0 }
+.post-body img       { width:100%; border:1px solid var(--border); margin:1.25rem 0 }
+.post-body table     { width:100%; border-collapse:collapse; margin-bottom:1.25rem }
+.post-body th, .post-body td { border:1px solid var(--border); padding:8px 12px; font-size:13px; text-align:left }
+.post-body th        { background:var(--bg3); color:var(--text); font-weight:600 }
+.post-body td        { color:var(--text2) }

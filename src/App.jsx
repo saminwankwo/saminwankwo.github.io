@@ -1,18 +1,15 @@
-import React, { Suspense, useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
-import Nav from './components/Nav'
-import Footer from './components/Footer'
-import Home from './pages/Home'
-import NotFound from './pages/NotFound'
+import React, { lazy, Suspense, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Outlet, useLocation } from 'react-router-dom'
+import Nav from '@layout/Nav'
+import Footer from '@layout/Footer'
+import BackToTop from '@ui/BackToTop'
+import Home from '@pages/Home'
+import NotFound from '@pages/NotFound'
 
-// Lazy load Blog and BlogPost
-const Blog = React.lazy(() => import('./pages/Blog'))
-const BlogPost = React.lazy(() => import('./pages/BlogPost'))
-
-import BackToTop from './components/BackToTop'
+const Blog = lazy(() => import('@pages/Blog'))
+const BlogPost = lazy(() => import('@pages/BlogPost'))
 
 function ScrollToTop() {
-
   const { pathname } = useLocation()
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -20,25 +17,32 @@ function ScrollToTop() {
   return null
 }
 
-function App() {
+function Layout() {
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
-      <ScrollToTop />
       <Nav />
       <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Outlet />
       </Suspense>
       <BackToTop />
       <Footer />
-
     </>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/:slug" element={<BlogPost />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
+}

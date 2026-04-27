@@ -1,19 +1,43 @@
 export default [
-  { icon:"⬡", cat:"Languages & Frameworks",
-    tags:[{l:"Node.js",p:1},{l:"Express.js",p:1},{l:"PHP",p:1},{l:"Laravel",p:1},
-          {l:"NestJS",},{l:"TypeScript"},{l:"JavaScript"},{l:"React.js"}] },
-  { icon:"◈", cat:"Databases",
-    tags:[{l:"MongoDB",p:1},{l:"MySQL",p:1},{l:"PostgreSQL"},{l:"Redis"},{l:"Mongoose ODM"}] },
-  { icon:"☁", cat:"Cloud & DevOps",
-    tags:[{l:"AWS EC2",p:1},{l:"Docker",p:1},{l:"AWS S3"},{l:"Lambda"},
-          {l:"Nginx"},{l:"GitHub Actions"},{l:"CI/CD"}] },
-  { icon:"⟡", cat:"API & Architecture",
-    tags:[{l:"REST APIs",p:1},{l:"GraphQL",p:1},{l:"Microservices"},{l:"WebSockets"},
-          {l:"RabbitMQ"},{l:"Webhooks"}] },
-  { icon:"⚡", cat:"Payments & Integrations",
-    tags:[{l:"Stripe",p:1},{l:"Paystack",p:1},{l:"Apple Pay"},{l:"Split Payments"},
-          {l:"WhatsApp API"},{l:"Mailchimp"}] },
-  { icon:"◎", cat:"Testing & Security",
-    tags:[{l:"Jest",p:1},{l:"PHPUnit",p:1},{l:"OWASP"},{l:"JWT/OAuth2"},
-          {l:"Rate Limiting"},{l:"HTTPS/TLS"}] },
+  {
+    icon: "⬡", cat: "Languages & Frameworks",
+    tags: [
+      {l:"Node.js",p:1},{l:"NestJS",p:1},{l:"PHP",p:1},{l:"Laravel",p:1},
+      {l:"Express.js"},{l:"TypeScript"},{l:"JavaScript"},{l:"React.js"}
+    ]
+  },
+  {
+    icon: "◈", cat: "Databases",
+    tags: [
+      {l:"MongoDB",p:1},{l:"MySQL",p:1},{l:"PostgreSQL"},{l:"Redis"},{l:"Mongoose ODM"}
+    ]
+  },
+  {
+    icon: "☁", cat: "Cloud & DevOps",
+    tags: [
+      {l:"AWS EC2",p:1},{l:"Docker",p:1},{l:"AWS S3"},{l:"Lambda"},
+      {l:"Nginx"},{l:"GitHub Actions"},{l:"CI/CD"}
+    ]
+  },
+  {
+    icon: "⟡", cat: "API & Architecture",
+    tags: [
+      {l:"REST APIs",p:1},{l:"GraphQL",p:1},{l:"Microservices"},
+      {l:"WebSockets"},{l:"RabbitMQ"},{l:"Webhooks"}
+    ]
+  },
+  {
+    icon: "⚡", cat: "Payments & Integrations",
+    tags: [
+      {l:"Stripe",p:1},{l:"Paystack",p:1},{l:"Apple Pay"},
+      {l:"Split Payments"},{l:"WhatsApp API"},{l:"Mailchimp"}
+    ]
+  },
+  {
+    icon: "◎", cat: "Testing & Security",
+    tags: [
+      {l:"Jest",p:1},{l:"PHPUnit",p:1},{l:"OWASP"},
+      {l:"JWT/OAuth2"},{l:"Rate Limiting"},{l:"HTTPS/TLS"}
+    ]
+  },
 ]

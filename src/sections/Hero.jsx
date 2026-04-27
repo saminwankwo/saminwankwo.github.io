@@ -1,76 +1,25 @@
-import React, { useState, useEffect } from 'react'
-import { CONFIG } from '../data/config'
+import React from 'react'
+import CONFIG from '@config'
+import Button from '@ui/Button'
+import TerminalWidget from '@features/TerminalWidget'
+import ErrorBoundary from '@ui/ErrorBoundary'
 
 export default function Hero() {
-  const [stage, setStage] = useState(0)
-  const [text, setText] = useState('')
-  const [showInfo, setShowInfo] = useState(false)
-  const [showLog, setShowLog] = useState([false, false, false])
-  const [showAvail, setShowAvail] = useState(false)
-
-  const commands = [
-    'node --info samuel.json',
-    'git log --oneline',
-    'cat available.json'
-  ]
-
-  useEffect(() => {
-    let currentText = ''
-    let charIndex = 0
-    let currentCommand = ''
-
-    const type = (cmdIndex, callback) => {
-      currentCommand = commands[cmdIndex]
-      charIndex = 0
-      const interval = setInterval(() => {
-        setText(currentCommand.slice(0, charIndex))
-        charIndex++
-        if (charIndex > currentCommand.length) {
-          clearInterval(interval)
-          setTimeout(callback, 600)
-        }
-      }, 75)
-    }
-
-    if (stage === 0) {
-      type(0, () => {
-        setShowInfo(true)
-        setStage(1)
-      })
-    } else if (stage === 1) {
-      setTimeout(() => setStage(2), 500)
-    } else if (stage === 2) {
-      type(1, () => {
-        setStage(3)
-      })
-    } else if (stage === 3) {
-      // Sequential log items
-      setTimeout(() => setShowLog([true, false, false]), 400)
-      setTimeout(() => setShowLog([true, true, false]), 800)
-      setTimeout(() => {
-        setShowLog([true, true, true])
-        setStage(4)
-      }, 1200)
-    } else if (stage === 4) {
-      setTimeout(() => setStage(5), 500)
-    } else if (stage === 5) {
-      type(2, () => {
-        setShowAvail(true)
-        setStage(6)
-      })
-    }
-  }, [stage])
-
   return (
-    <section id="hero" aria-label="Introduction" role="banner" style={{
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 'calc(var(--nav-h) + var(--strip-h) + 2rem) 2rem 4rem',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
+    <section 
+      id="hero" 
+      aria-label="Introduction" 
+      role="banner"
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 'calc(var(--nav-h) + var(--strip-h) + 2rem) 2rem 4rem',
+        position: 'relative',
+        overflow: 'hidden'
+      }}
+    >
       {/* Decorative bg */}
       <div aria-hidden="true" style={{
         position: 'absolute',
@@ -83,7 +32,6 @@ export default function Hero() {
 
       <div style={{
         maxWidth: 'var(--max-w)',
-
         width: '100%',
         margin: '0 auto',
         display: 'flex',
@@ -148,50 +96,17 @@ export default function Hero() {
           </div>
 
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <a 
-              href="#experience"
-              style={{
-                background: 'var(--green)',
-                color: 'var(--bg)',
-                padding: '11px 26px',
-                fontSize: '12px',
-                fontFamily: 'var(--mono)',
-                textTransform: 'uppercase',
-                fontWeight: 600,
-                transition: 'background 0.2s'
-              }}
-              onMouseEnter={(e) => e.target.style.background = 'var(--green-dim)'}
-              onMouseLeave={(e) => e.target.style.background = 'var(--green)'}
-            >
+            <Button variant="filled" as="a" href="#experience">
               View Experience
-            </a>
-            <a 
-              href="#contact"
-              style={{
-                border: '1px solid var(--border2)',
-                color: 'var(--text2)',
-                padding: '11px 26px',
-                fontSize: '12px',
-                fontFamily: 'var(--mono)',
-                textTransform: 'uppercase',
-                transition: 'all 0.2s'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.borderColor = 'var(--green)'
-                e.target.style.color = 'var(--green)'
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.borderColor = 'var(--border2)'
-                e.target.style.color = 'var(--text2)'
-              }}
-            >
+            </Button>
+            <Button variant="outline" as="a" href="#contact">
               Get In Touch
-            </a>
+            </Button>
           </div>
 
           <a 
             href={CONFIG.resumePath} 
-            download
+            download={CONFIG.resumeFilename}
             style={{
               display: 'block',
               marginTop: '1.25rem',
@@ -207,108 +122,18 @@ export default function Hero() {
           </a>
         </div>
 
-        <div className="hero-terminal" aria-hidden="true" style={{
-          width: '400px',
-          flexShrink: 0,
-          background: 'var(--bg2)',
-          border: '1px solid var(--border)',
-          fontFamily: 'var(--mono)',
-          marginLeft: '6rem',
-          transform: stage === 6 ? 'translateX(60px)' : 'none',
-          transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)'
-        }}>
-
-          <div style={{
-            background: 'var(--bg3)',
-            padding: '10px 16px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            borderBottom: '1px solid var(--border)'
-          }}>
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f57' }} />
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e' }} />
-            <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#28ca41' }} />
-            <span style={{ fontSize: '11px', color: 'var(--text3)', marginLeft: 'auto' }}>samuel@dev ~ portfolio</span>
-          </div>
-
-          <div style={{ padding: '16px', fontSize: '12px', lineHeight: 2.1 }}>
-            {/* Command 1 */}
-            <div>
-              <span style={{ color: 'var(--green)' }}>› </span>
-              <span>{stage >= 2 ? commands[0] : (stage === 0 ? text : '')}</span>
-              {stage === 0 && <span className="cursor" />}
-            </div>
-
-            {showInfo && (
-              <div style={{ marginBottom: '12px' }}>
-                <div><span style={{ color: 'var(--amber)' }}>name:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.fullName}"</span></div>
-                <div><span style={{ color: 'var(--amber)' }}>role:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.title}"</span></div>
-                <div><span style={{ color: 'var(--amber)' }}>location:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.location}, {CONFIG.country}"</span></div>
-                <div><span style={{ color: 'var(--amber)' }}>stack:</span> <span style={{ color: 'var(--blue)' }}>["Express.js","Laravel","AWS"]</span></div>
-                <div><span style={{ color: 'var(--amber)' }}>available:</span> <span style={{ color: 'var(--green)' }}>true</span></div>
-              </div>
-            )}
-
-            {/* Command 2 */}
-            {(stage >= 2) && (
-              <div>
-                <span style={{ color: 'var(--green)' }}>› </span>
-                <span>{stage >= 4 ? commands[1] : (stage === 2 ? text : '')}</span>
-                {stage === 2 && <span className="cursor" />}
-              </div>
-            )}
-
-            {stage >= 3 && (
-              <div style={{ marginBottom: '12px' }}>
-                {showLog[0] && <div style={{ color: 'var(--green)' }}>✓ 200+ npm installs (auth-sdk)</div>}
-                {showLog[1] && <div style={{ color: 'var(--green)' }}>✓ 99.7% uptime prediction-api</div>}
-                {showLog[2] && <div style={{ color: 'var(--green)' }}>✓ 50+ tenants on SaaS platform</div>}
-              </div>
-            )}
-
-            {/* Command 3 */}
-            {(stage >= 4) && (
-              <div>
-                <span style={{ color: 'var(--green)' }}>› </span>
-                <span>{stage >= 6 ? commands[2] : (stage === 5 ? text : '')}</span>
-                {stage === 5 && <span className="cursor" />}
-              </div>
-            )}
-
-            {showAvail && (
-              <div>
-                <div style={{ color: 'var(--blue)' }}>{`{ "status": "open",`}</div>
-                <div style={{ color: 'var(--blue)', paddingLeft: '12px' }}>{`"type": "remote",`}</div>
-                <div style={{ color: 'var(--blue)', paddingLeft: '12px' }}>{`"notice": "immediate" }`}</div>
-              </div>
-            )}
-          </div>
+        <div className="hero-terminal-container">
+          <ErrorBoundary>
+            <TerminalWidget />
+          </ErrorBoundary>
         </div>
       </div>
 
       <style>{`
-        .cursor {
-          display: inline-block;
-          width: 7px;
-          height: 13px;
-          background: var(--green);
-          margin-left: 4px;
-          vertical-align: middle;
-          animation: blink 1s steps(1) infinite;
-        }
-        @media (max-width: 1250px) {
-          .hero-terminal { width: 340px !important; margin-left: 2rem !important; }
-        }
-        @media (max-width: 1150px) {
-          .hero-terminal { display: none !important; }
-        }
-
-        @media (max-width: 768px) {
-          #hero > div { gap: 2rem; }
+        @media (max-width: 1100px) {
+          .hero-terminal-container { display: none !important; }
         }
       `}</style>
     </section>
   )
 }
-

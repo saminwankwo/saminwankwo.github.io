@@ -1,156 +1,112 @@
 import React, { useState } from 'react'
-import SectionHeader from '../components/SectionHeader'
-import FadeIn from '../components/FadeIn'
-import CaseStudyModal from '../components/CaseStudyModal'
-import projectsData from '../data/projects'
+import projects from '@data/projects'
+import SectionHeader from '@ui/SectionHeader'
+import FadeIn from '@ui/FadeIn'
+import CaseStudyModal from '@features/CaseStudyModal'
+import { trackEvent } from '@lib/analytics'
 
 export default function Projects() {
   const [activeProject, setActiveProject] = useState(null)
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" style={{
-      background: 'var(--bg2)',
-      padding: 'var(--section-py) var(--section-px)',
-      borderTop: '1px solid var(--border)',
-      borderBottom: '1px solid var(--border)'
-    }}>
+    <section 
+      id="projects" 
+      aria-labelledby="projects-title"
+      style={{
+        background: 'var(--bg2)',
+        borderTop: '1px solid var(--border)',
+        borderBottom: '1px solid var(--border)',
+        padding: 'var(--section-py) var(--section-px)'
+      }}
+    >
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        <SectionHeader 
-          tag="Featured Work" 
-          title="Project Highlights" 
-        />
+        <SectionHeader id="projects-title" tag="Featured Work" title="Project Highlights" />
 
-        <ul style={{
+        <ul style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '1.5rem',
           listStyle: 'none',
           padding: 0,
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))',
-          gap: '1.25rem'
+          marginTop: '3rem'
         }}>
-          {projectsData.map((project, index) => (
-            <FadeIn as="li" key={project.name} delay={index * 55}>
-              <article 
+          {projects.map((p, i) => (
+            <FadeIn key={p.name} as="li" delay={i * 55}>
+              <article
+                className="project-card"
+                onClick={() => p.caseStudy && setActiveProject(p)}
                 style={{
                   background: 'var(--bg3)',
                   border: '1px solid var(--border)',
-                  padding: '1.4rem',
-                  position: 'relative',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
+                  padding: '1.75rem',
                   height: '100%',
-                  cursor: project.caseStudy ? 'pointer' : 'default',
-                  transition: 'transform 0.3s'
+                  position: 'relative',
+                  cursor: p.caseStudy ? 'pointer' : 'default',
+                  transition: 'all 0.2s ease',
+                  display: 'flex',
+                  flexDirection: 'column'
                 }}
-                className="project-card"
-                onClick={() => project.caseStudy && setActiveProject(project)}
               >
-                {/* Top accent bar */}
-                <div className="project-accent" style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  height: '2px',
-                  background: 'var(--green)',
-                  transform: 'scaleX(0)',
-                  transformOrigin: 'left',
-                  transition: 'transform 0.3s'
-                }} />
+                {/* Accent bar */}
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '2px', background: 'var(--green)', opacity: 0.4 }} />
 
-                <div style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', marginBottom: '4px' }}>
-                  {project.num} / {project.cat}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--green)', textTransform: 'uppercase' }}>{p.cat}</span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)' }}>{p.num}</span>
                 </div>
-                
-                <h3 style={{ 
-                  fontFamily: 'var(--sans)', 
-                  fontWeight: 700, 
-                  fontSize: '15px', 
-                  color: 'var(--text)',
-                  marginBottom: '0.75rem'
-                }}>
-                  {project.name}
+
+                <h3 style={{ fontFamily: 'var(--sans)', fontWeight: 800, fontSize: '20px', color: 'var(--text)', margin: '0 0 0.75rem' }}>
+                  {p.name}
                 </h3>
 
-                <p style={{
-                  fontSize: '12px',
-                  fontFamily: 'var(--mono)',
-                  color: 'var(--text2)',
-                  lineHeight: 1.8,
-                  flex: 1,
-                  marginBottom: '1rem'
-                }}>
-                  {project.desc}
+                <p style={{ fontSize: '13px', color: 'var(--text2)', lineHeight: 1.7, marginBottom: '1.5rem', flex: 1 }}>
+                  {p.desc}
                 </p>
 
-                <div style={{
-                  borderTop: '1px solid var(--border)',
-                  paddingTop: '0.75rem',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                  <div style={{ color: 'var(--green)', fontSize: '11px', fontFamily: 'var(--mono)' }}>
-                    {project.metric}
-                  </div>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    {project.caseStudy && (
+                <footer style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
+                  <span style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--green)' }}>{p.metric}</span>
+                  
+                  <div style={{ display: 'flex', gap: '12px' }}>
+                    {p.caseStudy && (
                       <button 
-                        aria-label={`View case study for ${project.name}`}
-                        style={{
-                          fontSize: '10px',
-                          fontFamily: 'var(--mono)',
-                          color: 'var(--text3)',
-                          transition: 'color 0.2s'
-                        }}
+                        onClick={(e) => { e.stopPropagation(); setActiveProject(p); trackEvent('Project Case Study', { name: p.name }) }}
+                        aria-label={`View case study for ${p.name}`}
+                        style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', transition: 'color 0.2s' }}
                         className="project-link-btn"
                       >
                         case study ↗
                       </button>
                     )}
-                    {project.link && project.link !== '#' && (
+                    {p.link && (
                       <a 
-                        href={project.link}
-                        target="_blank"
+                        href={p.link} 
+                        target="_blank" 
                         rel="noopener noreferrer"
-                        aria-label={`View ${project.name} live`}
-                        style={{
-                          fontSize: '10px',
-                          fontFamily: 'var(--mono)',
-                          color: 'var(--text3)',
-                          transition: 'color 0.2s'
-                        }}
+                        style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', transition: 'color 0.2s' }}
                         className="project-link-btn"
-                        onClick={(e) => e.stopPropagation()}
                       >
                         live ↗
                       </a>
                     )}
                   </div>
-                </div>
+                </footer>
               </article>
             </FadeIn>
           ))}
         </ul>
-
-        {activeProject && (
-          <CaseStudyModal 
-            project={activeProject} 
-            onClose={() => setActiveProject(null)} 
-          />
-        )}
       </div>
 
+      {activeProject && (
+        <CaseStudyModal project={activeProject} onClose={() => setActiveProject(null)} />
+      )}
+
       <style>{`
-        .project-card:hover {
-          transform: translateY(-2px);
+        .project-card:hover { 
+          transform: translateY(-4px); 
+          border-color: var(--green) !important;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
-        .project-card:hover .project-accent {
-          transform: scaleX(1) !important;
-        }
-        .project-link-btn:hover {
-          color: var(--green) !important;
-        }
+        .project-link-btn:hover { color: var(--green) !important; }
       `}</style>
     </section>
   )

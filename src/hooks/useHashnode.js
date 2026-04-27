@@ -1,5 +1,18 @@
 import { useState, useEffect } from 'react'
-import { CONFIG } from '../data/config'
+import CONFIG from '@config'
+
+const GQL_URL = 'https://gql.hashnode.com'
+
+const POST_FIELDS = `
+  title
+  brief
+  slug
+  url
+  readTimeInMinutes
+  publishedAt
+  coverImage { url }
+  tags { name }
+`
 
 export function useHashnode({ first = 4 } = {}) {
   const [posts, setPosts] = useState([])
@@ -9,67 +22,57 @@ export function useHashnode({ first = 4 } = {}) {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const query = `
-          query GetPosts($username: String!, $first: Int!) {
-            user(username: $username) {
-              publications(first: 1) {
-                edges {
-                  node {
+        const response = await fetch(GQL_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            query: `
+              query GetUserPosts($username: String!, $first: Int!) {
+                user(username: $username) {
+                  publication(host: "${CONFIG.hashnodeBlog}") {
                     posts(first: $first) {
                       edges {
                         node {
-                          title
-                          brief
-                          slug
-                          url
-                          readTimeInMinutes
-                          publishedAt
-                          coverImage { url }
-                          tags { name }
+                          ${POST_FIELDS}
                         }
                       }
                     }
                   }
                 }
               }
+            `,
+            variables: {
+              username: CONFIG.hashnodeUser,
+              first
             }
-          }
-        `;
+          })
+        })
 
-        const response = await fetch('https://gql.hashnode.com', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            query,
-            variables: { username: CONFIG.hashnode, first }
-          }),
-        });
-
-        const result = await response.json();
-        const fetchedPosts = result?.data?.user?.publications?.edges[0]?.node?.posts?.edges || [];
-        
-        setPosts(fetchedPosts.map(({ node }) => ({
+        const { data } = await response.json()
+        const fetchedPosts = data?.user?.publication?.posts?.edges?.map(({ node }) => ({
           title: node.title,
           brief: node.brief,
           slug: node.slug,
           url: node.url,
-          readTime: node.readTimeInMinutes + " min",
+          readTime: `${node.readTimeInMinutes} min`,
           date: node.publishedAt,
           tag: node.tags[0]?.name || "Article",
-          coverImage: node.coverImage
-        })));
-        setLoading(false);
+          coverImage: node.coverImage?.url ? { url: node.coverImage.url } : null
+        })) || []
+
+        setPosts(fetchedPosts)
       } catch (err) {
-        console.warn('Hashnode fetch error:', err);
-        setError(true);
-        setLoading(false);
+        console.warn('Hashnode fetch failed:', err)
+        setError(true)
+      } finally {
+        setLoading(false)
       }
     }
 
-    fetchPosts();
-  }, [first]);
+    fetchPosts()
+  }, [first])
 
-  return { posts, loading, error };
+  return { posts, loading, error }
 }
 
 export function useHashnodePost(slug) {
@@ -78,62 +81,59 @@ export function useHashnodePost(slug) {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    if (!slug) return;
+    if (!slug) return
 
     async function fetchPost() {
       try {
-        const query = `
-          query GetPost($username: String!, $slug: String!) {
-            user(username: $username) {
-              publication(host: "${CONFIG.hashnodeBlog}") {
-                post(slug: $slug) {
-                  title
-                  brief
-                  slug
-                  url
-                  readTimeInMinutes
-                  publishedAt
-                  coverImage { url }
-                  tags { name }
-                  content { html }
-                }
-              }
-            }
-          }
-        `;
-
-        const response = await fetch('https://gql.hashnode.com', {
+        const response = await fetch(GQL_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            query,
-            variables: { username: CONFIG.hashnode, slug }
-          }),
-        });
+            query: `
+              query GetPost($host: String!, $slug: String!) {
+                publication(host: $host) {
+                  post(slug: $slug) {
+                    ${POST_FIELDS}
+                    content { html }
+                  }
+                }
+              }
+            `,
+            variables: {
+              host: CONFIG.hashnodeBlog,
+              slug
+            }
+          })
+        })
 
-        const result = await response.json();
-        const fetchedPost = result?.data?.user?.publication?.post;
+        const { data } = await response.json()
+        const node = data?.publication?.post
 
-        if (!fetchedPost) {
-          setError(true);
+        if (!node) {
+          setPost(null)
         } else {
           setPost({
-            ...fetchedPost,
-            readTime: fetchedPost.readTimeInMinutes + " min",
-            date: fetchedPost.publishedAt,
-            tag: fetchedPost.tags[0]?.name || "Article"
-          });
+            title: node.title,
+            brief: node.brief,
+            slug: node.slug,
+            url: node.url,
+            readTime: `${node.readTimeInMinutes} min`,
+            date: node.publishedAt,
+            tag: node.tags[0]?.name || "Article",
+            coverImage: node.coverImage?.url ? { url: node.coverImage.url } : null,
+            content: node.content
+          })
         }
-        setLoading(false);
       } catch (err) {
-        console.warn('Hashnode post fetch error:', err);
-        setError(true);
-        setLoading(false);
+        console.warn('Hashnode post fetch failed:', err)
+        setError(true)
+      } finally {
+        setLoading(false)
       }
     }
 
-    fetchPost();
-  }, [slug]);
+    fetchPost()
+  }, [slug])
 
-  return { post, loading, error };
+  return { post, loading, error }
 }

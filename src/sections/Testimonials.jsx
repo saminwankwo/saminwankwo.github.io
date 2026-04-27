@@ -1,71 +1,73 @@
 import React from 'react'
-import SectionHeader from '../components/SectionHeader'
-import FadeIn from '../components/FadeIn'
-import testimonialsData from '../data/testimonials'
+import testimonials from '@data/testimonials'
+import SectionHeader from '@ui/SectionHeader'
+import FadeIn from '@ui/FadeIn'
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" aria-labelledby="testimonials-heading" style={{
-      background: 'var(--bg2)',
-      padding: 'var(--section-py) var(--section-px)',
-      borderTop: '1px solid var(--border)',
-      borderBottom: '1px solid var(--border)'
-    }}>
+    <section 
+      id="testimonials" 
+      aria-labelledby="testimonials-title"
+      style={{
+        background: 'var(--bg2)',
+        borderTop: '1px solid var(--border)',
+        borderBottom: '1px solid var(--border)',
+        padding: 'var(--section-py) var(--section-px)'
+      }}
+    >
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
-        <SectionHeader 
-          tag="Social Proof" 
-          title="What People Say" 
-        />
+        <SectionHeader id="testimonials-title" tag="Social Proof" title="What People Say" />
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: '1.25rem'
+        <ul style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '1.5rem',
+          listStyle: 'none',
+          padding: 0,
+          marginTop: '3rem'
         }}>
-          {testimonialsData.map((t, index) => (
-            <FadeIn key={index} delay={index * 70}>
+          {testimonials.map((t, i) => (
+            <FadeIn key={t.name} as="li" delay={i * 70}>
               <figure style={{
                 background: 'var(--bg3)',
                 border: '1px solid var(--border)',
-                padding: '1.5rem',
+                padding: '2rem',
+                height: '100%',
+                margin: 0,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '1rem',
-                margin: 0,
-                height: '100%'
+                gap: '1.25rem',
+                position: 'relative'
               }}>
-                <span 
-                  aria-hidden="true"
-                  style={{ fontSize: '22px', color: 'var(--green)', fontFamily: 'Georgia, serif', lineHeight: 1 }}
-                >
-                  “
-                </span>
+                <span aria-hidden="true" style={{ 
+                  position: 'absolute', 
+                  top: '1rem', 
+                  right: '1.5rem', 
+                  fontSize: '40px', 
+                  fontFamily: 'serif', 
+                  color: 'var(--green)', 
+                  opacity: 0.1,
+                  lineHeight: 1
+                }}>"</span>
                 
-                <blockquote cite={t.name} style={{ margin: 0, flex: 1 }}>
-                  <p style={{
-                    fontSize: '12px',
-                    fontFamily: 'var(--mono)',
-                    color: 'var(--text2)',
-                    fontStyle: 'italic',
-                    lineHeight: 1.9,
-                    margin: 0
-                  }}>
-                    {t.quote}
+                <blockquote cite={t.name} style={{ margin: 0 }}>
+                  <p style={{ fontSize: '14px', color: 'var(--text2)', lineHeight: 1.8, fontStyle: 'italic', margin: 0 }}>
+                    "{t.quote}"
                   </p>
                 </blockquote>
 
-                <figcaption style={{ borderTop: '1px solid var(--border)', paddingTop: '0.75rem' }}>
-                  <strong style={{ fontFamily: 'var(--sans)', fontWeight: 700, fontSize: '13px', color: 'var(--text)' }}>
+                <figcaption style={{ marginTop: 'auto' }}>
+                  <strong style={{ display: 'block', fontFamily: 'var(--sans)', fontSize: '15px', color: 'var(--text)' }}>
                     {t.name}
                   </strong>
-                  <span style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', display: 'block', marginTop: '2px' }}>
+                  <span style={{ display: 'block', fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase', marginTop: '4px' }}>
                     {t.role}
                   </span>
                 </figcaption>
               </figure>
             </FadeIn>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   )

@@ -16,22 +16,17 @@ async function generateSitemap() {
 
     const username = env.VITE_HASHNODE_USERNAME || 'saminwankwo';
     const siteUrl = env.VITE_SITE_URL || 'https://saminwankwo.dev';
+    const host = env.VITE_HASHNODE_BLOG || 'saminwankwo.hashnode.dev';
 
     // 2. Fetch posts from Hashnode
     const query = `
-      query GetPosts($username: String!) {
-        user(username: $username) {
-          publications(first: 1) {
+      query GetPosts($host: String!) {
+        publication(host: $host) {
+          posts(first: 100) {
             edges {
               node {
-                posts(first: 100) {
-                  edges {
-                    node {
-                      slug
-                      publishedAt
-                    }
-                  }
-                }
+                slug
+                publishedAt
               }
             }
           }
@@ -42,11 +37,11 @@ async function generateSitemap() {
     const response = await fetch('https://gql.hashnode.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query, variables: { username } }),
+      body: JSON.stringify({ query, variables: { host } }),
     });
 
     const result = await response.json();
-    const posts = result?.data?.user?.publications?.edges[0]?.node?.posts?.edges || [];
+    const posts = result?.data?.publication?.posts?.edges || [];
 
     // 3. Read base sitemap
     const sitemapPath = path.resolve(process.cwd(), 'public/sitemap.xml');

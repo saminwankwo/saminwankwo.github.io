@@ -1,371 +1,144 @@
-import React, { useState } from 'react'
-import SectionHeader from '../components/SectionHeader'
-import { CONFIG } from '../data/config'
+import React from 'react'
+import CONFIG from '@config'
+import SectionHeader from '@ui/SectionHeader'
+import ContactForm from '@features/ContactForm'
+import Button from '@ui/Button'
+import Tag from '@ui/Tag'
+import { useClipboard } from '@hooks/useClipboard'
+import { trackEvent } from '@lib/analytics'
 
 export default function Contact() {
-  const [formState, setFormState] = useState('idle') // idle, submitting, success, error
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [copiedEmail, setCopiedEmail] = useState(false)
-
-  const copyEmail = (e) => {
-    e.preventDefault()
-    navigator.clipboard.writeText(CONFIG.email)
-    setCopiedEmail(true)
-    setTimeout(() => setCopiedEmail(false), 2000)
-  }
-
-  const handleSubmit = async (e) => {
-
-    e.preventDefault()
-    setFormState('submitting')
-
-    if (!CONFIG.formspreeId) {
-      console.warn('Formspree ID missing. Simulating success in dev mode.')
-      setTimeout(() => setFormState('success'), 1000)
-      return
-    }
-
-    try {
-      const response = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Accept": "application/json" },
-        body: JSON.stringify(formData)
-      })
-
-      if (response.ok) {
-        setFormState('success')
-        setFormData({ name: '', email: '', message: '' })
-      } else {
-        setFormState('error')
-      }
-    } catch (err) {
-      setFormState('error')
-    }
-  }
-
-  const socialLinks = [
-    { label: 'Twitter / X', url: CONFIG.twitterUrl },
-    { label: 'Instagram', url: CONFIG.instagramUrl },
-    { label: 'Telegram', url: CONFIG.telegramUrl },
-    { label: 'YouTube', url: CONFIG.youtubeUrl },
-    { label: 'Hashnode', url: CONFIG.hashnodeUrl },
-  ]
+  const { copied, copy } = useClipboard()
 
   const contactRows = [
-    { icon: '@', label: CONFIG.email, url: `mailto:${CONFIG.email}`, aria: 'Send email' },
-    { icon: '#', label: CONFIG.phone, url: `tel:${CONFIG.phone.replace(/\s/g, '')}`, aria: 'Call me' },
-    { icon: '⌥', label: 'github.com/saminwankwo', url: CONFIG.githubUrl, aria: 'GitHub profile' },
-    { icon: '⌘', label: 'linkedin.com/saminwankwo', url: CONFIG.linkedinUrl, aria: 'LinkedIn profile' },
-    { icon: '◉', label: 'npmjs.com/~saminwankwo', url: CONFIG.npmUrl, aria: 'npm profile' },
+    { label: 'Email', value: CONFIG.email, href: `mailto:${CONFIG.email}`, icon: '✉' },
+    { label: 'Phone', value: CONFIG.phone, href: `tel:${CONFIG.phone}`, icon: '✆' },
+    { label: 'GitHub', value: `@${CONFIG.handle}`, href: CONFIG.githubUrl, icon: '⌨' },
+    { label: 'LinkedIn', value: `/in/${CONFIG.handle}`, href: CONFIG.linkedinUrl, icon: '💼' },
+    { label: 'npm', value: `~${CONFIG.handle}`, href: CONFIG.npmUrl, icon: '📦' },
+  ]
+
+  const socialLinks = [
+    { name: 'Twitter', url: CONFIG.twitterUrl },
+    { name: 'Instagram', url: CONFIG.instagramUrl },
+    { name: 'Telegram', url: CONFIG.telegramUrl },
+    { name: 'YouTube', url: CONFIG.youtubeUrl },
+    { name: 'Hashnode', url: CONFIG.hashnodeUrl },
   ]
 
   return (
-    <section id="contact" aria-labelledby="contact-heading" style={{
-      background: 'var(--bg2)',
-      padding: 'var(--section-py) var(--section-px)',
-      borderTop: '1px solid var(--border)'
-    }}>
-      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem' }} className="contact-grid">
-        {/* LEFT COLUMN */}
+    <section 
+      id="contact" 
+      aria-labelledby="contact-title"
+      style={{
+        background: 'var(--bg2)',
+        borderTop: '1px solid var(--border)',
+        padding: 'var(--section-py) var(--section-px)'
+      }}
+    >
+      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
+        
+        {/* LEFT SIDE */}
         <div>
           <SectionHeader 
+            id="contact-title" 
             tag="Open to Opportunities" 
-            title={<>Let's Build<br/><span style={{ color: 'var(--green)' }}>Something.</span></>} 
+            title={<>Let's Build <span style={{ color: 'var(--green)' }}>Something.</span></>} 
           />
-          <p style={{ fontSize: '13px', fontFamily: 'var(--mono)', color: 'var(--text2)', lineHeight: 1.9, marginBottom: '2rem' }}>
-            Available for full-time remote roles, contract work, and technical consultations. 
-            Node.js · PHP/Laravel · AWS · Microservices.
+          <p style={{ fontSize: '14px', color: 'var(--text2)', lineHeight: 1.8, marginBottom: '2rem', marginTop: '1rem' }}>
+            I'm currently open to new remote opportunities, contract work, or technical consulting. 
+            If you have a project that needs a scalable backend, I'd love to hear from you.
           </p>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-            <div style={{ position: 'relative' }}>
-              <a 
-                href={`mailto:${CONFIG.email}`}
-                aria-label="Send email"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  border: '1px solid var(--border)',
-                  padding: '11px 14px',
-                  fontSize: '12px',
-                  fontFamily: 'var(--mono)',
-                  color: 'var(--text2)',
-                  transition: 'all 0.2s',
-                  width: '100%'
-                }}
-                className="contact-row"
-              >
-                <span style={{ color: 'var(--green)' }}>@</span>
-                <span>{CONFIG.email}</span>
-              </a>
-              <button 
-                onClick={copyEmail}
-                style={{
-                  position: 'absolute',
-                  right: '12px',
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  fontSize: '10px',
-                  color: copiedEmail ? 'var(--green)' : 'var(--text3)',
-                  fontFamily: 'var(--mono)',
-                  textTransform: 'uppercase',
-                  padding: '4px 8px',
-                  border: '1px solid var(--border)',
-                  background: 'var(--bg2)',
-                  transition: 'all 0.2s'
-                }}
-                className="copy-btn"
-              >
-                {copiedEmail ? 'Copied!' : 'Copy'}
-              </button>
-            </div>
-            
-            {contactRows.slice(1).map(row => (
-              <a 
-                key={row.url}
-                href={row.url}
-                aria-label={row.aria}
-                target={row.url.startsWith('http') ? '_blank' : undefined}
-                rel={row.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '12px',
-                  border: '1px solid var(--border)',
-                  padding: '11px 14px',
-                  fontSize: '12px',
-                  fontFamily: 'var(--mono)',
-                  color: 'var(--text2)',
-                  transition: 'all 0.2s'
-                }}
-                className="contact-row"
-              >
-                <span style={{ color: 'var(--green)' }}>{row.icon}</span>
-                <span>{row.label}</span>
-              </a>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            {contactRows.map(row => (
+              <div key={row.label} className="contact-row" style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '12px 16px',
+                background: 'var(--bg3)',
+                border: '1px solid var(--border)',
+                transition: 'all 0.2s',
+                borderRadius: '2px'
+              }}>
+                <a 
+                  href={row.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label={row.label}
+                  style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}
+                >
+                  <span style={{ color: 'var(--green)', fontSize: '14px' }}>{row.icon}</span>
+                  <span style={{ fontSize: '13px', fontFamily: 'var(--mono)', color: 'var(--text2)' }}>{row.value}</span>
+                </a>
+                {row.label === 'Email' && (
+                  <button 
+                    onClick={() => copy(row.value)}
+                    style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: copied ? 'var(--green)' : 'var(--text3)', transition: 'color 0.2s' }}
+                  >
+                    {copied ? 'COPIED' : 'COPY'}
+                  </button>
+                )}
+              </div>
             ))}
           </div>
 
-
-          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '1rem' }}>
-            {socialLinks.map(link => (
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '1.25rem' }}>
+            {socialLinks.map(s => (
               <a 
-                key={link.url}
-                href={link.url}
-                target="_blank"
+                key={s.name} 
+                href={s.url} 
+                target="_blank" 
                 rel="noopener noreferrer"
-                style={{
-                  fontSize: '11px',
-                  fontFamily: 'var(--mono)',
-                  border: '1px solid var(--border2)',
-                  padding: '4px 10px',
-                  color: 'var(--text3)',
-                  transition: 'all 0.2s'
-                }}
-                className="contact-social-pill"
+                style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', transition: 'color 0.2s' }}
+                className="social-pill-link"
               >
-                {link.label}
+                {s.name}
               </a>
             ))}
           </div>
 
-          <div style={{ background: 'var(--bg3)', border: '1px solid var(--border)', padding: '1rem', marginTop: '1.5rem' }}>
-            <div style={{ fontSize: '10px', color: 'var(--green)', fontFamily: 'var(--mono)', marginBottom: '8px' }}>
+          <div style={{ background: 'var(--bg3)', border: '1px solid var(--border)', padding: '1.5rem', marginTop: '2rem', borderRadius: '2px' }}>
+            <span style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
               // availability
-            </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '100px 1fr', gap: '8px', fontSize: '12px', fontFamily: 'var(--mono)' }}>
-              <span style={{ color: 'var(--text3)', textTransform: 'uppercase', fontSize: '10px' }}>Timezone</span>
-              <span style={{ color: 'var(--green)' }}>{CONFIG.timezone} · {CONFIG.timezoneNote}</span>
-              
-              <span style={{ color: 'var(--text3)', textTransform: 'uppercase', fontSize: '10px' }}>Available</span>
-              <span style={{ color: 'var(--green)' }}>{CONFIG.availableFrom}</span>
-              
-              <span style={{ color: 'var(--text3)', textTransform: 'uppercase', fontSize: '10px' }}>Work type</span>
-              <span style={{ color: 'var(--green)' }}>{CONFIG.workPreference}</span>
-              
-              <span style={{ color: 'var(--text3)', textTransform: 'uppercase', fontSize: '10px' }}>Notice</span>
-              <span style={{ color: 'var(--green)' }}>{CONFIG.noticeRequired}</span>
+            </span>
+            <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {[
+                { k: 'Timezone', v: CONFIG.timezone },
+                { k: 'Available', v: CONFIG.availableFrom },
+                { k: 'Work type', v: CONFIG.workPreference },
+                { k: 'Notice', v: CONFIG.noticeRequired }
+              ].map(row => (
+                <div key={row.k} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', fontFamily: 'var(--mono)' }}>
+                  <span style={{ color: 'var(--text3)' }}>{row.k}</span>
+                  <span style={{ color: 'var(--text2)' }}>{row.v}</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          <a 
+          <Button 
+            variant="outline" 
+            as="a" 
             href={CONFIG.resumePath} 
-            download 
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              gap: '8px',
-              marginTop: '1rem',
-              width: '100%',
-              border: '1px solid var(--border2)',
-              color: 'var(--text2)',
-              padding: '12px',
-              fontSize: '12px',
-              fontFamily: 'var(--mono)',
-              textTransform: 'uppercase',
-              transition: 'all 0.2s'
-            }}
-            className="contact-resume-btn"
+            download={CONFIG.resumeFilename}
+            onClick={() => trackEvent('Resume Download')}
+            style={{ width: '100%', marginTop: '1rem' }}
           >
             ↓ Download Resume (PDF)
-          </a>
+          </Button>
         </div>
 
-        {/* RIGHT COLUMN — Form */}
-        <div>
-          {formState === 'success' ? (
-            <div role="alert" aria-live="polite" style={{
-              border: '1px solid rgba(0, 255, 157, 0.4)',
-              background: 'rgba(0, 255, 157, 0.04)',
-              padding: '3rem 2rem',
-              textAlign: 'center',
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center'
-            }}>
-              <div style={{ fontSize: '48px', color: 'var(--green)', marginBottom: '1rem' }}>✓</div>
-              <p style={{ fontSize: '13px', color: 'var(--green)', fontFamily: 'var(--mono)' }}>
-                Message sent. I'll get back to you soon.
-              </p>
-              <button 
-                onClick={() => setFormState('idle')}
-                style={{ marginTop: '2rem', fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', textDecoration: 'underline' }}
-              >
-                Send another message
-              </button>
-            </div>
-          ) : (
-            <form aria-label="Contact form" onSubmit={handleSubmit} style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '1rem' }}>
-                <label htmlFor="name" style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase' }}>Name</label>
-                <input 
-                  id="name" 
-                  type="text" 
-                  required 
-                  aria-required="true" 
-                  placeholder="Your name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  style={{
-                    background: 'var(--bg3)',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text)',
-                    padding: '10px 14px',
-                    fontSize: '13px',
-                    fontFamily: 'var(--mono)',
-                    outline: 'none',
-                    width: '100%',
-                    transition: 'border-color 0.2s'
-                  }}
-                  onFocus={(e) => e.target.style.borderColor = 'var(--green)'}
-                  onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
-                />
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '1rem' }}>
-                <label htmlFor="email" style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase' }}>Email</label>
-                <input 
-                  id="email" 
-                  type="email" 
-                  required 
-                  aria-required="true" 
-                  placeholder="your@email.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  style={{
-                    background: 'var(--bg3)',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text)',
-                    padding: '10px 14px',
-                    fontSize: '13px',
-                    fontFamily: 'var(--mono)',
-                    outline: 'none',
-                    width: '100%',
-                    transition: 'border-color 0.2s'
-                  }}
-                  onFocus={(e) => e.target.style.borderColor = 'var(--green)'}
-                  onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
-                />
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '1rem', flex: 1 }}>
-                <label htmlFor="message" style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase' }}>Message</label>
-                <textarea 
-                  id="message" 
-                  rows="8" 
-                  required 
-                  aria-required="true" 
-                  placeholder="Tell me about your project or role..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  style={{
-                    background: 'var(--bg3)',
-                    border: '1px solid var(--border)',
-                    color: 'var(--text)',
-                    padding: '10px 14px',
-                    fontSize: '13px',
-                    fontFamily: 'var(--mono)',
-                    outline: 'none',
-                    width: '100%',
-                    resize: 'none',
-                    height: '100%',
-                    transition: 'border-color 0.2s'
-                  }}
-                  onFocus={(e) => e.target.style.borderColor = 'var(--green)'}
-                  onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
-                />
-              </div>
-
-              {formState === 'error' && (
-                <div role="alert" style={{ marginBottom: '1rem', padding: '1rem', background: 'rgba(255, 107, 107, 0.04)', border: '1px solid rgba(255, 107, 107, 0.4)' }}>
-                  <p style={{ fontSize: '12px', color: 'var(--red)', fontFamily: 'var(--mono)', margin: 0 }}>
-                    Something went wrong. Please email me directly at {CONFIG.email}
-                  </p>
-                </div>
-              )}
-
-              <button 
-                type="submit" 
-                disabled={formState === 'submitting'}
-                style={{
-                  background: 'var(--green)',
-                  color: 'var(--bg)',
-                  padding: '13px',
-                  fontSize: '12px',
-                  fontFamily: 'var(--mono)',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.1em',
-                  width: '100%',
-                  opacity: formState === 'submitting' ? 0.7 : 1,
-                  cursor: formState === 'submitting' ? 'not-allowed' : 'pointer',
-                  transition: 'background 0.2s'
-                }}
-                onMouseEnter={(e) => { if (formState !== 'submitting') e.target.style.background = 'var(--green-dim)' }}
-                onMouseLeave={(e) => { if (formState !== 'submitting') e.target.style.background = 'var(--green)' }}
-              >
-                {formState === 'submitting' ? 'Sending...' : 'Send Message'}
-              </button>
-
-              <p style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', textAlign: 'center', marginTop: '0.75rem' }}>
-                Response time: usually within 24 hours
-              </p>
-            </form>
-          )}
+        {/* RIGHT SIDE */}
+        <div style={{ marginTop: '4.5rem' }}>
+          <ContactForm />
         </div>
       </div>
 
       <style>{`
-        .contact-row:hover, .contact-social-pill:hover, .contact-resume-btn:hover {
-          border-color: var(--green) !important;
-          color: var(--green) !important;
-        }
-        @media (max-width: 768px) {
-          .contact-grid { grid-template-columns: 1fr !important; gap: 3rem !important; }
-        }
+        .contact-row:hover { border-color: var(--green) !important; background: rgba(0, 255, 157, 0.02) !important; }
+        .social-pill-link:hover { color: var(--green) !important; }
       `}</style>
     </section>
   )

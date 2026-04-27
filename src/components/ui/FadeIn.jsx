@@ -1,14 +1,14 @@
-import React, { useRef, useEffect, useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
-export default function FadeIn({
-  children,
-  delay = 0,
-  className = '',
-  style = {},
-  as: Component = 'div'
+export default function FadeIn({ 
+  children, 
+  delay = 0, 
+  className, 
+  style, 
+  as: Element = 'div' 
 }) {
-  const domRef = useRef()
   const [isVisible, setVisible] = useState(false)
+  const domRef = useRef()
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -17,11 +17,11 @@ export default function FadeIn({
           setVisible(true)
           observer.unobserve(domRef.current)
         }
-      });
+      })
     }, {
       threshold: 0.08,
       rootMargin: '0px 0px -40px 0px'
-    });
+    })
 
     if (domRef.current) {
       observer.observe(domRef.current)
@@ -29,23 +29,23 @@ export default function FadeIn({
 
     return () => {
       if (domRef.current) observer.unobserve(domRef.current)
-    };
-  }, []);
+    }
+  }, [])
 
-  const baseStyle = {
+  const currentStyle = {
+    ...style,
     opacity: isVisible ? 1 : 0,
     transform: isVisible ? 'none' : 'translateY(22px)',
-    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
-    ...style
+    transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`
   }
 
   return (
-    <Component
+    <Element
       ref={domRef}
       className={className}
-      style={baseStyle}
+      style={currentStyle}
     >
       {children}
-    </Component>
+    </Element>
   )
 }

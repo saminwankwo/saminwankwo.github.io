@@ -4,15 +4,14 @@ import FadeIn from './FadeIn'
 export default function SectionHeader({ tag, title, subtitle, id }) {
   return (
     <FadeIn style={{ marginBottom: '2.5rem' }}>
-      <p className="section-tag" id={id}>{tag}</p>
-      <h2 className="section-title">{title}</h2>
+      <p className="section-tag">{tag}</p>
+      <h2 id={id} className="section-title">{title}</h2>
       {subtitle && (
-        <p style={{
-          fontSize: 13,
-          color: 'var(--text2)',
-          marginTop: '0.75rem',
-          lineHeight: 1.8,
-          maxWidth: '600px'
+        <p style={{ 
+          fontSize: '13px', 
+          color: 'var(--text2)', 
+          marginTop: '0.5rem', 
+          fontFamily: 'var(--mono)' 
         }}>
           {subtitle}
         </p>
