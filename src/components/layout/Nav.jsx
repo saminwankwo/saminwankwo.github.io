@@ -5,13 +5,19 @@ import { useScrollSpy } from '@hooks/useScrollSpy'
 import { trackEvent } from '@lib/analytics'
 import MobileMenu from './MobileMenu'
 
-const SECTION_IDS = ['skills', 'experience', 'projects', 'freelance', 'github', 'writing', 'contact']
+const NAV_LINKS = [
+  { label: 'Skills', path: '/skills' },
+  { label: 'Experience', path: '/experience' },
+  { label: 'Projects', path: '/projects' },
+  { label: 'Freelance', path: '/freelance' },
+  { label: 'GitHub', path: '/github' },
+  { label: 'Blog', path: '/blog' },
+  { label: 'Contact', path: '/contact' },
+]
 
 export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
-  const navigate = useNavigate()
-  const activeSection = useScrollSpy(SECTION_IDS)
 
   useEffect(() => {
     if (menuOpen) {
@@ -24,27 +30,6 @@ export default function Nav() {
   useEffect(() => {
     setMenuOpen(false)
   }, [location.pathname])
-
-  const handleNavClick = (e, sectionId) => {
-    e.preventDefault()
-    if (location.pathname === '/') {
-      const el = document.getElementById(sectionId)
-      if (el) el.scrollIntoView({ behavior: 'smooth' })
-    } else {
-      navigate('/', { state: { scrollTo: sectionId } })
-    }
-    setMenuOpen(false)
-  }
-
-  const navLinks = [
-    { label: 'Skills', id: 'skills' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Freelance', id: 'freelance' },
-    { label: 'GitHub', id: 'github' },
-    { label: 'Writing', id: 'writing' },
-    { label: 'Contact', id: 'contact' },
-  ]
 
   return (
     <header role="banner" style={{
@@ -70,40 +55,24 @@ export default function Nav() {
 
         {/* Desktop Links */}
         <div className="nav-links-desktop">
-          <ul style={{ listStyle: 'none', display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
-            {navLinks.map(link => (
-              <li key={link.id}>
-                <a 
-                  href={`/#${link.id}`}
-                  onClick={(e) => handleNavClick(e, link.id)}
+          <ul style={{ listStyle: 'none', display: 'flex', gap: '1.25rem', alignItems: 'center', margin: 0, padding: 0 }}>
+            {NAV_LINKS.map(link => (
+              <li key={link.path}>
+                <Link 
+                  to={link.path}
                   style={{
                     fontSize: '11px',
                     fontFamily: 'var(--mono)',
                     textTransform: 'uppercase',
                     letterSpacing: '0.08em',
-                    color: activeSection === link.id ? 'var(--green)' : 'var(--text2)',
+                    color: location.pathname.startsWith(link.path) ? 'var(--green)' : 'var(--text2)',
                     transition: 'color 0.2s'
                   }}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
-            <li>
-              <Link 
-                to="/blog"
-                style={{
-                  fontSize: '11px',
-                  fontFamily: 'var(--mono)',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.08em',
-                  color: location.pathname.startsWith('/blog') ? 'var(--green)' : 'var(--text2)',
-                  transition: 'color 0.2s'
-                }}
-              >
-                Blog
-              </Link>
-            </li>
           </ul>
         </div>
 
@@ -136,7 +105,7 @@ export default function Nav() {
         </button>
       </nav>
 
-      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} handleNavClick={handleNavClick} />}
+      {menuOpen && <MobileMenu onClose={() => setMenuOpen(false)} />}
 
       <style>{`
         .nav-btn-outline {

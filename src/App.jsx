@@ -4,6 +4,12 @@ import Nav from '@layout/Nav'
 import Footer from '@layout/Footer'
 import BackToTop from '@ui/BackToTop'
 import Home from '@pages/Home'
+import SkillsPage from '@pages/SkillsPage'
+import ExperiencePage from '@pages/ExperiencePage'
+import ProjectsPage from '@pages/ProjectsPage'
+import FreelancePage from '@pages/FreelancePage'
+import GitHubPage from '@pages/GitHubPage'
+import ContactPage from '@pages/ContactPage'
 import NotFound from '@pages/NotFound'
 
 const Blog = lazy(() => import('@pages/Blog'))
@@ -38,8 +44,14 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="skills" element={<SkillsPage />} />
+          <Route path="experience" element={<ExperiencePage />} />
+          <Route path="projects" element={<ProjectsPage />} />
+          <Route path="freelance" element={<FreelancePage />} />
+          <Route path="github" element={<GitHubPage />} />
           <Route path="blog" element={<Blog />} />
           <Route path="blog/:slug" element={<BlogPost />} />
+          <Route path="contact" element={<ContactPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

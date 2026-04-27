@@ -1,14 +1,28 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import CONFIG from '@config'
+import Button from '@ui/Button'
 
-export default function MobileMenu({ onClose, handleNavClick }) {
+const NAV_LINKS = [
+  { label: 'Skills', path: '/skills' },
+  { label: 'Experience', path: '/experience' },
+  { label: 'Projects', path: '/projects' },
+  { label: 'Freelance', path: '/freelance' },
+  { label: 'GitHub', path: '/github' },
+  { label: 'Blog', path: '/blog' },
+  { label: 'Contact', path: '/contact' },
+]
+
+export default function MobileMenu({ onClose }) {
+  const location = useLocation()
+
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', handleEsc)
 
+    // Focus trap (simple)
     const focusable = document.querySelectorAll(
       'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
     )
@@ -17,121 +31,89 @@ export default function MobileMenu({ onClose, handleNavClick }) {
     return () => window.removeEventListener('keydown', handleEsc)
   }, [onClose])
 
-  const navLinks = [
-    { label: 'Skills', id: 'skills' },
-    { label: 'Experience', id: 'experience' },
-    { label: 'Projects', id: 'projects' },
-    { label: 'Freelance', id: 'freelance' },
-    { label: 'GitHub', id: 'github' },
-    { label: 'Writing', id: 'writing' },
-    { label: 'Contact', id: 'contact' },
-  ]
-
   return (
     <div 
       role="dialog" 
       aria-modal="true" 
       aria-label="Navigation menu"
       style={{ 
-        position: 'fixed', 
-        inset: 0, 
-        background: 'var(--bg)', 
-        zIndex: 200,
-        display: 'flex', 
-        flexDirection: 'column', 
-        alignItems: 'center',
-        justifyContent: 'center', 
-        gap: '2rem' 
+        position: 'fixed',
+        inset: 0,
+        zIndex: 1000,
+        background: 'var(--bg)',
+        padding: '2rem',
+        display: 'flex',
+        flexDirection: 'column'
       }}
     >
-      <button 
-        onClick={onClose}
-        aria-label="Close navigation menu"
-        style={{ 
-          position: 'absolute', 
-          top: '1.5rem', 
-          right: '1.5rem',
-          fontSize: '24px',
-          color: 'var(--text2)'
-        }}
-      >
-        ✕
-      </button>
-
-      <ul style={{ listStyle: 'none', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        {navLinks.map(link => (
-          <li key={link.id}>
-            <a 
-              href={`/#${link.id}`}
-              onClick={(e) => {
-                handleNavClick(e, link.id)
-                onClose()
-              }}
-              style={{
-                fontSize: '18px',
-                fontFamily: 'var(--sans)',
-                fontWeight: 600,
-                color: 'var(--text2)'
-              }}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
-        <li>
-          <Link 
-            to="/blog"
-            onClick={onClose}
-            style={{
-              fontSize: '18px',
-              fontFamily: 'var(--sans)',
-              fontWeight: 600,
-              color: 'var(--text2)'
-            }}
-          >
-            Blog
-          </Link>
-        </li>
-      </ul>
-
-      <div style={{ width: '60px', height: '1px', background: 'var(--border)' }} />
-
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '200px' }}>
-        <a 
-          href={CONFIG.resumePath} 
-          download={CONFIG.resumeFilename}
-          className="nav-btn-outline"
-          style={{ textAlign: 'center' }}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
+        <Link to="/" onClick={onClose} style={{ display: 'flex', alignItems: 'baseline', gap: '2px' }}>
+          <span style={{ fontFamily: 'var(--sans)', fontWeight: 800, fontSize: '18px', color: 'var(--green)' }}>Samuel</span>
+          <span style={{ color: 'var(--text3)', fontWeight: 400, fontSize: '18px' }}>.dev</span>
+        </Link>
+        <button 
+          onClick={onClose} 
+          aria-label="Close menu"
+          style={{ fontSize: '32px', color: 'var(--text)' }}
         >
-          Resume ↓
-        </a>
-        <a 
-          href={`mailto:${CONFIG.email}`} 
-          className="nav-btn-primary"
-          style={{ textAlign: 'center' }}
-        >
-          Hire Me
-        </a>
+          ✕
+        </button>
       </div>
 
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(4, 1fr)', 
-        gap: '1rem', 
-        marginTop: '1rem' 
-      }}>
-        {CONFIG.socials.map(s => (
-          <a 
-            key={s.label} 
-            href={s.url} 
-            aria-label={s.ariaLabel} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            style={{ fontSize: '12px', color: 'var(--text3)' }}
-          >
-            {s.label.substring(0, 2)}
-          </a>
-        ))}
+      <nav aria-label="Mobile navigation" style={{ flex: 1 }}>
+        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          {NAV_LINKS.map(link => (
+            <li key={link.path}>
+              <Link 
+                to={link.path}
+                onClick={onClose}
+                style={{
+                  fontSize: '24px',
+                  fontFamily: 'var(--sans)',
+                  fontWeight: 800,
+                  color: location.pathname.startsWith(link.path) ? 'var(--green)' : 'var(--text)',
+                  textDecoration: 'none'
+                }}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
+          {CONFIG.socials.map(s => (
+            <a 
+              key={s.name} 
+              href={s.url} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase' }}
+            >
+              {s.name}
+            </a>
+          ))}
+        </div>
+        
+        <Button 
+          variant="outline" 
+          as="a" 
+          href={CONFIG.resumePath} 
+          download={CONFIG.resumeFilename}
+          style={{ width: '100%' }}
+        >
+          Download Resume ↓
+        </Button>
+        <Button 
+          variant="filled" 
+          as="a" 
+          href={`mailto:${CONFIG.email}`}
+          style={{ width: '100%' }}
+        >
+          Hire Me
+        </Button>
       </div>
     </div>
   )
