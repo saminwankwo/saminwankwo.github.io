@@ -34,6 +34,24 @@
   --max-w:        1100px;
   --section-px:   2rem;
   --section-py:   5rem;
+
+  --green-dim: rgba(0, 255, 157, 0.4);
+  --border: rgba(255, 255, 255, 0.1);
+  --nav-h: 70px;
+  --strip-h: 38px;
+  --section-py: 6rem;
+  --section-px: 2rem;
+  --max-w: 1100px;
+}
+
+.light-mode {
+  --bg: #f8fafc;
+  --bg2: #ffffff;
+  --bg3: #f1f5f9;
+  --text: #0f172a;
+  --text2: #334155;
+  --text3: #64748b;
+  --border: rgba(15, 23, 42, 0.1);
 }
 
 /* Reset */

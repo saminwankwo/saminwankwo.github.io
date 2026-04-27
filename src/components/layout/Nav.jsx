@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import CONFIG from '@config'
 import { useScrollSpy } from '@hooks/useScrollSpy'
+import ThemeToggle from '@ui/ThemeToggle'
 import { trackEvent } from '@lib/analytics'
 import MobileMenu from './MobileMenu'
 
@@ -77,7 +78,8 @@ export default function Nav() {
         </div>
 
         {/* Desktop Buttons */}
-        <div className="nav-btns-desktop" style={{ display: 'flex', gap: '12px' }}>
+        <div className="nav-btns-desktop" style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+          <ThemeToggle />
           <a 
             href={CONFIG.resumePath} 
             download={CONFIG.resumeFilename}

@@ -1,8 +1,11 @@
 import React, { lazy, Suspense, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Outlet, useLocation } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
 import Nav from '@layout/Nav'
 import Footer from '@layout/Footer'
 import BackToTop from '@ui/BackToTop'
+import CustomCursor from '@ui/CustomCursor'
+import PageWrapper from '@layout/PageWrapper'
 import Home from '@pages/Home'
 import SkillsPage from '@pages/SkillsPage'
 import ExperiencePage from '@pages/ExperiencePage'
@@ -24,13 +27,18 @@ function ScrollToTop() {
 }
 
 function Layout() {
+  const location = useLocation()
   return (
     <>
       <a href="#main-content" className="skip-link">Skip to main content</a>
       <Nav />
-      <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}>
-        <Outlet />
-      </Suspense>
+      <AnimatePresence mode="wait">
+        <PageWrapper key={location.pathname}>
+          <Suspense fallback={<div style={{ minHeight: '100vh', background: 'var(--bg)' }} />}>
+            <Outlet />
+          </Suspense>
+        </PageWrapper>
+      </AnimatePresence>
       <BackToTop />
       <Footer />
     </>
@@ -41,6 +49,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <CustomCursor />
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />

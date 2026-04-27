@@ -51,13 +51,16 @@ export default function MobileMenu({ onClose }) {
           <span style={{ fontFamily: 'var(--sans)', fontWeight: 800, fontSize: '18px', color: 'var(--green)' }}>Samuel</span>
           <span style={{ color: 'var(--text3)', fontWeight: 400, fontSize: '18px' }}>.dev</span>
         </Link>
-        <button 
-          onClick={onClose} 
-          aria-label="Close menu"
-          style={{ fontSize: '32px', color: 'var(--text)' }}
-        >
-          ✕
-        </button>
+        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+          <ThemeToggle />
+          <button 
+            onClick={onClose} 
+            aria-label="Close menu"
+            style={{ fontSize: '32px', color: 'var(--text)' }}
+          >
+            ✕
+          </button>
+        </div>
       </div>
 
       <nav aria-label="Mobile navigation" style={{ flex: 1 }}>
