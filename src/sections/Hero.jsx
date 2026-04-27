@@ -83,6 +83,7 @@ export default function Hero() {
 
       <div style={{
         maxWidth: 'var(--max-w)',
+
         width: '100%',
         margin: '0 auto',
         display: 'flex',
@@ -212,8 +213,8 @@ export default function Hero() {
           background: 'var(--bg2)',
           border: '1px solid var(--border)',
           fontFamily: 'var(--mono)',
-          marginLeft: '4rem',
-          transform: stage === 6 ? 'translateX(40px)' : 'none',
+          marginLeft: '6rem',
+          transform: stage === 6 ? 'translateX(60px)' : 'none',
           transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)'
         }}>
 
