@@ -1,7 +1,7 @@
 export const CONFIG = Object.freeze({
   // Identity
   name:            "Samuel Nwankwo",
-  fullName:        "Nwankwo Chibuike Samuel",
+  fullName:        "Nwankwo Samuel",
   title:           "Backend Engineer",
   shortTitle:      "Backend Engineer | Node.js · PHP · Cloud",
   tagline:         "Building scalable APIs, microservices, and cloud infrastructure.",
@@ -56,7 +56,7 @@ export const CONFIG = Object.freeze({
 
   // Skills meta keywords
   skillKeywords: [
-    "Node.js","NestJS","PHP","Laravel","TypeScript","JavaScript",
+    "Node.js","Expressjs","NestJS","PHP","Laravel","TypeScript","JavaScript",
     "MongoDB","MySQL","PostgreSQL","Redis","AWS","Docker","GraphQL",
     "REST APIs","Microservices","RabbitMQ","WebSockets","CI/CD"
   ],
