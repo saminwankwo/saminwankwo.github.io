@@ -1,95 +1,73 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import CONFIG from '@config'
 
 export default function TerminalWidget() {
-  const [history, setHistory] = useState([])
-  const [input, setInput] = useState('')
-  const [isInteractive, setIsInteractive] = useState(false)
-  const [booting, setBooting] = useState(true)
-  const [bootText, setBootText] = useState('')
-  const terminalEndRef = useRef(null)
-  const inputRef = useRef(null)
-
-  const scrollToBottom = () => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [history, bootText, booting])
-
-  useEffect(() => {
-    if (!booting && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [booting])
+  const [text1, setText1] = useState('')
+  const [showOut1, setShowOut1] = useState(0)
+  const [started2, setStarted2] = useState(false)
+  const [text2, setText2] = useState('')
+  const [showOut2, setShowOut2] = useState(false)
+  const [started3, setStarted3] = useState(false)
+  const [text3, setText3] = useState('')
+  const [showOut3, setShowOut3] = useState(false)
+  const [done, setDone] = useState(false)
 
   useEffect(() => {
     let isCancelled = false
-    const bootSequence = async () => {
-      const lines = [
-        { text: 'Initializing portfolio kernel...', delay: 400 },
-        { text: 'Loading backend modules...', delay: 300 },
-        { text: 'Establishing secure connection to samuel.dev...', delay: 500 },
-        { text: 'Node.js v20.10.0 detected.', delay: 200 },
-        { text: 'Type "help" to see available commands.', delay: 400 },
-      ]
 
-      for (const line of lines) {
-        if (isCancelled) return
-        setBootText(prev => prev + line.text + '\n')
-        await new Promise(r => setTimeout(r, line.delay))
-      }
-      
-      if (!isCancelled) {
-        setBooting(false)
-        setIsInteractive(true)
-      }
+    const typeCmd = (cmd, setter, callback) => {
+      let i = 0
+      setter('')
+      const interval = setInterval(() => {
+        if (isCancelled) return clearInterval(interval)
+        setter(cmd.slice(0, i + 1))
+        i++
+        if (i >= cmd.length) {
+          clearInterval(interval)
+          setTimeout(() => {
+            if (!isCancelled && callback) callback()
+          }, 400)
+        }
+      }, 50)
     }
 
-    bootSequence()
+    typeCmd('node --info samuel.json', setText1, () => {
+      let line = 0
+      const jsonInt = setInterval(() => {
+        if (isCancelled) return clearInterval(jsonInt)
+        line++
+        setShowOut1(line)
+        if (line >= 5) {
+          clearInterval(jsonInt)
+          setTimeout(() => {
+            if (isCancelled) return
+            setStarted2(true)
+            typeCmd('git log --oneline', setText2, () => {
+              setTimeout(() => {
+                if (isCancelled) return
+                setShowOut2(true)
+                setTimeout(() => {
+                  if (isCancelled) return
+                  setStarted3(true)
+                  typeCmd('cat available.json', setText3, () => {
+                    setTimeout(() => {
+                      if (isCancelled) return
+                      setShowOut3(true)
+                      setTimeout(() => {
+                        if (!isCancelled) setDone(true)
+                      }, 400)
+                    }, 300)
+                  })
+                }, 1000)
+              }, 800)
+            })
+          }, 1000)
+        }
+      }, 400) // slowly show lines
+    })
+
     return () => { isCancelled = true }
   }, [])
-
-  const handleCommand = (e) => {
-    if (e.key === 'Enter') {
-      const cmd = input.trim().toLowerCase()
-      let output = ''
-
-      switch (cmd) {
-        case 'help':
-          output = 'Available commands:\n  whoami   - Show short bio\n  ls       - List projects\n  exp      - Show recent experience\n  contact  - Get contact info\n  clear    - Clear terminal\n  stats    - View system metrics'
-          break
-        case 'whoami':
-          output = `Name: ${CONFIG.fullName}\nRole: ${CONFIG.title}\nBio: ${CONFIG.tagline}`
-          break
-        case 'ls':
-          output = 'Featured Projects:\n- Auth SDK for Express\n- Multitenant SaaS\n- E-Commerce API\n- AI Intrusion Detection'
-          break
-        case 'exp':
-          output = 'Recent Roles:\n- Sweeftly (Backend Engineer)\n- Olotu Square (Backend Engineer)\n- Webxiel (Laravel Developer)'
-          break
-        case 'contact':
-          output = `Email: ${CONFIG.email}\nGitHub: ${CONFIG.socials.github}\nLinkedIn: ${CONFIG.socials.linkedin}`
-          break
-        case 'clear':
-          setHistory([])
-          setInput('')
-          return
-        case 'stats':
-          output = 'Metrics:\n- $1M+ Payments Processed\n- 99.9% System Uptime\n- 200+ App Installs'
-          break
-        case '':
-          output = ''
-          break
-        default:
-          output = `command not found: ${cmd}. Type "help" for a list of commands.`
-      }
-
-      setHistory([...history, { cmd: input, output }])
-      setInput('')
-    }
-  }
 
   const Blinker = () => (
     <span className="animate-blink" style={{ display: 'inline-block', width: '7px', height: '13px', background: 'var(--green)', marginLeft: '4px', verticalAlign: 'middle' }} />
@@ -98,19 +76,17 @@ export default function TerminalWidget() {
   return (
     <div 
       className="hero-terminal" 
-      aria-label="Interactive Terminal"
-      onClick={() => inputRef.current?.focus()}
+      aria-label="Terminal showing developer info" 
+      aria-hidden="true"
       style={{
-        width: '450px',
-        height: '320px',
+        width: '400px',
         flexShrink: 0,
         background: 'var(--bg2)',
         border: '1px solid var(--border)',
         fontFamily: 'var(--mono)',
-        display: 'flex',
-        flexDirection: 'column',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.3)',
-        cursor: 'text'
+        marginLeft: '0.1rem',
+        transform: showOut1 > 0 ? 'translateX(60px)' : 'none',
+        transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)'
       }}
     >
       <div style={{
@@ -119,73 +95,67 @@ export default function TerminalWidget() {
         display: 'flex',
         alignItems: 'center',
         gap: '8px',
-        borderBottom: '1px solid var(--border)',
-        flexShrink: 0
+        borderBottom: '1px solid var(--border)'
       }}>
-        <div style={{ display: 'flex', gap: '6px' }}>
-          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f57' }} />
-          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e' }} />
-          <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#28ca41' }} />
-        </div>
-        <span style={{ fontSize: '11px', color: 'var(--text3)', marginLeft: 'auto' }}>samuel@dev — zsh</span>
+        <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ff5f57' }} />
+        <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#ffbd2e' }} />
+        <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#28ca41' }} />
+        <span style={{ fontSize: '11px', color: 'var(--text3)', marginLeft: 'auto' }}>samuel@dev ~ portfolio</span>
       </div>
 
-      <div style={{ 
-        padding: '16px', 
-        fontSize: '12px', 
-        lineHeight: 1.6, 
-        overflowY: 'auto',
-        flex: 1,
-        scrollbarWidth: 'none'
-      }}>
-        <pre style={{ whiteSpace: 'pre-wrap', color: 'var(--text2)', margin: 0 }}>
-          {bootText}
-        </pre>
+      <div style={{ padding: '16px', fontSize: '12px', lineHeight: 2.1 }}>
+        <div>
+          <span style={{ color: 'var(--green)' }}>› </span>
+          <span>{text1}</span>
+          {showOut1 === 0 && !started2 && <Blinker />}
+        </div>
 
-        {history.map((item, i) => (
-          <div key={i} style={{ marginTop: '8px' }}>
-            <div style={{ display: 'flex', gap: '8px' }}>
-              <span style={{ color: 'var(--green)' }}>›</span>
-              <span style={{ color: 'var(--text)' }}>{item.cmd}</span>
-            </div>
-            {item.output && (
-              <pre style={{ 
-                whiteSpace: 'pre-wrap', 
-                color: 'var(--blue)', 
-                marginTop: '4px',
-                paddingLeft: '16px',
-                margin: 0
-              }}>
-                {item.output}
-              </pre>
-            )}
-          </div>
-        ))}
-
-        {!booting && (
-          <div style={{ display: 'flex', gap: '8px', marginTop: '8px', alignItems: 'center' }}>
-            <span style={{ color: 'var(--green)' }}>›</span>
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleCommand}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--text)',
-                fontFamily: 'var(--mono)',
-                fontSize: '12px',
-                outline: 'none',
-                width: '100%',
-                padding: 0
-              }}
-              autoFocus
-            />
+        {showOut1 > 0 && (
+          <div style={{ marginBottom: '12px' }}>
+            {showOut1 >= 1 && <div><span style={{ color: 'var(--amber)' }}>name:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.fullName}"</span></div>}
+            {showOut1 >= 2 && <div><span style={{ color: 'var(--amber)' }}>role:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.title}"</span></div>}
+            {showOut1 >= 3 && <div><span style={{ color: 'var(--amber)' }}>location:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.location}"</span></div>}
+            {showOut1 >= 4 && <div><span style={{ color: 'var(--amber)' }}>stack:</span> <span style={{ color: 'var(--blue)' }}>["NestJS","Laravel","AWS"]</span></div>}
+            {showOut1 >= 5 && <div><span style={{ color: 'var(--amber)' }}>available:</span> <span style={{ color: 'var(--green)' }}>true</span></div>}
           </div>
         )}
-        <div ref={terminalEndRef} />
+
+        {started2 && (
+          <div>
+            <span style={{ color: 'var(--green)' }}>› </span>
+            <span>{text2}</span>
+            {!showOut2 && !started3 && <Blinker />}
+            {showOut2 && (
+              <>
+                <div style={{ color: 'var(--green)' }}>✓ 200+ npm installs (auth-sdk)</div>
+                <div style={{ color: 'var(--green)' }}>✓ 99.7% uptime prediction-api</div>
+                <div style={{ color: 'var(--green)' }}>✓ 50+ tenants on SaaS platform</div>
+              </>
+            )}
+          </div>
+        )}
+
+        {started3 && (
+          <div style={{ marginTop: '12px' }}>
+            <span style={{ color: 'var(--green)' }}>› </span>
+            <span>{text3}</span>
+            {!showOut3 && !done && <Blinker />}
+            {showOut3 && (
+              <>
+                <div style={{ color: 'var(--blue)' }}>{`{ "status": "open",`}</div>
+                <div style={{ color: 'var(--blue)', paddingLeft: '12px' }}>{`"type": "remote",`}</div>
+                <div style={{ color: 'var(--blue)', paddingLeft: '12px' }}>{`"notice": "immediate" }`}</div>
+              </>
+            )}
+          </div>
+        )}
+
+        {done && (
+          <div style={{ marginTop: '12px' }}>
+            <span style={{ color: 'var(--green)' }}>› </span>
+            <Blinker />
+          </div>
+        )}
       </div>
     </div>
   )
