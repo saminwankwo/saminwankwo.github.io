@@ -15,14 +15,14 @@ export default function ContactForm() {
     e.preventDefault()
     setStatus('submitting')
 
-    if (!CONFIG.formspreeId) {
-      console.warn('No Formspree ID found in CONFIG')
-      setTimeout(() => setStatus('success'), 1000)
-      return
-    }
+    // if (!CONFIG.formspreeId) {
+    //   console.warn('No Formspree ID found in CONFIG')
+    //   setTimeout(() => setStatus('success'), 1000)
+    //   return
+    // }
 
     try {
-      const response = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
+      const response = await fetch(`https://formspree.io/f/mykvvqgv`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
