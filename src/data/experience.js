@@ -4,7 +4,7 @@ export default [
     role: "Backend Engineer — Full-Time, Remote",
     date: "May 2024 – Aug 2025",
     loc: "Cumbernauld, Scotland",
-    current: true,
+    current: false,
     tech: ["NestJS","Express.js","MongoDB","AWS (EC2, ELB, S3)","Docker"],
     bullets: [
       "Architected e-commerce API (v1 Express.js → v2 NestJS) handling thousands of daily orders with chat-style ordering flow.",
@@ -18,7 +18,7 @@ export default [
     role: "Backend Engineer — Contract, Remote",
     date: "May 2024 – Present",
     loc: "Port Harcourt, Nigeria",
-    current: true,
+    current: false,
     tech: ["Node.js","Express","Laravel","MongoDB","MySQL","Docker","GitHub Actions"],
     bullets: [
       "Migrated PHP monolith → Laravel; reduced deployment errors by ~50% through standardized architecture and automated tests.",

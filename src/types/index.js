@@ -32,6 +32,7 @@
  * @property {string} [link]
  * @property {string} [github]
  * @property {string[]} [techDetail]
+ * @property {boolean} [featured]
  * @property {CaseStudy} [caseStudy]
  */
 
