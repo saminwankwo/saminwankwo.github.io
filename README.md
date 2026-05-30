@@ -1,92 +1,36 @@
-# My Personal Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-This is my personal portfolio, showcasing my skills, projects, and experience as a ReactJS developer.
+## Getting Started
 
-## Table of Contents
+First, run the development server:
 
-- [Introduction](#introduction)
-- [Technologies Used](#technologies-used)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Demo](#demo)
-- [Contributing](#contributing)
-- [License](#license)
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-## Introduction
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-This portfolio is a single-page web application built using ReactJS. It features a responsive design, intuitive navigation, and a clean, modern look. The portfolio includes sections for showcasing my skills, projects, and experience, as well as a contact form for potential clients and collaborators.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-## Technologies Used
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-- ReactJS
-- HTML
-- CSS
-- JavaScript
-- Bootstrap
+## Learn More
 
-## Features
+To learn more about Next.js, take a look at the following resources:
 
-- Responsive design
-- Clean, modern layout
-- Sections for skills, projects, and experience
-- Contact form for potential clients and collaborators
-- Dynamic content loaded from JSON files
-- Easy customization and maintenance
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## Installation
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-To install this portfolio on your local machine, follow these steps:
+## Deploy on Vercel
 
-1. Clone the repository to your local machine:
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-   ```
-   git clone https://github.com/saminwankwo/saminwankwo.github.io.git
-   ```
-
-2. Navigate to the project directory:
-
-   ```
-   cd saminwankwo.github.io
-   ```
-
-3. Install the dependencies:
-
-   ```
-   npm install
-   ```
-
-## Usage
-
-To run the portfolio on your local machine, follow these steps:
-
-1. Navigate to the project directory:
-
-   ```
-   cd saminwankwo.github.io
-   ```
-
-2. Start the development server:
-
-   ```
-   npm start
-   ```
-
-3. Open your web browser and navigate to http://localhost:3000 to view the portfolio.
-
-## Demo
-
-To see a live demo of this portfolio, visit 
- - [https://saminwankwo-github-io.vercel.app](https://saminwankwo-github-io.vercel.app)
- - [https://saminwankwo.netlify.app](https://saminwankwo.netlify.app)
-
-## Contributing
-
-Contributions are welcome! If you have any suggestions or improvements, feel free to submit a pull request or open an issue.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Older Version
-There's an older version written in html on the master branch of this repo
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
