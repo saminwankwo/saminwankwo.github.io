@@ -43,8 +43,8 @@ export const CONFIG = Object.freeze({
   formspreeId:     import.meta.env.VITE_FORMSPREE_ID     || "",
 
   // Assets
-  resumePath:      "/Samuel_Nwankwo_Resume.pdf",
-  resumeFilename:  "Samuel_Nwankwo_Resume.pdf",
+  resumePath:      "/Samuel_Nwankwo_ATS_Resume_v2.pdf",
+  resumeFilename:  "Samuel_Nwankwo_ATS_Resume_v2.pdf",
   ogImage:         "/og-image.jpg",
 
   // SEO keywords
