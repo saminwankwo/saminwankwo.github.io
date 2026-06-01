@@ -2,7 +2,7 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {
-      "source": "/Samuel_Nwankwo_Resume.pdf",
+      "source": "/Samuel_Nwankwo_ATS_Resume_v2.pdf",
       "headers": [{ "key": "Content-Disposition", "value": "attachment" }]
     }
   ]
