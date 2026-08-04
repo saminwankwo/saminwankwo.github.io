@@ -11,7 +11,12 @@ export default function GitHubPage() {
         title={`GitHub Activity — ${CONFIG.name}`}
         description={`Open source contributions and GitHub activity of ${CONFIG.name}. Explore my latest repositories and coding stats.`}
         canonical={CONFIG.siteUrl + '/github'}
-        structuredData={buildStructuredData('home', {})}
+        structuredData={buildStructuredData('webpage', {
+          title: `GitHub Activity — ${CONFIG.name}`,
+          description: `Open source contributions and GitHub activity of ${CONFIG.name}. Explore my latest repositories and coding stats.`,
+          url: CONFIG.siteUrl + '/github',
+          breadcrumbName: 'GitHub'
+        })}
       />
       <main id="main-content" style={{ paddingTop: 'calc(var(--nav-h) + 2rem)' }}>
         <GitHub />

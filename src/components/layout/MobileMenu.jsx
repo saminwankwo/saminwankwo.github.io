@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import CONFIG from '@config'
 import Button from '@ui/Button'
+import ThemeToggle from '@ui/ThemeToggle'
 
 const NAV_LINKS = [
   { label: 'Skills', path: '/skills' },
@@ -47,7 +48,7 @@ export default function MobileMenu({ onClose }) {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
-        <Link to="/" onClick={onClose} style={{ display: 'flex', alignItems: 'baseline', gap: '2px' }}>
+        <Link to="/" onClick={onClose} aria-label={`${CONFIG.name} — home`} style={{ display: 'flex', alignItems: 'baseline', gap: '2px' }}>
           <span style={{ fontFamily: 'var(--sans)', fontWeight: 800, fontSize: '18px', color: 'var(--green)' }}>Samuel</span>
           <span style={{ color: 'var(--text3)', fontWeight: 400, fontSize: '18px' }}>.dev</span>
         </Link>
@@ -89,13 +90,14 @@ export default function MobileMenu({ onClose }) {
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '1rem' }}>
           {CONFIG.socials.map(s => (
             <a 
-              key={s.name} 
+              key={s.label} 
               href={s.url} 
               target="_blank" 
               rel="noopener noreferrer"
+              aria-label={s.ariaLabel}
               style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase' }}
             >
-              {s.name}
+              {s.label}
             </a>
           ))}
         </div>

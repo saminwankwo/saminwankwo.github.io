@@ -1,5 +1,5 @@
 export default [
-  { name: "Mieuve", country:"🇬🇧 UK", sector:"Transport",   stack:"Node.js — shuttle booking API"},
+  { name:"Mieuve", country:"🇬🇧 UK", sector:"Transport",   stack:"Node.js — shuttle booking API"},
   { name:"DigiBank",      country:"🇳🇬 Nigeria",  sector:"Fintech",     stack:"PHP/Laravel — loan scheduling API" },
   { name:"VendoHub",      country:"🇺🇸 USA",       sector:"Marketplace", stack:"Node.js, MongoDB — vendor onboarding" },
   { name:"EduCrest LMS",  country:"🇬🇧 UK",        sector:"EdTech",      stack:"NestJS — role-based LMS backend" },
