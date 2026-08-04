@@ -11,7 +11,12 @@ export default function FreelancePage() {
         title={`Freelance Engagements — ${CONFIG.name}`}
         description={`Global freelance work and client engagements by ${CONFIG.name} in Fintech, Marketplace, and EdTech sectors.`}
         canonical={CONFIG.siteUrl + '/freelance'}
-        structuredData={buildStructuredData('home', {})}
+        structuredData={buildStructuredData('webpage', {
+          title: `Freelance Engagements — ${CONFIG.name}`,
+          description: `Global freelance work and client engagements by ${CONFIG.name} in Fintech, Marketplace, and EdTech sectors.`,
+          url: CONFIG.siteUrl + '/freelance',
+          breadcrumbName: 'Freelance'
+        })}
       />
       <main id="main-content" style={{ paddingTop: 'calc(var(--nav-h) + 2rem)' }}>
         <Freelance />

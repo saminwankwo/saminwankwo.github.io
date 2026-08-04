@@ -1,5 +1,16 @@
 export default [
   {
+    company: "Phunplan",
+    role: "Backend Engineer — Full-Time, Remote",
+    date: "Dec 2025 – Jul 2026",
+    loc: "Port Harcourt, Nigeria",
+    current: false,
+    tech: ["NestJS",,"MongoDB","Digital Ocean"],
+    bullets: [
+      
+    ]
+  },
+  {
     company: "Sweeftly",
     role: "Backend Engineer — Full-Time, Remote",
     date: "May 2024 – Aug 2025",
@@ -15,8 +26,8 @@ export default [
   },
   {
     company: "Olotu Square",
-    role: "Backend Engineer — Contract, Remote",
-    date: "May 2024 – Present",
+    role: "Software Developer — Contract, Remote",
+    date: "May 2024 – Dec 2025",
     loc: "Port Harcourt, Nigeria",
     current: false,
     tech: ["Node.js","Express","Laravel","MongoDB","MySQL","Docker","GitHub Actions"],

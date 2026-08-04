@@ -2,6 +2,15 @@
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {
+      "source": "/(.*).(js|css|woff2|png|jpg|jpeg|svg|pdf)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/Samuel_Nwankwo_ATS_Resume_v2.pdf",
       "headers": [{ "key": "Content-Disposition", "value": "attachment" }]
     }

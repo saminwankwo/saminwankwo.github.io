@@ -21,7 +21,25 @@ export function buildStructuredData(type, data) {
         "name": CONFIG.name,
         "jobTitle": CONFIG.title,
         "url": CONFIG.siteUrl,
+        "description": CONFIG.tagline,
         "sameAs": CONFIG.socials.map(s => s.url)
+      }
+    }
+  }
+
+  if (type === 'webpage' && data) {
+    return {
+      ...base,
+      "@type": "WebPage",
+      "name": data.title,
+      "description": data.description,
+      "url": data.url,
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": CONFIG.siteUrl },
+          { "@type": "ListItem", "position": 2, "name": data.breadcrumbName, "item": data.url }
+        ]
       }
     }
   }

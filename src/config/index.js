@@ -34,6 +34,7 @@ export const CONFIG = Object.freeze({
   youtubeUrl:      "https://youtube.com/@saminwankwo",
   hashnodeUrl:     "https://saminwankwo.hashnode.dev",
   twitterHandle:   "@saminwankwo",
+  tiktokUrl:       "https://www.tiktok.com/@saminwankwo",
 
   // Environment-driven
   siteUrl:         import.meta.env.VITE_SITE_URL       || "https://saminwankwo.dev",
@@ -79,6 +80,7 @@ export const CONFIG = Object.freeze({
     { label: "npm",         url: "https://npmjs.com/~saminwankwo",           ariaLabel: "npm packages" },
     { label: "YouTube",     url: "https://youtube.com/@saminwankwo",         ariaLabel: "YouTube channel" },
     { label: "Hashnode",    url: "https://saminwankwo.hashnode.dev",         ariaLabel: "Hashnode blog" },
+    { label: "tiktok",      url: "https://saminwankwo.hashnode.dev",         ariaLabel: "Hashnode blog" },
   ]
 })
 

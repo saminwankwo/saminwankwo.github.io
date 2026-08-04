@@ -114,8 +114,8 @@ export default function TerminalWidget() {
           <div style={{ marginBottom: '12px' }}>
             {showOut1 >= 1 && <div><span style={{ color: 'var(--amber)' }}>name:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.fullName}"</span></div>}
             {showOut1 >= 2 && <div><span style={{ color: 'var(--amber)' }}>role:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.title}"</span></div>}
-            {showOut1 >= 3 && <div><span style={{ color: 'var(--amber)' }}>location:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.location}"</span></div>}
-            {showOut1 >= 4 && <div><span style={{ color: 'var(--amber)' }}>stack:</span> <span style={{ color: 'var(--blue)' }}>["NestJS","Laravel","AWS"]</span></div>}
+            {/* {showOut1 >= 3 && <div><span style={{ color: 'var(--amber)' }}>location:</span> <span style={{ color: 'var(--blue)' }}>"{CONFIG.location}"</span></div>} */}
+            {showOut1 >= 4 && <div><span style={{ color: 'var(--amber)' }}>stack:</span> <span style={{ color: 'var(--blue)' }}>["Expressjs","Laravel","AWS"]</span></div>}
             {showOut1 >= 5 && <div><span style={{ color: 'var(--amber)' }}>available:</span> <span style={{ color: 'var(--green)' }}>true</span></div>}
           </div>
         )}

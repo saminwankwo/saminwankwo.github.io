@@ -17,6 +17,24 @@ export default [
       outcome: "Adopted by 200+ applications. Auth integration reduced from ~2 hours to under 10 minutes per project. Zero reported security regressions."
     }
   },
+
+  {
+    num: "01",
+    cat: "SaaS platform",
+    name: "Family Tree application ",
+    desc: "Design a platform capable of handling complex family relationships across multiple generations — with real-time updates, fast search, and a deeply intuitive visual interface.",
+    metric: "200+ app installs",
+    link: "https://umuoparauhadynasty.com/",
+    techDetail: ["PHP ", "MYSQL", "D3.js"],
+    featured: true,
+    caseStudy: {
+      problem: "Every project copy-pasted the same JWT middleware, creating inconsistent security implementations across codebases.",
+      solution: "Extracted auth logic into a configurable npm package with multiple strategies, automatic refresh token rotation, role-based route guards, and full TypeScript types.",
+      stack: "Node.js · TypeScript · Express.js · JWT · npm Registry",
+      outcome: "Adopted by 200+ applications. Auth integration reduced from ~2 hours to under 10 minutes per project. Zero reported security regressions."
+    }
+  },
+
   {
     num: "02",
     cat: "SaaS platform",

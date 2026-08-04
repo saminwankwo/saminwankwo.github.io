@@ -11,7 +11,12 @@ export default function ProjectsPage() {
         title={`Portfolio Projects — ${CONFIG.name}`}
         description={`Featured projects and case studies by ${CONFIG.name}, covering e-commerce APIs, SaaS platforms, and developer tools.`}
         canonical={CONFIG.siteUrl + '/projects'}
-        structuredData={buildStructuredData('home', {})}
+        structuredData={buildStructuredData('webpage', {
+          title: `Portfolio Projects — ${CONFIG.name}`,
+          description: `Featured projects and case studies by ${CONFIG.name}, covering e-commerce APIs, SaaS platforms, and developer tools.`,
+          url: CONFIG.siteUrl + '/projects',
+          breadcrumbName: 'Projects'
+        })}
       />
       <main id="main-content" style={{ paddingTop: 'calc(var(--nav-h) + 2rem)' }}>
         <Projects />
