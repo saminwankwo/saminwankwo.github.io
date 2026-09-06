@@ -64,6 +64,10 @@ export default function ArticleList({ first = 4 }) {
 
       <style>{`
         .article-row:hover { background: var(--bg) !important; }
+        @media (max-width: 480px) {
+          .article-row { padding: 1rem !important; align-items: flex-start !important; }
+          .article-row div:first-child { min-width: 0; }
+        }
       `}</style>
     </div>
   )

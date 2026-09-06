@@ -15,7 +15,7 @@ export function useGitHub() {
           fetch(`https://api.github.com/users/${CONFIG.githubUser}/repos?sort=updated&per_page=6&type=public`)
         ])
 
-        if (userRes.status === 403 || reposRes.status === 403) {
+        if (userRes.status === 403 || reposRes.status === 403 || userRes.status === 429 || reposRes.status === 429) {
           setRateLimited(true)
           setError(true)
           setLoading(false)

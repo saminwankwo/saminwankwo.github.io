@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import { Link, useLocation } from 'react-router-dom'
 import CONFIG from '@config'
 import Button from '@ui/Button'
@@ -16,27 +17,65 @@ const NAV_LINKS = [
 
 export default function MobileMenu({ onClose }) {
   const location = useLocation()
+  const containerRef = useRef(null)
+  const previousActiveRef = useRef(null)
 
   useEffect(() => {
+    previousActiveRef.current = document.activeElement
     const handleEsc = (e) => {
       if (e.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', handleEsc)
 
-    // Focus trap (simple)
-    const focusable = document.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    )
-    if (focusable.length > 0) focusable[0].focus()
+    // Focus first element inside menu only
+    requestAnimationFrame(() => {
+      const focusable = containerRef.current?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (focusable?.length > 0) focusable[0].focus()
+    })
 
-    return () => window.removeEventListener('keydown', handleEsc)
+    const handleTab = (e) => {
+      if (e.key !== 'Tab') return
+      const focusable = containerRef.current?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+      if (!focusable || focusable.length === 0) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    window.addEventListener('keydown', handleTab)
+
+    return () => {
+      window.removeEventListener('keydown', handleEsc)
+      window.removeEventListener('keydown', handleTab)
+      if (previousActiveRef.current instanceof HTMLElement) {
+        previousActiveRef.current.focus()
+      }
+    }
   }, [onClose])
 
-  return (
+  const content = (
     <div 
+      ref={containerRef}
       role="dialog" 
       aria-modal="true" 
       aria-label="Navigation menu"
+      onClick={(e) => {
+        // Close when clicking backdrop (not content)
+        if (e.target === e.currentTarget) onClose()
+      }}
       style={{ 
         position: 'fixed',
         inset: 0,
@@ -44,7 +83,9 @@ export default function MobileMenu({ onClose }) {
         background: 'var(--bg)',
         padding: '2rem',
         display: 'flex',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        overflowY: 'auto',
+        WebkitOverflowScrolling: 'touch'
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3rem' }}>
@@ -55,9 +96,10 @@ export default function MobileMenu({ onClose }) {
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <ThemeToggle />
           <button 
+            type="button"
             onClick={onClose} 
             aria-label="Close menu"
-            style={{ fontSize: '32px', color: 'var(--text)' }}
+            style={{ fontSize: '24px', color: 'var(--text)', width: '44px', height: '44px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
           >
             ✕
           </button>
@@ -122,4 +164,6 @@ export default function MobileMenu({ onClose }) {
       </div>
     </div>
   )
+
+  return createPortal(content, document.body)
 }

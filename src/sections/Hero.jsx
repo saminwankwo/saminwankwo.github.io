@@ -10,6 +10,7 @@ export default function Hero() {
       id="hero" 
       aria-label="Introduction" 
       role="banner"
+      className="hero-section"
       style={{
         minHeight: '100vh',
         display: 'flex',
@@ -30,7 +31,7 @@ export default function Hero() {
         zIndex: -1
       }} />
 
-      <div style={{
+      <div className="hero-inner" style={{
         maxWidth: 'var(--max-w)',
         width: '100%',
         margin: '0 auto',
@@ -48,7 +49,7 @@ export default function Hero() {
           <h1 style={{
             fontFamily: 'var(--sans)',
             fontWeight: 800,
-            fontSize: 'clamp(46px, 8vw, 84px)',
+            fontSize: 'clamp(36px, 8vw, 84px)',
             lineHeight: 1,
             letterSpacing: '-3px',
             marginBottom: '1.5rem'
@@ -132,6 +133,10 @@ export default function Hero() {
       <style>{`
         @media (max-width: 1100px) {
           .hero-terminal-container { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .hero-section { padding: calc(var(--nav-h) + var(--strip-h) + 1rem) 1.25rem 2.5rem !important; min-height: auto !important; }
+          .hero-inner { flex-direction: column !important; gap: 2rem !important; align-items: flex-start !important; }
         }
       `}</style>
     </section>

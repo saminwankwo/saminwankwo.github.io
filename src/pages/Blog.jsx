@@ -30,8 +30,8 @@ export default function Blog() {
         structuredData={buildStructuredData('blog', {})}
       />
 
-      <main id="main-content" style={{ minHeight: '100vh', background: 'var(--bg)', paddingTop: 'calc(var(--nav-h) + 4rem)', paddingBottom: '6rem' }}>
-        <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 2rem' }}>
+      <main id="main-content" className="blog-main" style={{ minHeight: '100vh', background: 'var(--bg)', paddingTop: 'calc(var(--nav-h) + 4rem)', paddingBottom: '6rem' }}>
+        <div className="blog-main-inner" style={{ maxWidth: 'var(--max-w)', margin: '0 auto', padding: '0 2rem' }}>
           
           <header style={{ marginBottom: '4rem' }}>
             <p style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--green)', textTransform: 'uppercase', letterSpacing: '0.2em', marginBottom: '8px' }}>
@@ -44,13 +44,14 @@ export default function Blog() {
               Deep dives into backend architecture, system design, and production engineering.
             </p>
 
-            <nav aria-label="Filter posts by topic" style={{ 
+            <nav aria-label="Filter posts by topic" className="blog-filter-nav" style={{ 
               marginTop: '2.5rem', 
               display: 'flex', 
               gap: '8px', 
               overflowX: 'auto', 
               paddingBottom: '1rem',
-              scrollbarWidth: 'none'
+              scrollbarWidth: 'none',
+              WebkitOverflowScrolling: 'touch'
             }}>
               {FILTER_TAGS.map(tag => (
                 <button 
@@ -133,6 +134,12 @@ export default function Blog() {
 
       <style>{`
         .blog-card:hover { border-color: var(--green); transform: translateY(-2px); }
+        @media (max-width: 768px) {
+          .blog-main { padding-top: calc(var(--nav-h) + 1.5rem) !important; padding-bottom: 3rem !important; }
+          .blog-main-inner { padding: 0 1.25rem !important; }
+          .blog-filter-nav { gap: 6px !important; }
+          .blog-card { padding: 1.25rem !important; }
+        }
       `}</style>
     </>
   )

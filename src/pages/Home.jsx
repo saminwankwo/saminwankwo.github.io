@@ -26,7 +26,7 @@ export default function Home() {
           margin: '0 auto',
           borderTop: '1px solid var(--border)'
         }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
+          <div className="home-explore-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))', gap: '2rem' }}>
             {[
               { label: 'Technical Stack', path: '/skills', desc: 'Core technologies and tools I use.' },
               { label: 'Work History', path: '/experience', desc: 'Professional journey and roles.' },
@@ -54,6 +54,9 @@ export default function Home() {
           border-color: var(--green);
           background: var(--bg3);
           transform: translateY(-2px);
+        }
+        @media (max-width: 480px) {
+          .home-explore-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </>

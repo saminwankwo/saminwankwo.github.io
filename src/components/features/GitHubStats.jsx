@@ -9,7 +9,7 @@ export default function GitHubStats() {
 
   if (loading) {
     return (
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+      <div className="github-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
         <Skeleton count={6} height="80px" />
         <Skeleton count={1} height="300px" />
       </div>
@@ -23,7 +23,7 @@ export default function GitHubStats() {
   const streakUrl = `https://github-readme-streak-stats.herokuapp.com/?user=${CONFIG.githubUser}&theme=tokyonight&hide_border=true&background=0f1217`
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2rem' }}>
+    <div className="github-stats-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
       {/* Top Repositories */}
       <div style={{ background: 'var(--bg2)', border: '1px solid var(--border)', padding: '1.5rem' }}>
         <h3 style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
@@ -62,7 +62,7 @@ export default function GitHubStats() {
           Contribution Stats
         </h3>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+        <div className="github-stats-cards" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
           {[
             { label: 'Public Repos', value: user.public_repos },
             { label: 'Followers', value: user.followers },
@@ -80,13 +80,25 @@ export default function GitHubStats() {
           <img 
             src={streakUrl} 
             width="100%" 
+            height="auto"
             loading="lazy" 
             alt="GitHub contribution streak"
-            style={{ border: '1px solid var(--border)' }}
+            style={{ border: '1px solid var(--border)', maxWidth: '100%', height: 'auto' }}
             onError={e => e.currentTarget.style.display = 'none'} 
           />
         </div>
       </div>
+      <style>{`
+        @media (max-width: 768px) {
+          .github-stats-grid { gap: 1.5rem !important; }
+        }
+        @media (max-width: 480px) {
+          .github-stats-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 360px) {
+          .github-stats-cards { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   )
 }

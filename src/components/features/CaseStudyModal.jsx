@@ -84,6 +84,19 @@ export default function CaseStudyModal({ project, onClose }) {
             View on GitHub →
           </Button>
         )}
+        {project.caseStudyUrl && (
+          <Button 
+            variant="outline" 
+            size="sm" 
+            as="a" 
+            href={project.caseStudyUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            onClick={() => trackEvent('Project Case Study External', { name: project.name })}
+          >
+            Full Case Study →
+          </Button>
+        )}
       </div>
     </Modal>
   )

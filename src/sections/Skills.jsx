@@ -22,9 +22,9 @@ export default function Skills() {
         <SectionHeader id="skills-title" tag="Technical Stack" title="Skills & Technologies" />
 
         <ErrorBoundary>
-          <div style={{ 
+          <div className="skills-grid" style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))', 
             gap: '1.25rem' 
           }}>
             {skills.map((cat, i) => (
@@ -70,6 +70,9 @@ export default function Skills() {
 
       <style>{`
         .skill-card:hover { border-color: var(--green) !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); }
+        @media (max-width: 480px) {
+          .skills-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </section>
   )

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark')
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'dark'
+    return localStorage.getItem('theme') || 'dark'
+  })
 
   useEffect(() => {
     if (theme === 'light') {
@@ -24,8 +27,8 @@ export default function ThemeToggle() {
         background: 'none',
         border: '1px solid var(--border)',
         padding: '8px',
-        width: '36px',
-        height: '36px',
+        width: '44px',
+        height: '44px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

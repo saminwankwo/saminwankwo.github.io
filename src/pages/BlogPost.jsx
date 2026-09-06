@@ -54,7 +54,7 @@ export default function BlogPost() {
       />
 
       <main id="main-content" style={{ background: 'var(--bg)', minHeight: '100vh' }}>
-        <article style={{ maxWidth: '720px', margin: '0 auto', padding: '8rem 2rem 6rem' }}>
+        <article className="blog-post-article" style={{ maxWidth: '720px', margin: '0 auto', padding: '8rem 2rem 6rem' }}>
           
           <header style={{ marginBottom: '3rem' }}>
             <Link to="/blog" style={{ fontSize: '12px', fontFamily: 'var(--mono)', color: 'var(--green)', display: 'block', marginBottom: '2.5rem' }}>
@@ -116,8 +116,11 @@ export default function BlogPost() {
       <Toast message="Link copied to clipboard!" visible={copied} />
 
       <style>{`
-        .share-link { fontSize: 12px; color: var(--text2); fontFamily: var(--mono); transition: color 0.2s; }
+        .share-link { font-size: 12px; color: var(--text2); font-family: var(--mono); transition: color 0.2s; min-height: 44px; display: inline-flex; align-items: center; }
         .share-link:hover { color: var(--green); }
+        @media (max-width: 768px) {
+          .blog-post-article { padding: calc(var(--nav-h) + 1.5rem) 1.25rem 3rem !important; }
+        }
       `}</style>
     </>
   )

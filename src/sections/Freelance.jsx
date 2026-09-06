@@ -16,9 +16,9 @@ export default function Freelance() {
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <SectionHeader id="freelance-title" tag="Global Clients" title="Freelance Engagements" />
 
-        <ul style={{ 
+        <ul className="freelance-grid" style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', 
           gap: '1.25rem',
           listStyle: 'none',
           padding: 0,
@@ -50,6 +50,9 @@ export default function Freelance() {
 
       <style>{`
         .freelance-card:hover { border-color: var(--green) !important; }
+        @media (max-width: 480px) {
+          .freelance-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+        }
       `}</style>
     </section>
   )

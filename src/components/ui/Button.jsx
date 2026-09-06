@@ -50,8 +50,8 @@ export default function Button({
   }
 
   const sizes = {
-    sm: { padding: '6px 14px', fontSize: '11px' },
-    md: { padding: '11px 26px', fontSize: '12px' }
+    sm: { padding: '10px 14px', fontSize: '11px', minHeight: '44px' },
+    md: { padding: '12px 26px', fontSize: '12px', minHeight: '44px' }
   }
 
   const currentStyles = {

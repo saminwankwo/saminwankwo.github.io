@@ -63,10 +63,20 @@ export default function SEO({
     if (ogType === 'article') {
       if (articleDate) upsertMeta('property', 'article:published_time', articleDate)
       upsertMeta('property', 'article:author', CONFIG.name)
+      // Clear old article:tag metas before adding new ones
+      document.querySelectorAll('meta[property="article:tag"]').forEach(el => el.remove())
       if (articleTags) {
-        // Clear old tags first? For simplicity we just add.
-        articleTags.forEach(tag => upsertMeta('property', 'article:tag', tag))
+        articleTags.forEach(tag => {
+          const el = document.createElement('meta')
+          el.setAttribute('property', 'article:tag')
+          el.setAttribute('content', tag)
+          document.head.appendChild(el)
+        })
       }
+    } else {
+      // Remove stale article tags when not on article page
+      document.querySelectorAll('meta[property="article:tag"]').forEach(el => el.remove())
+      document.querySelectorAll('meta[property="article:published_time"]').forEach(el => el.remove())
     }
 
     // Structured Data

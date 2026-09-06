@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# saminwankwo.dev — Portfolio
+
+Vite + React 18 + React Router 6 + Framer Motion. Backend engineer portfolio for Samuel Nwankwo.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # Vite dev server at http://localhost:5173
+npm run build    # generate sitemap + vite build → dist/
+npm run preview  # preview production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Requires Node `>=22` (see `.nvmrc`).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Env
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` → `.env`:
 
-## Learn More
+```
+VITE_SITE_URL=https://saminwankwo.dev
+VITE_HASHNODE_USERNAME=saminwankwo
+VITE_HASHNODE_BLOG=saminwankwo.hashnode.dev
+VITE_GITHUB_USERNAME=saminwankwo
+VITE_FORMSPREE_ID=your_formspree_id
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Scripts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `generate-sitemap` — fetches Hashnode posts and rebuilds `public/sitemap.xml`
+- `build` — runs sitemap generation then `vite build`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
+Configured for both **Vercel** (`vercel.json`) and **Netlify** (`netlify.toml`) as SPA — pick one. Output dir: `dist`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  config/      # CONFIG single source of truth
+  data/        # projects, experience, skills, freelance
+  hooks/       # useGitHub, useHashnode, useClipboard
+  lib/         # seo, analytics, formatters
+  components/  # layout, ui, features, seo
+  pages/       # route pages
+  sections/    # home sections
+  styles/      # globals, typography, animations
+```
+
+## License
+
+MIT © 2025 Nwankwo Samuel
