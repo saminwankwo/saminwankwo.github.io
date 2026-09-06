@@ -86,6 +86,7 @@ export default function Modal({
 
       <style>{`
         @media (max-width: 768px) {
+          .modal-backdrop { padding: 0 !important; align-items: stretch !important; }
           .modal-panel {
             ${fullScreenOnMobile ? `
               position: fixed !important;

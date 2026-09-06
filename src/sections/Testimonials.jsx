@@ -18,9 +18,9 @@ export default function Testimonials() {
       <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto' }}>
         <SectionHeader id="testimonials-title" tag="Social Proof" title="What People Say" />
 
-        <ul style={{ 
+        <ul className="testimonials-grid" style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', 
           gap: '1.5rem',
           listStyle: 'none',
           padding: 0,
@@ -69,6 +69,11 @@ export default function Testimonials() {
           ))}
         </ul>
       </div>
+      <style>{`
+        @media (max-width: 480px) {
+          .testimonials-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </section>
   )
 }

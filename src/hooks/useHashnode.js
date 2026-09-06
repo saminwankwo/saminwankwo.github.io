@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import CONFIG from '@config'
 
-const GQL_URL = 'https://gql.hashnode.com'
+const GQL_BETA_URL = 'https://gql-beta.hashnode.com'
 
 const POST_FIELDS = `
   title
@@ -22,19 +22,19 @@ export function useHashnode({ first = 4 } = {}) {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await fetch(GQL_URL, {
+        // New API (2025+): user(username).posts is public, no Pro required
+        // Old publication(host) query is now Pro-gated and deprecated
+        const response = await fetch(GQL_BETA_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             query: `
               query GetUserPosts($username: String!, $first: Int!) {
                 user(username: $username) {
-                  publication(host: "${CONFIG.hashnodeBlog}") {
-                    posts(first: $first) {
-                      edges {
-                        node {
-                          ${POST_FIELDS}
-                        }
+                  posts(first: $first) {
+                    edges {
+                      node {
+                        ${POST_FIELDS}
                       }
                     }
                   }
@@ -48,8 +48,11 @@ export function useHashnode({ first = 4 } = {}) {
           })
         })
 
-        const { data } = await response.json()
-        const fetchedPosts = data?.user?.publication?.posts?.edges?.map(({ node }) => ({
+        const result = await response.json()
+        if (result.errors) {
+          throw new Error(result.errors[0]?.message || 'Hashnode error')
+        }
+        const fetchedPosts = result?.data?.user?.posts?.edges?.map(({ node }) => ({
           title: node.title,
           brief: node.brief,
           slug: node.slug,
@@ -85,43 +88,52 @@ export function useHashnodePost(slug) {
 
     async function fetchPost() {
       try {
-        const response = await fetch(GQL_URL, {
+        // Fetch via user.posts and find by slug (public, no Pro needed)
+        // We fetch enough posts to cover the blog; Hashnode id-based post query requires ID
+        const response = await fetch(GQL_BETA_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             query: `
-              query GetPost($host: String!, $slug: String!) {
-                publication(host: $host) {
-                  post(slug: $slug) {
-                    ${POST_FIELDS}
-                    content { html }
+              query GetUserPostsForDetail($username: String!) {
+                user(username: $username) {
+                  posts(first: 100) {
+                    edges {
+                      node {
+                        ${POST_FIELDS}
+                        content { html }
+                      }
+                    }
                   }
                 }
               }
             `,
             variables: {
-              host: CONFIG.hashnodeBlog,
-              slug
+              username: CONFIG.hashnodeUser
             }
           })
         })
 
-        const { data } = await response.json()
-        const node = data?.publication?.post
+        const result = await response.json()
+        if (result.errors) {
+          throw new Error(result.errors[0]?.message || 'Hashnode error')
+        }
+        const edges = result?.data?.user?.posts?.edges || []
+        const match = edges.find(({ node }) => node.slug === slug)?.node || null
 
-        if (!node) {
+        if (!match) {
           setPost(null)
         } else {
           setPost({
-            title: node.title,
-            brief: node.brief,
-            slug: node.slug,
-            url: node.url,
-            readTime: `${node.readTimeInMinutes} min`,
-            date: node.publishedAt,
-            tag: node.tags[0]?.name || "Article",
-            coverImage: node.coverImage?.url ? { url: node.coverImage.url } : null,
-            content: node.content
+            title: match.title,
+            brief: match.brief,
+            slug: match.slug,
+            url: match.url,
+            readTime: `${match.readTimeInMinutes} min`,
+            date: match.publishedAt,
+            tag: match.tags[0]?.name || "Article",
+            coverImage: match.coverImage?.url ? { url: match.coverImage.url } : null,
+            content: match.content
           })
         }
       } catch (err) {

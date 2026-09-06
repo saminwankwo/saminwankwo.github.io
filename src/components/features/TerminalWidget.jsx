@@ -80,6 +80,7 @@ export default function TerminalWidget() {
       aria-hidden="true"
       style={{
         width: '400px',
+        maxWidth: '90vw',
         flexShrink: 0,
         background: 'var(--bg2)',
         border: '1px solid var(--border)',

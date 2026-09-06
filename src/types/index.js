@@ -31,6 +31,7 @@
  * @property {string} metric
  * @property {string} [link]
  * @property {string} [github]
+ * @property {string} [caseStudyUrl]
  * @property {string[]} [techDetail]
  * @property {boolean} [featured]
  * @property {CaseStudy} [caseStudy]

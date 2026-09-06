@@ -43,16 +43,18 @@ export default function Writing() {
             View all articles on Hashnode →
           </a>
 
-          <div style={{ 
+          <div className="writing-promo" style={{ 
             border: '1px solid var(--border)', 
             padding: '0.9rem 1.4rem', 
             background: 'var(--bg3)',
             display: 'flex',
             alignItems: 'center',
             gap: '1.25rem',
-            borderRadius: '2px'
+            borderRadius: '2px',
+            flexWrap: 'wrap',
+            maxWidth: '100%'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
               <span style={{ color: '#ff0000', fontSize: '18px' }}>▶</span>
               <span style={{ fontSize: '13px', color: 'var(--text2)', fontFamily: 'var(--mono)' }}>Backend dev content on YouTube</span>
             </div>
@@ -62,6 +64,11 @@ export default function Writing() {
           </div>
         </div>
       </div>
+      <style>{`
+        @media (max-width: 480px) {
+          .writing-promo { padding: 1rem !important; gap: 0.75rem !important; width: 100%; }
+        }
+      `}</style>
     </section>
   )
 }

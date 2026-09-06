@@ -44,13 +44,14 @@ export default function Projects() {
         <SectionHeader id="projects-title" tag="Featured Work" title="Project Highlights" />
 
         {/* Filter Bar */}
-        <div style={{ 
+        <div className="projects-filter-bar" style={{ 
           display: 'flex', 
-          gap: '12px', 
+          gap: '8px', 
           overflowX: 'auto', 
           padding: '2rem 0 1rem',
           scrollbarWidth: 'none',
-          msOverflowStyle: 'none'
+          msOverflowStyle: 'none',
+          WebkitOverflowScrolling: 'touch'
         }}>
           {categories.map(cat => (
             <button
@@ -63,7 +64,8 @@ export default function Projects() {
                 trackEvent('Filter Projects', { category: cat })
               }}
               style={{
-                padding: '6px 16px',
+                padding: '10px 16px',
+                minHeight: '44px',
                 fontSize: '11px',
                 fontFamily: 'var(--mono)',
                 background: filter === cat ? 'var(--green-dim)' : 'transparent',
@@ -79,9 +81,9 @@ export default function Projects() {
           ))}
         </div>
 
-        <ul style={{ 
+        <ul className="projects-grid" style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', 
           gap: '1.5rem',
           listStyle: 'none',
           padding: 0,
@@ -212,6 +214,10 @@ export default function Projects() {
         }
         .project-link-btn:hover { color: var(--green) !important; }
         .show-more-btn:hover { border-color: var(--green); color: var(--green); }
+        @media (max-width: 480px) {
+          .projects-grid { grid-template-columns: 1fr !important; }
+          .projects-filter-bar { padding: 1.25rem 0 0.75rem !important; gap: 6px !important; }
+        }
       `}</style>
     </section>
   )

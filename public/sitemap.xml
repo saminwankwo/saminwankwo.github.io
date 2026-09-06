@@ -2,26 +2,164 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://saminwankwo.dev/</loc>
-    <lastmod>2025-04-01</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://saminwankwo.dev/blog</loc>
-    <lastmod>2025-04-01</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-
-
-
-
-
-
-
-
-
-
-
-
+  <url>
+    <loc>https://saminwankwo.dev/projects</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/experience</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/skills</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/github</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/contact</loc>
+    <lastmod>2026-09-06</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/introduction-to-system-design-1</loc>
+    <lastmod>2025-11-18</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/introduction-to-system-design</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/technical-deep-dive-defending-your-backend-from-steganography-attacks</loc>
+    <lastmod>2025-03-12</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/how-i-prevented-signups-from-temporary-emails-on-my-website</loc>
+    <lastmod>2025-02-24</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/how-i-automated-mongodb-backups-with-nodejs</loc>
+    <lastmod>2025-02-05</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/database-optimization-techniques</loc>
+    <lastmod>2024-09-26</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/understanding-authentication-vs-authorization-whats-the-difference</loc>
+    <lastmod>2024-09-01</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/mastering-restful-api-design-essential-best-practices-for-developers</loc>
+    <lastmod>2024-08-19</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/problem-solving-for-developers-a-simple-guide</loc>
+    <lastmod>2024-07-09</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/passing-arrays-to-routes-in-nodejs-with-express</loc>
+    <lastmod>2024-01-24</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/securing-your-aws-instance-a-step-by-step-guide-to-adding-ssl-with-lets-encrypt-for-nginx</loc>
+    <lastmod>2023-12-14</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/pagination-in-graphql-exploring-nodejs-and-mysql-implementation</loc>
+    <lastmod>2023-11-07</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/getting-started-with-nodejs-and-mysql</loc>
+    <lastmod>2023-10-20</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/database-migrations-in-nodejs-with-db-migrate</loc>
+    <lastmod>2023-10-13</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/a-beginners-guide-to-databases-types-and-functions</loc>
+    <lastmod>2023-10-04</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/discover-the-power-of-apis-definitions-uses-and-types-explained</loc>
+    <lastmod>2023-05-09</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/math-for-code-essential-mathematical-concepts-every-programmer-should-know</loc>
+    <lastmod>2023-04-26</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/programming-made-simple-a-beginners-guide-to-understanding-the-art-of-code</loc>
+    <lastmod>2023-04-20</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/how-to-optimized-api-endpoints-and-make-it-10x-faster</loc>
+    <lastmod>2023-04-13</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://saminwankwo.dev/blog/the-future-of-employment-and-the-rise-of-artificial-intelligence</loc>
+    <lastmod>2023-04-06</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
 </urlset>

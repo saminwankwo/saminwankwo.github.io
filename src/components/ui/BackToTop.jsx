@@ -27,8 +27,8 @@ export default function BackToTop() {
         background: 'var(--bg2)',
         border: '1px solid var(--border)',
         color: 'var(--green)',
-        width: '40px',
-        height: '40px',
+        width: '44px',
+        height: '44px',
         display: visible ? 'flex' : 'none',
         justifyContent: 'center',
         alignItems: 'center',
@@ -47,6 +47,9 @@ export default function BackToTop() {
           color: var(--bg);
           border-color: var(--green);
           box-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+        }
+        @media (max-width: 768px) {
+          .back-to-top { bottom: 1rem !important; right: 1rem !important; }
         }
       `}</style>
     </button>

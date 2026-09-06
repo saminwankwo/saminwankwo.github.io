@@ -15,14 +15,14 @@ export default function ContactForm() {
     e.preventDefault()
     setStatus('submitting')
 
-    // if (!CONFIG.formspreeId) {
-    //   console.warn('No Formspree ID found in CONFIG')
-    //   setTimeout(() => setStatus('success'), 1000)
-    //   return
-    // }
+    if (!CONFIG.formspreeId) {
+      console.warn('No Formspree ID configured (VITE_FORMSPREE_ID)')
+      setStatus('error')
+      return
+    }
 
     try {
-      const response = await fetch(`https://formspree.io/f/mykvvqgv`, {
+      const response = await fetch(`https://formspree.io/f/${CONFIG.formspreeId}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -148,12 +148,13 @@ export default function ContactForm() {
 const inputStyle = {
   background: 'var(--bg2)',
   border: '1px solid var(--border)',
-  padding: '12px 16px',
+  padding: '14px 16px',
   color: 'var(--text)',
-  fontSize: '14px',
+  fontSize: '16px',
   outline: 'none',
   transition: 'border-color 0.2s',
-  width: '100%'
+  width: '100%',
+  minHeight: '44px'
 }
 // We handle focus via CSS usually, but for inline:
 // In V2 refactor, we can add a <style> block here if needed or use the globals.css focus-visible.

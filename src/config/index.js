@@ -37,15 +37,15 @@ export const CONFIG = Object.freeze({
   tiktokUrl:       "https://www.tiktok.com/@saminwankwo",
 
   // Environment-driven
-  siteUrl:         import.meta.env.VITE_SITE_URL       || "https://saminwankwo.dev",
-  hashnodeBlog:    import.meta.env.VITE_HASHNODE_BLOG   || "saminwankwo.hashnode.dev",
-  hashnodeUser:    import.meta.env.VITE_HASHNODE_USERNAME || "saminwankwo",
-  githubUser:      import.meta.env.VITE_GITHUB_USERNAME  || "saminwankwo",
-  formspreeId:     import.meta.env.VITE_FORMSPREE_ID     || "",
+  siteUrl:         import.meta.env.VITE_SITE_URL,
+  hashnodeBlog:    import.meta.env.VITE_HASHNODE_BLOG,
+  hashnodeUser:    import.meta.env.VITE_HASHNODE_USERNAME,
+  githubUser:      import.meta.env.VITE_GITHUB_USERNAME,
+  formspreeId:     import.meta.env.VITE_FORMSPREE_ID,     
 
   // Assets
   resumePath:      "/Samuel_Nwankwo_ATS_Resume_v2.pdf",
-  resumeFilename:  "Samuel_Nwankwo_ATS_Resume_v2.pdf",
+  resumeFilename:  "Samuel_Nwankwo_Resume.pdf",
   ogImage:         "/og-image.jpg",
 
   // SEO keywords
@@ -80,7 +80,7 @@ export const CONFIG = Object.freeze({
     { label: "npm",         url: "https://npmjs.com/~saminwankwo",           ariaLabel: "npm packages" },
     { label: "YouTube",     url: "https://youtube.com/@saminwankwo",         ariaLabel: "YouTube channel" },
     { label: "Hashnode",    url: "https://saminwankwo.hashnode.dev",         ariaLabel: "Hashnode blog" },
-    { label: "tiktok",      url: "https://saminwankwo.hashnode.dev",         ariaLabel: "Hashnode blog" },
+    { label: "TikTok",      url: "https://www.tiktok.com/@saminwankwo",      ariaLabel: "TikTok profile" },
   ]
 })
 

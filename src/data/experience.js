@@ -5,9 +5,9 @@ export default [
     date: "Dec 2025 – Jul 2026",
     loc: "Port Harcourt, Nigeria",
     current: false,
-    tech: ["NestJS",,"MongoDB","Digital Ocean"],
+    tech: ["NestJS", "MongoDB", "Digital Ocean"],
     bullets: [
-      
+      "Built scalable backend services with NestJS and MongoDB on DigitalOcean infrastructure.",
     ]
   },
   {

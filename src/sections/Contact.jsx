@@ -36,7 +36,7 @@ export default function Contact() {
         padding: 'var(--section-py) var(--section-px)'
       }}
     >
-      <div style={{ maxWidth: 'var(--max-w)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '4rem' }}>
+      <div className="contact-grid" style={{ maxWidth: 'var(--max-w)', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '4rem' }}>
         
         {/* LEFT SIDE */}
         <div>
@@ -67,15 +67,15 @@ export default function Contact() {
                   target="_blank" 
                   rel="noopener noreferrer"
                   aria-label={row.label}
-                  style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1, minWidth: 0, overflow: 'hidden' }}
                 >
-                  <span style={{ color: 'var(--green)', fontSize: '14px' }}>{row.icon}</span>
-                  <span style={{ fontSize: '13px', fontFamily: 'var(--mono)', color: 'var(--text2)' }}>{row.value}</span>
+                  <span style={{ color: 'var(--green)', fontSize: '14px', flexShrink: 0 }}>{row.icon}</span>
+                  <span style={{ fontSize: '13px', fontFamily: 'var(--mono)', color: 'var(--text2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{row.value}</span>
                 </a>
                 {row.label === 'Email' && (
                   <button 
                     onClick={() => copy(row.value)}
-                    style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: copied ? 'var(--green)' : 'var(--text3)', transition: 'color 0.2s' }}
+                    style={{ fontSize: '10px', fontFamily: 'var(--mono)', color: copied ? 'var(--green)' : 'var(--text3)', transition: 'color 0.2s', minHeight: '44px', padding: '8px 10px', flexShrink: 0 }}
                   >
                     {copied ? 'COPIED' : 'COPY'}
                   </button>
@@ -131,7 +131,7 @@ export default function Contact() {
         </div>
 
         {/* RIGHT SIDE */}
-        <div style={{ marginTop: '4.5rem' }}>
+        <div className="contact-form-col" style={{ marginTop: '4.5rem' }}>
           <ContactForm />
         </div>
       </div>
@@ -139,6 +139,13 @@ export default function Contact() {
       <style>{`
         .contact-row:hover { border-color: var(--green) !important; background: rgba(0, 255, 157, 0.02) !important; }
         .social-pill-link:hover { color: var(--green) !important; }
+        @media (max-width: 768px) {
+          .contact-grid { gap: 2.5rem !important; }
+          .contact-form-col { margin-top: 0 !important; }
+        }
+        @media (max-width: 480px) {
+          .contact-grid { grid-template-columns: 1fr !important; }
+        }
       `}</style>
     </section>
   )
