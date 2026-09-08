@@ -97,10 +97,10 @@ export default function Hero() {
           </div>
 
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button variant="filled" as="a" href="#experience">
+            <Button variant="filled" as="a" href="/experience">
               View Experience
             </Button>
-            <Button variant="outline" as="a" href="#contact">
+            <Button variant="outline" as="a" href="/contact">
               Get In Touch
             </Button>
           </div>
