@@ -23,6 +23,8 @@ export default function Contact() {
     { name: 'Telegram', url: CONFIG.telegramUrl },
     { name: 'YouTube', url: CONFIG.youtubeUrl },
     { name: 'Hashnode', url: CONFIG.hashnodeUrl },
+    { name: 'TikTok',   url:CONFIG.tiktokUrl},
+    { name :'dev.to', url:CONFIG.devtoUrl}
   ]
 
   const availabilityRows = [

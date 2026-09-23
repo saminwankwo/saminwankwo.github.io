@@ -35,6 +35,8 @@ export const CONFIG = Object.freeze({
   hashnodeUrl:     "https://saminwankwo.hashnode.dev",
   twitterHandle:   "@saminwankwo",
   tiktokUrl:       "https://www.tiktok.com/@saminwankwo",
+  devtoUrl:        "https://dev.to/saminwankwo",
+  facebookUrl:     "https://www.facebook.com/nwankwo.samuel",
 
   // Environment-driven
   siteUrl:         import.meta.env.VITE_SITE_URL,

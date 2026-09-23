@@ -64,7 +64,7 @@ export default function Footer() {
           flexDirection: 'column',
           gap: '8px'
         }}>
-          <p>© {new Date().getFullYear()} {CONFIG.name} · {CONFIG.title} · Remote — {CONFIG.location}</p>
+          <p>© {new Date().getFullYear()} {CONFIG.name} · {CONFIG.title} · Remote </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center' }}>
             <Link to="/blog" className="footer-link">Blog</Link>
             <span aria-hidden>·</span>
