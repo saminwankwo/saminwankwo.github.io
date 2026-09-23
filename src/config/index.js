@@ -1,7 +1,7 @@
 export const CONFIG = Object.freeze({
   // Identity
   name:            "Samuel Nwankwo",
-  fullName:        "Nwankwo Samuel",
+  fullName:        "Samuel Nwankwo",
   title:           "Backend Engineer",
   shortTitle:      "Backend Engineer | Node.js · PHP · Cloud",
   tagline:         "Building scalable APIs, microservices, and cloud infrastructure.",

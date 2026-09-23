@@ -134,7 +134,165 @@ ul, ol { list-style: none }
   }
 }
 
-/* iOS input zoom fix */
-@media (max-width: 768px) {
-  input, textarea, select { font-size: 16px !important; }
+/* Route loading skeleton/spinner + per-route error state (Issue 23) */
+.route-fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: var(--max-w);
+  min-height: 50vh;
+  margin: 0 auto;
+  padding: var(--section-py) var(--section-px);
 }
+.route-error {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: var(--max-w);
+  min-height: 50vh;
+  margin: 0 auto;
+  padding: var(--section-py) var(--section-px);
+}
+.route-error__tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.route-error__title {
+  font-family: var(--sans);
+  font-size: clamp(24px, 4vw, 34px);
+  color: var(--text);
+}
+.route-error__desc {
+  font-size: 14px;
+  color: var(--text2);
+  max-width: 520px;
+}
+.route-error__link {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--green);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.route-error__link:hover { border-color: var(--green) }
+
+/* =============================================================
+   Contact section — styles moved out of Contact.jsx inline
+   style props and its <style> tag (Issue 18)
+============================================================= */
+.contact-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: var(--section-py) var(--section-px);
+}
+.contact-grid {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 4rem;
+}
+.contact-accent { color: var(--green) }
+.contact-intro {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin: 1rem 0 2rem;
+}
+.contact-rows { display: flex; flex-direction: column; gap: 8px }
+.contact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+.contact-row:hover {
+  border-color: var(--green);
+  background: rgba(0, 255, 157, 0.02);
+}
+.contact-row__link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.contact-row__icon { color: var(--green); font-size: 14px; flex-shrink: 0 }
+.contact-row__value {
+  font-size: 13px;
+  font-family: var(--mono);
+  color: var(--text2);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.contact-row__copy {
+  font-size: 10px;
+  font-family: var(--mono);
+  color: var(--text3);
+  transition: color 0.2s;
+  min-height: 44px;
+  padding: 8px 10px;
+  flex-shrink: 0;
+}
+.contact-row__copy.is-copied { color: var(--green) }
+.contact-socials { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 1.25rem }
+.social-pill-link {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--text3);
+  transition: color 0.2s;
+}
+.social-pill-link:hover { color: var(--green) }
+.contact-availability {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.contact-availability__label {
+  font-size: 10px;
+  font-family: var(--mono);
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.contact-availability__list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contact-availability__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 12px;
+  font-family: var(--mono);
+}
+.contact-availability__key { color: var(--text3) }
+.contact-availability__value { color: var(--text2); text-align: right }
+.contact-resume { margin-top: 1rem }
+.contact-resume > a { width: 100% }
+.contact-form-col { margin-top: 4.5rem }
+
+@media (max-width: 768px) {
+  .contact-grid { gap: 2.5rem }
+  .contact-form-col { margin-top: 0 }
+}
+@media (max-width: 480px) {
+  .contact-grid { grid-template-columns: 1fr }
+}
+
