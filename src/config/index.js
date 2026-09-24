@@ -79,7 +79,7 @@ export const CONFIG = Object.freeze({
     { label: "Twitter / X", url: "https://twitter.com/saminwankwo",          ariaLabel: "Twitter/X profile" },
     { label: "Instagram",   url: "https://instagram.com/saminwankwo",        ariaLabel: "Instagram profile" },
     { label: "Telegram",    url: "https://t.me/saminwankwo",                 ariaLabel: "Telegram profile" },
-    { label: "npm",         url: "https://npmjs.com/~saminwankwo",           ariaLabel: "npm packages" },
+    { label: "NPM",         url: "https://npmjs.com/~saminwankwo",           ariaLabel: "npm packages" },
     { label: "YouTube",     url: "https://youtube.com/@saminwankwo",         ariaLabel: "YouTube channel" },
     { label: "Hashnode",    url: "https://saminwankwo.hashnode.dev",         ariaLabel: "Hashnode blog" },
     { label: "TikTok",      url: "https://www.tiktok.com/@saminwankwo",      ariaLabel: "TikTok profile" },

@@ -27,7 +27,7 @@ export default function GitHubStats() {
       {/* Top Repositories */}
       <div style={{ background: 'var(--bg2)', border: '1px solid var(--border)', padding: '1.5rem' }}>
         <h3 style={{ fontSize: '11px', fontFamily: 'var(--mono)', color: 'var(--text3)', textTransform: 'uppercase', marginBottom: '1.5rem' }}>
-          Top Repositories
+          Last Five Repositories
         </h3>
         <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {repos.map(repo => (
