@@ -50,4 +50,4 @@ src/
 
 ## License
 
-MIT © 2025 Nwankwo Samuel
+MIT © 2025 Samuel Nwankwo

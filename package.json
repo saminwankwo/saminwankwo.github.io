@@ -4,11 +4,11 @@
   "version": "2.0.0",
   "type": "module",
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate-sitemap.js && vite build",
+    "build": "vite build && node scripts/generate-sitemap.js",
     "preview": "vite preview",
     "generate-sitemap": "node scripts/generate-sitemap.js"
   },

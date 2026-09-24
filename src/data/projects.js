@@ -1,4 +1,3 @@
-/** @type {import('../types').Project[]} */
 export default [
   {
     num: "01",

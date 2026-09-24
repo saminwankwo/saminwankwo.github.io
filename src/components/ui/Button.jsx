@@ -12,7 +12,9 @@ export default function Button({
   ariaLabel, 
   type = 'button',
   target,
-  rel
+  rel,
+  className,
+  style
 }) {
   const Element = as
 
@@ -82,9 +84,10 @@ export default function Button({
       type={as === 'button' ? type : undefined}
       target={target}
       rel={rel}
+      className={className}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      style={{ ...currentStyles, ...hoverStyles }}
+      style={{ ...currentStyles, ...hoverStyles, ...style }}
     >
       {children}
     </Element>
